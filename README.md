@@ -1,2 +1,2 @@
-# SoftUni-Fundamentals
-Fundamentals with C#
+# SoftUni Cours
+
