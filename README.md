@@ -1,2 +1,2 @@
-# SoftUni Cours
+# SoftUni Course
 
