@@ -1,0 +1,1 @@
+Create a program, which prints all unique pairs in an array of integers whose sum is equal to a given number.

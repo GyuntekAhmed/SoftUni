@@ -1,0 +1,2 @@
+Create a program that receives an array and several rotations that you have to perform.
+The rotations are done by moving the first element of the array from the front to the back. Print the resulting array.

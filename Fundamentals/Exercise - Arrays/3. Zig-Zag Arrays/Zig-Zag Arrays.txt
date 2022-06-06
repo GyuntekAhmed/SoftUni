@@ -1,0 +1,3 @@
+Create a program that creates 2 arrays. You will be given an integer n.
+On the next n lines, you will get 2 integers.
+Form 2 new arrays in a zig-zag pattern as shown below.
