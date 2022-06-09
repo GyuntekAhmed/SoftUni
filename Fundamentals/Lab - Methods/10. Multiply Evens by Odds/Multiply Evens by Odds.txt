@@ -1,0 +1,4 @@
+Create a program that multiplies the sum of all even digits of a number by the sum of all odd digits of the same number:
+•	Create a method called GetMultipleOfEvenAndOdds()
+•	Create a method GetSumOfEvenDigits()
+•	Create GetSumOfOddDigits()
