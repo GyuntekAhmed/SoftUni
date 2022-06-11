@@ -1,0 +1,1 @@
+Create a method that receives a single integer n and prints an NxN matrix using this number as a filler.

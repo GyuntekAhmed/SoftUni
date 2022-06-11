@@ -1,0 +1,3 @@
+You will receive a single string.
+Create a method that prints the character found at its middle.
+If the length of the string is even there are two middle characters.
