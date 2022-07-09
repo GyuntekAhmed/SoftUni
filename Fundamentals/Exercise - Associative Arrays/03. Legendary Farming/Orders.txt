@@ -1,0 +1,12 @@
+You’ve done all the work and the last thing left to accomplish is to own a legendary item.
+However, it's a tedious process and it requires quite a bit of farming.
+Anyway, you are not too pretentious - any legendary item will do. The possible items are:
+•	Shadowmourne - requires 250 Shards;
+•	Valanyr - requires 250 Fragments;
+•	Dragonwrath - requires 250 Motes;
+Shards, Fragments and Motes are the key materials and everything else is junk.
+You will be given lines of input, in the format: "2 motes 3 ores 15 stones"
+Keep track of the key materials - the first one that reaches the 250 marks, wins the race.
+At that point, you have to print that the corresponding legendary item is obtained.
+Then, print the remaining shards, fragments, motes, each on a new line.
+Finally, print the collected junk items.
