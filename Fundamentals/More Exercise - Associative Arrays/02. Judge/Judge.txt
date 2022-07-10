@@ -1,0 +1,14 @@
+You know the judge system, right?! Your job is to create a program similar to the Judge system. 
+You will receive several input lines in one of the following formats:
+"{username} -> {contest} -> {points}"
+
+The constestName and username are strings, the given points will be an integer number.
+You need to keep track of every contest and individual statistics of every user.
+You should check if such a contest already exists, and if not, add it, otherwise,
+check if the current user Is participating in the contest, if he is participating take the higher score, otherwise, just add it. 
+Also, you need to keep individual statistics for each user - the total points of all contests. 
+You should end your program when you receive the command "no more time".
+At that point, you should print each contest in order of input, 
+for each contest print the participants ordered by points in descending order, then ordered by name in ascending order. 
+After that, you should print individual statistics for every participant ordered by total points in descending order,
+and then by alphabetical order.
