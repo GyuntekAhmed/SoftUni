@@ -8,8 +8,10 @@ namespace _01._Furniture
     {
         static void Main(string[] args)
         {
-            string patern = @">>(?<name>\w+)<<(?<price>\d+(\.?)(\d?)+)\!(?<quantity>\d+)";
+          string patern = @">>(?<name>[A-z]+)<<(?<price>\d+(.\d+)?)!(?<quantity>\d+)";
+
             List<string> furnitureName = new List<string>();
+
             double spendMoney = 0;
 
             while (true)
@@ -35,6 +37,7 @@ namespace _01._Furniture
 
             }
             Console.WriteLine("Bought furniture:");
+
             foreach (var item in furnitureName)
             {
                 Console.WriteLine(item);
