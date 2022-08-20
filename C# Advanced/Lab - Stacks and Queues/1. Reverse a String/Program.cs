@@ -8,9 +8,9 @@ namespace _1._Reverse_a_String
         static void Main(string[] args)
         {
             Stack<char> stack = new Stack<char>();
-            string str = Console.ReadLine();
+            string text = Console.ReadLine();
 
-            foreach (char ch in str)
+            foreach (char ch in text)
             {
                 stack.Push(ch);
             }
