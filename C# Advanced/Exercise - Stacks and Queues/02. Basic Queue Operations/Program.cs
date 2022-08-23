@@ -2,49 +2,49 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace _01._Basic_Stack_Operations
+namespace _02._Basic_Queue_Operations
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Stack<int> stack = new Stack<int>();
+            Queue<int> queue = new Queue<int>();
 
             int[] numbers = Console.ReadLine()
-                .Split()
-                .Select(int.Parse)
-                .ToArray();
+                            .Split(' ')
+                            .Select(int.Parse)
+                            .ToArray();
             int n = numbers[0];
             int s = numbers[1];
             int x = numbers[2];
 
             List<int> numberList = Console.ReadLine()
-                .Split(' ')
-                .Select(int.Parse)
-                .ToList();
+                                   .Split(' ')
+                                   .Select(int.Parse)
+                                   .ToList();
+
             for (int i = 0; i < n; i++)
             {
-                stack.Push(numberList[i]);
+                queue.Enqueue(numberList[i]);
             }
 
-            for (int j = 0; j < s; j++)
+            for (int i = 0; i < s; i++)
             {
-                stack.Pop();
+                queue.Dequeue();
             }
 
-            if (stack.Count == 0)
+            if (queue.Count == 0)
             {
                 Console.WriteLine(0);
             }
-            else if (stack.Contains(x))
+            else if (queue.Contains(x))
             {
                 Console.WriteLine("true");
             }
             else
             {
-                Console.WriteLine(stack.Min());
+                Console.WriteLine(queue.Min());
             }
-
         }
     }
 }
