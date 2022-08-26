@@ -14,8 +14,7 @@ namespace _06._Songs_Queue
                 string command = Console.ReadLine();
                 if (command.Contains("Add"))
                 {
-                    command = command.Remove(0, 4);
-                    string nameOfSong = command;
+                    string nameOfSong = command.Substring(4);
                     if (songs.Contains(nameOfSong))
                     {
                         Console.WriteLine($"{nameOfSong} is already contained!");
