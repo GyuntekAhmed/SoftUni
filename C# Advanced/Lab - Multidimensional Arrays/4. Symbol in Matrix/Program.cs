@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace _4._Symbol_in_Matrix
+    class Symbol_in_Matrix
 {
-    class Program
-    {
         static void Main(string[] args)
         {
             int number = int.Parse(Console.ReadLine());
@@ -45,4 +43,3 @@ namespace _4._Symbol_in_Matrix
 
         }
     }
-}
