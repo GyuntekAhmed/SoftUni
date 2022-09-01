@@ -46,7 +46,7 @@ namespace _08._Balanced_Parenthesis
                         isBalanced = false;
                         break;
                     }
-                }
+                } 
             }
             if (isBalanced)
             {
