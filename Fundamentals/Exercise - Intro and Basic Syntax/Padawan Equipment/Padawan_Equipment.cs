@@ -4,7 +4,7 @@ namespace Padawan_Equipment
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             double amountOfMoney =double.Parse(Console.ReadLine());
             int countOfStudents =int.Parse(Console.ReadLine());
