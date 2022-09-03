@@ -1,10 +1,8 @@
 ﻿using System;
 
-namespace Login
-{
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             string username = Console.ReadLine();
             string password = "";
@@ -39,4 +37,3 @@ namespace Login
 
         }
     }
-}
