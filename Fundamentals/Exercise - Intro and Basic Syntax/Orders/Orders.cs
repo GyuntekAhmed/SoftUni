@@ -1,7 +1,5 @@
 ﻿using System;
 
-namespace Orders
-{
     class Program
     {
         static void Main(string[] args)
@@ -27,4 +25,3 @@ namespace Orders
             Console.WriteLine($"Total: ${price:F2}");
         }
     }
-}
