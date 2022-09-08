@@ -1,6 +1,6 @@
 ﻿using System;
 
-class Program
+class Excellent_Result
 {
     static void Main()
     {
@@ -10,3 +10,4 @@ class Program
             Console.WriteLine("Excellent!");
         }
     }
+}
