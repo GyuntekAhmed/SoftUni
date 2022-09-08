@@ -1,6 +1,6 @@
 ﻿using System;
 
-class Program
+class Even_or_Odd
 {
     static void Main()
     {
