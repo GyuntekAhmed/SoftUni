@@ -5,7 +5,7 @@ namespace _06._Songs_Queue
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Queue<string> songs = new Queue<string>(Console.ReadLine().Split(", "));
 

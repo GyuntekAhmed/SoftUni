@@ -4,7 +4,7 @@ using System.Linq;
 
 class _Basic_Stack_Operations
 {
-    static void Main(string[] args)
+    static void Main()
     {
         Stack<int> stack = new Stack<int>();
 
