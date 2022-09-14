@@ -5,24 +5,27 @@ internal class Method_for_FillMatrix
 {
     static void Main()
     {
-        int n = int.Parse(Console.ReadLine());
-        int[,] array = new int[n, n];
+        string input = Console.ReadLine();
+        int rows = int.Parse(input.Split()[0]);
+        int cols = int.Parse(input.Split()[1]);
 
-        FillMatrix(array, " ");
+        int[,] matrix = new int[rows, cols];
+
+        FillMatrix(matrix);
 
     }
 
-    public static void FillMatrix(int[,] array, string spliter = " ")
+    public static void FillMatrix(int[,] matrix)
     {
-        for (int row = 0; row < array.GetLength(0); row++)
+        for (int row = 0; row < matrix.GetLength(0); row++)
         {
             int[] rowData = Console.ReadLine()
-                .Split(spliter, StringSplitOptions.RemoveEmptyEntries)
+                .Split(' ', StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse)
                 .ToArray();
-            for (int col = 0; col < array.GetLength(1); col++)
+            for (int col = 0; col < matrix.GetLength(1); col++)
             {
-                array[row, col] = rowData[col];
+                matrix[row, col] = rowData[col];
             }
         }
     }
