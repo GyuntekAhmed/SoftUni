@@ -6,7 +6,7 @@ class Average_Student_Grades
 {
     static void Main()
     {
-        Dictionary<string, List<double>> students = new Dictionary<string, List<double>>();
+        Dictionary<string, List<decimal>> students = new Dictionary<string, List<decimal>>();
 
         int countOfStudents = int.Parse(Console.ReadLine());
 
@@ -14,15 +14,27 @@ class Average_Student_Grades
         {
             string[] infoAboutStudent = Console.ReadLine().Split(' ');
             string name = infoAboutStudent[0];
-            double grade = double.Parse(infoAboutStudent[1]);
-            
-            students.Add(name, new List<double>());
-            students["name"].Add(grade);
+            decimal grade = decimal.Parse(infoAboutStudent[1]);
+
+            if (students.ContainsKey(name) == false)
+            {
+                students.Add(name, new List<decimal>());
+            }
+
+            students[name].Add(grade);
         }
 
         foreach (var student in students)
         {
-            Console.WriteLine($"{student.Key} -> {string.Join(' ', student.Value)} (avg: {student.Value.Average():f2})");
+            Console.Write($"{student.Key} -> ");
+
+            foreach (decimal grade in student.Value)
+            {
+                Console.Write($"{grade:f2} ");
+            }
+
+            Console.Write($"(avg: {student.Value.Average():f2})");
+            Console.WriteLine();
         }
     }
 }
