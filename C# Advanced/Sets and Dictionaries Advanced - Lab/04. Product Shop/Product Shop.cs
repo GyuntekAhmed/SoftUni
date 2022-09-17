@@ -13,6 +13,7 @@ class Program
 
             if (command == "Revision")
             {
+                PrintProducts(shops);
                 break;
             }
             string[] tokens = command.Split(", ", StringSplitOptions.RemoveEmptyEntries);
@@ -28,6 +29,10 @@ class Program
             shops[shopName].Add(product, price);
         }
 
+    }
+
+     static void PrintProducts(SortedDictionary<string, Dictionary<string, double>> shops)
+    {
         foreach (var shop in shops)
         {
             Console.WriteLine($"{shop.Key}->");
