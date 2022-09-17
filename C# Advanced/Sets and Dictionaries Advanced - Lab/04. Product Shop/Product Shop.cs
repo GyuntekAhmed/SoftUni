@@ -21,17 +21,22 @@ class Program
             string product = tokens[1];
             double price = double.Parse(tokens[2]);
 
+            AddProduct(shops, shopName, product, price);
+        }
+
+    }
+
+     static void AddProduct(SortedDictionary<string, Dictionary<string, double>> shops, string shopName, string product, double price)
+    {
             if (!shops.ContainsKey(shopName))
             {
                 shops.Add(shopName, new Dictionary<string, double>());
             }
             
             shops[shopName].Add(product, price);
-        }
-
     }
 
-     static void PrintProducts(SortedDictionary<string, Dictionary<string, double>> shops)
+    static void PrintProducts(SortedDictionary<string, Dictionary<string, double>> shops)
     {
         foreach (var shop in shops)
         {

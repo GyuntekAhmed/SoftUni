@@ -5,7 +5,7 @@ class Cities_by_Continent_and_Country
 {
     static void Main()
     {
-        var Countries = new Dictionary<string, Dictionary<string, List<string>>>();
+        var cities = new Dictionary<string, Dictionary<string, List<string>>>();
 
         int countToAdd = int.Parse(Console.ReadLine());
 
@@ -17,19 +17,15 @@ class Cities_by_Continent_and_Country
             string country = spliter[1];
             string city = spliter[2];
 
-            if (!Countries.ContainsKey(continent))
-            {
-                Countries.Add(continent, new Dictionary<string, List<string>>());
-            }
-            if (!Countries[continent].ContainsKey(country))
-            {
-                Countries[continent].Add(country, new List<string>());
-            }
-
-            Countries[continent][country].Add(city);
+            AddCity(cities, continent, country, city);
         }
 
-        foreach (var continent in Countries)
+        PrintContinents(cities);
+    }
+
+    static void PrintContinents(Dictionary<string, Dictionary<string, List<string>>> cities)
+    {
+        foreach (var continent in cities)
         {
             Console.WriteLine($"{continent.Key}:");
 
@@ -38,5 +34,20 @@ class Cities_by_Continent_and_Country
                 Console.WriteLine($"{country.Key} -> {string.Join(", ", country.Value)}");
             }
         }
+
+    }
+
+    static void AddCity(Dictionary<string, Dictionary<string, List<string>>> cities, string continent, string country, string city)
+    {
+        if (!cities.ContainsKey(continent))
+        {
+            cities.Add(continent, new Dictionary<string, List<string>>());
+        }
+        if (!cities[continent].ContainsKey(country))
+        {
+            cities[continent].Add(country, new List<string>());
+        }
+
+        cities[continent][country].Add(city);
     }
 }
