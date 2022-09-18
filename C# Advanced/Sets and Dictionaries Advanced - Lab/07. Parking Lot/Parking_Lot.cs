@@ -41,6 +41,11 @@ class Parking_Lot
 
     static void PrintCars(HashSet<string> cars)
     {
+        if (cars.Count == 0)
+        {
+            Console.WriteLine("Parking Lot is Empty");
+        }
+
         foreach (string car in cars)
         {
             Console.WriteLine(car);
