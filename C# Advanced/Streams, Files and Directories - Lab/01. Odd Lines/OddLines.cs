@@ -1,18 +1,17 @@
 ﻿using System;
 using System.IO;
 
-class Odd_Lines
+class OddLines
 {
     static void Main()
     {
-        var reader = new StreamReader("../../../input.txt");
+        StreamReader reader = new("../../../input.txt");
         using (reader)
         {
-            var writer = new StreamWriter("../../../output.txt");
-            using(writer)
+            StreamWriter writer = new StreamWriter("../../../output.txt");
+            using (writer)
             {
                 int lineNum = 0;
-
                 while (true)
                 {
                     string line = reader.ReadLine();
@@ -22,6 +21,7 @@ class Odd_Lines
                     {
                         writer.WriteLine(line);
                     }
+                    lineNum++;
                 }
             }
         }
