@@ -22,8 +22,9 @@ namespace LineNumbers
                     int lineNum = 0;
                     string line;
 
-                    while ((line = reader.ReadLine()) != null)
+                    while (!reader.EndOfStream)
                     {
+                        line = reader.ReadLine();
                         writer.WriteLine(lineNum + ". " + line);
                         lineNum++;
                     }
