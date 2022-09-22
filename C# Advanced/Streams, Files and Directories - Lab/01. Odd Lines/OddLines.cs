@@ -1,27 +1,36 @@
 ﻿using System;
 using System.IO;
 
-class OddLines
+namespace OddLines
 {
-    static void Main()
+    public class OddLines
     {
-        StreamReader reader = new("../../../input.txt");
-        using (reader)
+        static void Main()
         {
-            StreamWriter writer = new StreamWriter("../../../output.txt");
-            using (writer)
+            string inputFilePath = @"..\..\..\input.txt";
+            string outputFilePath = @"..\..\..\output.txt";
+            ExtractOddLines(inputFilePath, outputFilePath);
+        }
+        public static void ExtractOddLines(string inputFilePath, string outputFilePath)
+        {
+            StreamReader reader = new StreamReader(inputFilePath);
+            using (reader)
             {
-                int lineNum = 0;
-                while (true)
+                StreamWriter writer = new StreamWriter(outputFilePath);
+                using (writer)
                 {
-                    string line = reader.ReadLine();
-                    if (line == null)
-                        break;
-                    if (lineNum % 2 == 1)
+                    int lineNum = 0;
+                    while (true)
                     {
-                        writer.WriteLine(line);
+                        string line = reader.ReadLine();
+                        if (line == null)
+                            break;
+                        if (lineNum % 2 == 1)
+                        {
+                            writer.WriteLine(line);
+                        }
+                        lineNum++;
                     }
-                    lineNum++;
                 }
             }
         }
