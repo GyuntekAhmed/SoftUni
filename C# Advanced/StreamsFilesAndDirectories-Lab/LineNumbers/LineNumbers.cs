@@ -7,8 +7,8 @@ namespace LineNumbers
     {
         static void Main()
         {
-            string inputPath = @"..\..\..\Files\input.txt";
-            string outputPath = @"..\..\..\Files\output.txt";
+            string inputPath = @".\..\..\..\Files/input.txt";
+            string outputPath = @".\..\..\..\..\..\..\..\..\..\output.txt";
             RewriteFileWithLineNumbers(inputPath, outputPath);
         }
         public static void RewriteFileWithLineNumbers(string inputFilePath, string outputFilePath)
