@@ -11,7 +11,7 @@ namespace LineNumbers
         static void Main()
         {
             string inputFilePath = @"..\..\..\text.txt";
-            string outputFilePath = @"..\..\..\output.txt";
+            string outputFilePath = @"..\..\..\..\..\..\..\..\..\output.txt";
 
             ProcessLines(inputFilePath, outputFilePath);
         }
