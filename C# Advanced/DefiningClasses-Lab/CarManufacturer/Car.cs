@@ -6,10 +6,55 @@ namespace CarManufacturer
 {
     public class Car
     {
+        public Car()
+        {
+            Make = "VW";
+            Model = "Golf";
+            Year = 2025;
+            FuelQuantity = 200;
+            FuelConsumption = 10;
+        }
+
+        public Car(string make, string model, int year): this()
+        {
+            Make = make;
+            Model = model;
+            Year = year;
+        }
+
+        public Car(string make, string model, int year, double fuelQuantity, double fuelConsumption)
+            : this(make, model, year)
+        {
+            FuelQuantity = fuelQuantity;
+            FuelConsumption = fuelConsumption;
+        }
+
+        public Car(string make, string model, int year, double fuelQuantity, double fuelConsumption,
+             Engine engine, Tire[] tires): this( make, model, year, fuelQuantity, fuelConsumption)
+        {
+            Engine = engine;
+            Tires = tires;
+        }
+        private Engine engine;
+
+        public Engine Engine
+        {
+            get { return engine; }
+            set { engine = value; }
+        }
+
+        private Tire[] tires;
+
+        public Tire[] Tires
+        {
+            get { return tires; }
+            set { tires = value; }
+        }
+
 
         private string make;
-        public string Make 
-        { 
+        public string Make
+        {
             get
             {
                 return make;
@@ -20,9 +65,9 @@ namespace CarManufacturer
             }
         }
         private string model;
-        public string Model 
+        public string Model
         {
-            get 
+            get
             {
                 return model;
             }
@@ -32,8 +77,8 @@ namespace CarManufacturer
             }
         }
         private int year;
-        public int Year 
-        { 
+        public int Year
+        {
             get
             {
                 return year;
