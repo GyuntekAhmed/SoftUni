@@ -2,66 +2,71 @@
 using System.Collections.Generic;
 using System.Linq;
 
-class PredicateParty
+namespace _09.PredicateParty
 {
-    static void Main()
+    internal class Program
     {
-        List<string> people = Console.ReadLine()
-            .Split()
-            .ToList();
-
-        while (true)
+        static void Main()
         {
-            string command = Console.ReadLine();
+            List<string> people = Console.ReadLine()
+                .Split(" ", StringSplitOptions.RemoveEmptyEntries)
+                .ToList();
 
-            if (command == "Party")
+            while (true)
             {
-                break;
+                string command = Console.ReadLine();
+
+                if (command == "Party!")
+                {
+                    break;
+                }
+
+                string[] tokens = command.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
+                string action = tokens[0];
+                string filter = tokens[1];
+                string value = tokens[2];
+
+                if (action == "Remove")
+                {
+                    people.RemoveAll(GetPredicate(filter, value)); // p => p.StartsWith("P")
+                }
+                else
+                {
+                    List<string> peopleToDouble = people.FindAll(GetPredicate(filter, value));
+
+                    int index = people.FindIndex(GetPredicate(filter, value));
+
+                    if (index >= 0)
+                    {
+                        people.InsertRange(index, peopleToDouble);
+                    }
+                }
             }
 
-            string[] tokens = command.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-
-            string action = tokens[0];
-            string filter = tokens[1];
-            string value = tokens[2];
-
-            if (action == "Remove")
+            if (people.Any())
             {
-                people.RemoveAll(GetPredicate(filter, value));
+                Console.WriteLine($"{string.Join(", ", people)} are going to the party!");
             }
             else
             {
-                List<string> peopleToDouble = people.FindAll(GetPredicate(filter, value));
-
-                int index = people.FindIndex(GetPredicate(filter, value));
-                
-                if(index > 0)
-                people.InsertRange(index, peopleToDouble);
+                Console.WriteLine("Nobody is going to the party!");
             }
         }
 
-        if (people.Any())
+        static Predicate<string> GetPredicate(string filter, string value)
         {
-            Console.WriteLine($"{string.Join(", ", people)}are going to the party!");
-        }
-        else
-        {
-            Console.WriteLine("Nobody is going to the party!");
-        }
-    }
-
-     static Predicate<string> GetPredicate(string filter, string value)
-    {
-        switch (filter)
-        {
-            case "StartsWith":
-                return s => s.StartsWith(value);
-            case "EndsWith":
-                return s => s.EndsWith(value);
-            case "Lenght":
-                return s => s.Length == int.Parse(value);
-            default:
-                return default(Predicate<string>);
+            switch (filter)
+            {
+                case "StartsWith":
+                    return s => s.StartsWith(value);
+                case "EndsWith":
+                    return s => s.EndsWith(value);
+                case "Length":
+                    return s => s.Length == int.Parse(value);
+                default:
+                    return default(Predicate<string>);
+            }
         }
     }
 }
