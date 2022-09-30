@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CarManufacturer
 {
@@ -6,28 +8,86 @@ namespace CarManufacturer
     {
         static void Main()
         {
-            Engine engine = new Engine(155, 2.2);
+            List<List<double>> listTiresYears = new List<List<double>>();
+            List<List<double>> listTiresPressures = new List<List<double>>();
+            List<int> listHorsePowers = new List<int>();
+            List<double> listCubicCapacity = new List<double>();
 
-            Tire[] tires = new Tire[4]
+            List<Car> listCars = new List<Car>();
+
+
+            string input = Console.ReadLine();
+
+            Tires tires = new Tires();
+            Engine engine = new Engine();
+
+            while (input != "No more tires")
             {
-                new Tire(2022, 5),
-                new Tire(2022, 5),
-                new Tire(2022, 5),
-                new Tire(2022, 5),
-            };
+                string[] splitted = input.Split();
 
-            Car car = new Car("Hyundai", "Santa Fe", 2009, 75, 10.5, engine, tires);
+                List<double> listYears = tires.GetYearInfo(splitted);
+                List<double> listPressures = tires.GetPressureInfo(splitted);
 
-            while (true)
+                listTiresYears.Add(listYears);
+                listTiresPressures.Add(listPressures);
+
+                input = Console.ReadLine();
+            }
+
+            string secondInput = Console.ReadLine();
+
+            while (secondInput != "Engines done")
             {
+                string[] splitted = secondInput.Split();
 
-                Console.WriteLine("Where to go ?");
+                listHorsePowers.Add(engine.GetHorsePower(splitted));
+                listCubicCapacity.Add(engine.GetCubicCapacity(splitted));
 
-                car.Drive(int.Parse(Console.ReadLine()));
-                Console.WriteLine($"{car.Tires[0].Pressure}");
-                Console.WriteLine($"Left fuel: {car.FuelQuantity}");
-                Console.WriteLine($"{car.WhoAmI()}");
+                secondInput = Console.ReadLine();
+            }
 
+            string thirdInput = Console.ReadLine();
+
+            while (thirdInput != "Show special")
+            {
+                string[] splitted = thirdInput.Split();
+                string make = splitted[0];
+                string model = splitted[1];
+                int year = int.Parse(splitted[2]);
+                double fuelQuantity = double.Parse(splitted[3]);
+                double fuelConsumption = double.Parse(splitted[4]);
+                int engineIndex = int.Parse(splitted[5]);
+                int tiresIndex = int.Parse(splitted[6]);
+
+                int horsePower = listHorsePowers[engineIndex];
+                double pressure = tires.GetSumPressure(listTiresPressures, tiresIndex);
+
+                Car car = new Car(make, model, year, horsePower, fuelQuantity, fuelConsumption,
+                    engineIndex, tiresIndex, pressure);
+
+                listCars.Add(car);
+
+
+                thirdInput = Console.ReadLine();
+            }
+
+            foreach (var car in listCars)
+            {
+                if (car.Year >= 2017 && car.HorsePower > 330
+                    && car.TotalPressure > 9 && car.TotalPressure < 10)
+                {
+                    car.FuelQuantity = car.Drive20Kilometers(car.FuelQuantity, car.FuelConsumption);
+
+                    Console.WriteLine($"Make: {car.Make}");
+
+                    Console.WriteLine($"Model: {car.Model}");
+
+                    Console.WriteLine($"Year: {car.Year}");
+
+                    Console.WriteLine($"HorsePowers: {car.HorsePower}");
+
+                    Console.WriteLine($"FuelQuantity: {car.FuelQuantity}");
+                }
             }
         }
     }
