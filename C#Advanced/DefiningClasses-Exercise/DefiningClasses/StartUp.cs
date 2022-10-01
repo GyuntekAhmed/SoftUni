@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DefiningClasses;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace DefiningClasses
 {
@@ -6,20 +9,25 @@ namespace DefiningClasses
     {
         static void Main()
         {
-            Person person = new Person("Gyintek", 31);
+            Family family = new Family();
 
-            Person person1 = new Person()
+            int countOfPeoples = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < countOfPeoples; i++)
             {
-                Name = "Gyuni",
-                Age = 7,
-            };
-            Person person2 = new Person();
-            person2.Name = "Georgi";
-            person2.Age = 31;
+                string[] command = Console.ReadLine().Split();
 
-            Console.WriteLine($"Name: {person.Name} Age: {person.Age}");
-            Console.WriteLine($"Name: {person1.Name} Age: {person1.Age}");
-            Console.WriteLine($"Name: {person2.Name} Age: {person2.Age}");
+                string name = command[0];
+                int age = int.Parse(command[1]);
+
+                Person person = new Person(name, age);
+
+                family.AddMember(person);
+            }
+
+            Person oldestPerson = family.GetOldestMember();
+
+            Console.WriteLine($"{oldestPerson.Name} {oldestPerson.Age}");
         }
     }
 }
