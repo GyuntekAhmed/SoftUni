@@ -9,23 +9,25 @@ namespace DefiningClasses
     {
         static void Main()
         {
-            Person person1 = new Person();
+            Family family = new Family();
 
-            Person person2 = new Person(31);
+            int countOfPeoples = int.Parse(Console.ReadLine());
 
-            Person person3 = new Person("Gyuni", 31);
-
-            List<Person> people = new List<Person>();
-
-            people.Add(person1);
-            people.Add(person2);
-            people.Add(person3);
-
-            foreach (var p in people)
+            for (int i = 0; i < countOfPeoples; i++)
             {
-                Console.WriteLine(p.Name);
-                Console.WriteLine(p.Age);
+                string[] command = Console.ReadLine().Split();
+
+                string name = command[0];
+                int age = int.Parse(command[1]);
+
+                Person person = new Person(name, age);
+
+                family.AddMember(person);
             }
+
+            Person oldestPerson = family.GetOldestMember();
+
+            Console.WriteLine($"{oldestPerson.Name} {oldestPerson.Age}");
         }
     }
 }
