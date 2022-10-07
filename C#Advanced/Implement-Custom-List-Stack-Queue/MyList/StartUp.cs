@@ -13,15 +13,17 @@ namespace MyList
             customList.Add(13);
             customList.Add(14);
             customList.Add(15);
-
+            customList.ForEach(x => Console.WriteLine(x));
             customList.RemoveAt(0);
 
             customList.RemoveAt(2);
             customList.RemoveAt(0);
 
+            customList.ForEach(x => Console.WriteLine(x));
+
             customList.Add(44);
 
-            Console.WriteLine(customList.Count);
+            customList.ForEach(x => Console.WriteLine(x));
         }
     }
 }

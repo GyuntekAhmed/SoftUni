@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MyList
 {
@@ -12,7 +10,7 @@ namespace MyList
 
         public CustomList()
         {
-            items = new int[InitialCapacity];
+            this.items = new int[InitialCapacity];
         }
 
         public int Count { get; private set; }
@@ -21,87 +19,153 @@ namespace MyList
         {
             get
             {
-                if (index < 0 || index >= Count)
-                    throw new ArgumentOutOfRangeException();
-                return items[index];
+                this.CheckIndex(index);
+
+                return this.items[index];
             }
             set
             {
-                if (index < 0 || index >= Count)
-                    throw new ArgumentOutOfRangeException();
-                items[index] = value;
+                this.CheckIndex(index);
+
+                this.items[index] = value;
             }
         }
 
         public void Add(int item)
         {
-            if (Count == items.Length)
+            if (this.items.Length == this.Count)
             {
-                Resize();
+                this.Resize();
             }
 
-            items[Count] = item;
+            this.items[Count] = item;
 
-            Count++;
+            this.Count++;
+        }
+
+        public void AddRange(int[] array)
+        {
+            foreach (var item in array)
+            {
+                this.Add(item);
+            }
         }
 
         public int RemoveAt(int index)
         {
-            if (index < 0 || index >= Count)
-                throw new ArgumentOutOfRangeException();
+            this.CheckIndex(index);
 
-            int item = items[index];
+            int removedItem = this.items[index];
 
-            items[index] = default(int);
-            ShiftToLeft(index);
+            this.items[index] = default(int);
 
-            Count--;
+            this.ShiftLeft(index);
 
-            if (Count <= items.Length / 4)
+            this.Count--;
+
+            if (this.Count <= this.items.Length / 4)
             {
-                Shrink();
+                this.Shrink();
             }
 
-            return item;
+            return removedItem;
         }
 
+        public void InsertAt(int index, int item)
+        {
+            this.CheckIndex(index);
+
+            if (this.items.Length == Count)
+            {
+                this.Resize();
+            }
+
+            ShiftRight(index);
+
+            this.items[index] = item;
+
+            this.Count++;
+        }
+
+        public bool Contains(int item)
+        {
+            for (int i = 0; i < this.Count; i++)
+            {
+                if (this.items[i] == item)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public void Swap(int firstIndex, int secondIndex)
+        {
+            this.CheckIndex(firstIndex);
+            this.CheckIndex(secondIndex);
+
+            int temp = this.items[firstIndex];
+            this.items[firstIndex] = this.items[secondIndex];
+            this.items[secondIndex] = temp;
+        }
+
+        public void ForEach(Action<int> action)
+        {
+            for (int i = 0; i < this.Count; i++)
+            {
+                int currentItem = this.items[i];
+
+                action(currentItem);
+            }
+        }
 
         private void Resize()
         {
-            int[] copy = new int[items.Length * 2];
+            int[] copy = new int[this.items.Length * 2];
 
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < this.Count; i++)
             {
-                copy[i] = items[i];
+                copy[i] = this.items[i];
             }
 
-            items = copy;
-        }
-
-        private void ShiftToLeft(int index)
-        {
-            for (int i = index; i < Count - 1; i++)
-                items[i] = items[i + 1];
-        }
-
-        private void ShiftToRight(int index)
-        {
-            for (int i = Count; i > index; i--)
-            {
-                items[i] = items[i - 1];
-            }
+            this.items = copy;
         }
 
         private void Shrink()
         {
-            int[] copy = new int[items.Length / 2];
+            int[] copy = new int[this.items.Length / 2];
 
-            for (int i = 0; i < Count; i++)
+            for (int i = 0; i < this.Count; i++)
             {
-                copy[i] = items[i];
+                copy[i] = this.items[i];
             }
 
-            items = copy;
+            this.items = copy;
+        }
+
+        private void ShiftLeft(int index)
+        {
+            for (int i = index; i < this.Count; i++)
+            {
+                items[i] = items[i + 1];
+            }
+        }
+
+        private void ShiftRight(int index)
+        {
+            for (int i = this.Count - 1; i >= index; i--)
+            {
+                this.items[i + 1] = this.items[i];
+            }
+        }
+
+        private void CheckIndex(int index)
+        {
+            if (index < 0 || index >= this.Count)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }
