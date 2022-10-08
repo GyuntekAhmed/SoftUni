@@ -1,10 +1,12 @@
 ﻿
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace GenericBoxOfString
 {
-    public class Box<T>
+    public class Box<T> : IComparable<T> where T : IComparable<T>
     {
         public Box(T element)
         {
@@ -24,6 +26,12 @@ namespace GenericBoxOfString
             elements[indexOne] = elements[indexTwo];
             elements[indexTwo] = firstElement;
         }
+
+        public int CompareTo(T other)
+            => Element.CompareTo(other);
+
+        public int CountOfGreaterElements<T>(List<T> list, T readLine) where T : IComparable
+            => list.Count(word => word.CompareTo(readLine) > 0);
 
         public override string ToString()
         {
