@@ -6,12 +6,14 @@ namespace GenericScale
     {
         static void Main()
         {
-            EqualityScale<int> nums = new EqualityScale<int>();
+            EqualityScale<int> nums = new EqualityScale<int>(5, 5);
 
-            int num1 = 5;
-            int num2 = 6;
+            int num1 = 54;
+            int num2 = 46;
 
             var result = nums.Equals(num1 == num2);
+
+            Console.WriteLine(nums.AreEqual());
 
             Console.WriteLine(result);
         }
