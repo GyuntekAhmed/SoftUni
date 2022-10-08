@@ -6,12 +6,12 @@ namespace BoxOfT
     {
         private List<T> elements;
 
-        public int Count => elements.Count;
-
         public Box()
         {
             elements = new List<T>();
         }
+
+        public int Count => elements.Count;
 
         public void Add(T element)
         {
