@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace IteratorsAndComparators
 {
@@ -16,5 +17,13 @@ namespace IteratorsAndComparators
         public string Title { get; set; }
         public int Year { get; set; }
         public List<string> Autors { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"{Title} - {Year}");
+
+            return sb.ToString().TrimEnd();
+        }
     }
 }

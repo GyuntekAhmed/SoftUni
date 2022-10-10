@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace IteratorsAndComparators
 {
@@ -12,8 +13,8 @@ namespace IteratorsAndComparators
 
             Library libraryOne = new Library();
             Library libraryTwo = new Library(bookOne, bookTwo, bookThree);
-
-            foreach (var book in libraryTwo)
+            
+            foreach (var book in libraryTwo.OrderBy(x => x.Year).ThenByDescending(x => x.Autors))
             {
                 Console.WriteLine(book);
             }
