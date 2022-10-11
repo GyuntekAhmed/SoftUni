@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ListyIterator
 {
-    public class ListyIterator<T>
+    public class ListyIterator<T> : IEnumerable<T>
     {
         private List<T> colection;
         private int currentIndex;
@@ -36,5 +36,17 @@ namespace ListyIterator
 
             Console.WriteLine($"{colection[currentIndex]}");
         }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            foreach (T element in colection)
+            {
+                yield return element;
+            }
+        }
+
+        public void PrintAll() => Console.WriteLine(string.Join(" ", colection));
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }
