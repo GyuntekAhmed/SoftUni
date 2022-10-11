@@ -1,11 +1,13 @@
 ﻿
+using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
 namespace IteratorsAndComparators
 {
-    public class Book
+    public class Book : IComparable<Book>
     {
         public Book(string title, int year, params string[] autors)
         {
@@ -18,12 +20,21 @@ namespace IteratorsAndComparators
         public int Year { get; set; }
         public List<string> Autors { get; set; }
 
+        public int CompareTo(Book other)
+        {
+            int result = this.Year.CompareTo(other.Year);
+
+            if (result == 0)
+            {
+                return Title.CompareTo(other.Title);
+            }
+
+            return result;
+        }
+
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append($"{Title} - {Year}");
-
-            return sb.ToString().TrimEnd();
+            return $"{Title} - {Year}";
         }
     }
 }
