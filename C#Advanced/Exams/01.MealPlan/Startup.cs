@@ -47,6 +47,7 @@ namespace _01.MealPlan
                         numberOfMeals--;
                         meals.Dequeue();
                         numberOfMeals++;
+                        numberOfMeals++;
                         break;
                     }
 
