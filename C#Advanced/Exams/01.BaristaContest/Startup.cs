@@ -27,30 +27,73 @@ namespace _01.BaristaContest
                 .Select(int.Parse)
                 .ToArray());
 
-            while (cofeeQuantities.Count != 0 || milkQuantities.Count != 0)
+            while (cofeeQuantities.Count != 0 && milkQuantities.Count != 0)
             {
                 int sumOfDrinks = cofeeQuantities.Peek() + milkQuantities.Peek();
 
-                foreach (var drink in drinksTable)
+                if (drinksTable.ContainsValue(sumOfDrinks))
                 {
-                    if (sumOfDrinks == drink.Value)
+                    foreach (var drink in drinksTable)
                     {
-                        string drinkName = drink.Key;
-                        if (!drinksCount.ContainsKey(drinkName))
+                        if (sumOfDrinks == drink.Value)
                         {
-                            drinksCount.Add(drinkName, 1);
-                            cofeeQuantities.Dequeue();
-                            milkQuantities.Pop();
-                            break;
-                        }
-                        else
-                        {
-                            drinksCount[drinkName]++;
-                            cofeeQuantities.Dequeue();
-                            milkQuantities.Pop();
-                            break;
+                            string drinkName = drink.Key;
+                            if (!drinksCount.ContainsKey(drinkName))
+                            {
+                                drinksCount.Add(drinkName, 1);
+                                cofeeQuantities.Dequeue();
+                                milkQuantities.Pop();
+                                break;
+                            }
+                            else
+                            {
+                                drinksCount[drinkName]++;
+                                cofeeQuantities.Dequeue();
+                                milkQuantities.Pop();
+                                break;
+                            }
                         }
                     }
+                }
+                else
+                {
+                    cofeeQuantities.Dequeue();
+                    int degreesedMilk = milkQuantities.Peek() - 5;
+                    milkQuantities.Pop();
+                    milkQuantities.Push(degreesedMilk);
+                }
+            }
+
+            if (cofeeQuantities.Count == 0 && milkQuantities.Count == 0)
+            {
+                Console.WriteLine("Nina is going to win! She used all the coffee and milk!");
+            }
+            else
+            {
+                Console.WriteLine("Nina needs to exercise more! She didn't use all the coffee and milk!");
+            }
+
+            if (cofeeQuantities.Count == 0)
+            {
+                Console.WriteLine("Coffee left: none");
+            }
+            else
+            {
+                Console.WriteLine($"Coffee left: {string.Join(", ", cofeeQuantities)}");
+            }
+            if (milkQuantities.Count == 0)
+            {
+                Console.WriteLine("Milk left: none");
+            }
+            else
+            {
+                Console.WriteLine($"Milk left: {string.Join(", ", milkQuantities)}");
+            }
+            foreach (var drink in drinksCount.OrderBy(x => x.Value).ThenByDescending(x => x.Key))
+            {
+                if (drink.Value > 0)
+                {
+                    Console.WriteLine($"{drink.Key}: {drink.Value}");
                 }
             }
         }
