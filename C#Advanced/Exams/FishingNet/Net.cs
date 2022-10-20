@@ -64,7 +64,7 @@ namespace FishingNet
         public string Report()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"Into the {this.Material}:");
+            sb.AppendLine($"Into the {Material}:");
 
             foreach (var item in Fish.OrderByDescending(x => x.Length))
             {
