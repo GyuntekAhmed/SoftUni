@@ -38,9 +38,10 @@ namespace _01.BakeryShop
                     foreach (var product in products)
                     {
                         string productName = product.Key;
+
                         if (product.Value == currentWater)
                         {
-                            if (!bakeds.ContainsKey(product.Key))
+                            if (!bakeds.ContainsKey(productName))
                             {
                                 bakeds.Add(productName, 1);
                                 waters.Dequeue();
@@ -74,6 +75,29 @@ namespace _01.BakeryShop
 
                     flours.Push(sum);
                 }
+            }
+
+            foreach (var baked in bakeds.OrderByDescending(b => b.Value).ThenBy(b => b.Key))
+            {
+                Console.WriteLine($"{baked.Key}: {baked.Value}");
+            }
+
+            if (waters.Count == 0)
+            {
+                Console.WriteLine("Water left: None");
+            }
+            else
+            {
+                Console.WriteLine($"Water left: {string.Join(", ", waters)}");
+            }
+
+            if (flours.Count == 0)
+            {
+                Console.WriteLine("Flour left: None");
+            }
+            else
+            {
+                Console.WriteLine($"Flour left: {string.Join(", ", flours)}");
             }
         }
     }
