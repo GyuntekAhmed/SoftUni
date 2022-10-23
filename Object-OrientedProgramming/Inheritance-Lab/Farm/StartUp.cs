@@ -6,10 +6,18 @@ namespace Farm
     {
         static void Main()
         {
-            Dog dog = new Dog();
+            Console.WriteLine("Dog:");
 
+            Dog dog = new Dog();
             dog.Eat();
             dog.Bark();
+            Console.WriteLine();
+
+            Console.WriteLine("Cat:");
+
+            Cat puppy = new Cat();
+            puppy.Eat();
+            puppy.Meow();
         }
     }
 }
