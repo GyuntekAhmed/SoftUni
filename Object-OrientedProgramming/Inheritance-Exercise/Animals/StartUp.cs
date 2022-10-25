@@ -28,24 +28,27 @@ namespace Animals
                     continue;
                 }
 
-                switch (typeOfAnimal)
+                if (typeOfAnimal == "Dog")
                 {
-                    case "Dog":
-                        animals = new Dog(nameOfAnimal, ageOfAnimal, tokens[2]);
-                        break;
-                    case "Cat":
-                        animals = new Cat(nameOfAnimal, ageOfAnimal, tokens[2]);
-                        break;
-                    case "Kitten":
-                        animals = new Kitten(nameOfAnimal, ageOfAnimal);
-                        break;
-                    case "Tomcat":
-                        animals = new Tomcat(nameOfAnimal, ageOfAnimal);
-                        break;
-                    case "Frog":
-                        animals = new Frog(nameOfAnimal, ageOfAnimal, tokens[2]);
-                        break;
+                    animals = new Dog(nameOfAnimal, ageOfAnimal, tokens[2]);
                 }
+                else if (typeOfAnimal =="Frog")
+                {
+                    animals = new Frog(nameOfAnimal, ageOfAnimal, tokens[2]);
+                }
+                else if (typeOfAnimal == "Kitten")
+                {
+                    animals = new Kitten(nameOfAnimal, ageOfAnimal);
+                }
+                else if (typeOfAnimal == "Tomcat")
+                {
+                    animals = new Tomcat(nameOfAnimal, ageOfAnimal);
+                }
+                else
+                {
+                    animals = new Cat(nameOfAnimal, ageOfAnimal, tokens[2]);
+                }
+                
                 Console.WriteLine(typeOfAnimal);
                 Console.WriteLine($"{animals.Name} {animals.Age} {animals.Gender}");
                 string sound = animals.ProduceSound();
