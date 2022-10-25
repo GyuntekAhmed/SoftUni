@@ -6,12 +6,12 @@ namespace CustomStack
 {
     public class StackOfStrings : Stack<string>
     {
-        public bool isEmpty()
+        public bool IsEmpty()
         {
-            return this.Count == 0;
+            return Count == 0;
         }
 
-        public Stack<string> AddRange(List<string> elements)
+        public Stack<string> AddRange(IEnumerable<string> elements)
         {
             foreach (var element in elements)
             {
