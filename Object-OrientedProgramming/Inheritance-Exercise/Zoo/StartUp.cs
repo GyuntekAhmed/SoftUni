@@ -5,9 +5,9 @@ namespace Zoo
 {
     public class StartUp
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            List<object> animals = new List<object>();
+            List<Animal> animals = new List<Animal>();
             List<string> names = new List<string>();
 
             while (true)
