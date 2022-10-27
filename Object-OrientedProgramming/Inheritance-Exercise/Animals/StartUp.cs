@@ -9,7 +9,6 @@ namespace Animals
 
             while (true)
             {
-                Animals animals = default;
                 string commands = Console.ReadLine();
 
                 if (commands == "Beast!")
@@ -28,11 +27,12 @@ namespace Animals
                     continue;
                 }
 
+                Animals animals;
                 if (typeOfAnimal == "Dog")
                 {
                     animals = new Dog(nameOfAnimal, ageOfAnimal, tokens[2]);
                 }
-                else if (typeOfAnimal =="Frog")
+                else if (typeOfAnimal == "Frog")
                 {
                     animals = new Frog(nameOfAnimal, ageOfAnimal, tokens[2]);
                 }
@@ -44,11 +44,15 @@ namespace Animals
                 {
                     animals = new Tomcat(nameOfAnimal, ageOfAnimal);
                 }
-                else
+                else if (typeOfAnimal == "Cat")
                 {
                     animals = new Cat(nameOfAnimal, ageOfAnimal, tokens[2]);
                 }
-                
+                else
+                {
+                    throw new Exception("Invalid input!");
+                }
+
                 Console.WriteLine(typeOfAnimal);
                 Console.WriteLine($"{animals.Name} {animals.Age} {animals.Gender}");
                 string sound = animals.ProduceSound();
