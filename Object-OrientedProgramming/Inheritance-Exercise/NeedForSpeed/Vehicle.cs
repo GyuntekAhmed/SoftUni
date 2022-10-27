@@ -6,7 +6,7 @@ namespace NeedForSpeed
 {
     public class Vehicle
     {
-		public const double DefaultFuelConsumption = 1.25;
+		private const double DEFAULT_FUEL_CONSUMTION = 1.25;
 
 
         public Vehicle( int horsePower, double fuel )
@@ -20,7 +20,7 @@ namespace NeedForSpeed
 		public int HorsePower { get; set; }
 
 		public virtual double FuelConsumption
-			=> DefaultFuelConsumption;
+			=> DEFAULT_FUEL_CONSUMTION;
 
 		public virtual void Drive(double kilometers)
 		{
