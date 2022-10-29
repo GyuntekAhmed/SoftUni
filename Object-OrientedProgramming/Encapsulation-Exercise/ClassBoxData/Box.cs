@@ -59,21 +59,21 @@ namespace ClassBoxData
             }
         }
 
-        public double SurfaceArea(double length, double width, double height)
+        public double SurfaceArea()
         {
             double result = 2 * (length * width) + 2 * (length * height) + 2 * (width * height);
 
             return result;
         }
 
-        public double LateralSurfaceArea(double length, double width, double height)
+        public double LateralSurfaceArea()
         {
             double result = 2 * (length * height) + 2 * (width * height);
 
             return result;
         }
 
-        public double Volume(double length, double width, double height)
+        public double Volume()
         {
             double result = length * width * height;
 
