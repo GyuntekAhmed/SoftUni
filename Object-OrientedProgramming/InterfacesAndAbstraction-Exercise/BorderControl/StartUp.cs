@@ -11,6 +11,7 @@ namespace BorderControl
             List<string> fakeId = new List<string>();
             List<Citizens> citizens = new List<Citizens>();
             List<Robots> robots = new List<Robots>();
+            List<Pet> pets = new List<Pet>();
             
 
             while (true)
@@ -24,42 +25,61 @@ namespace BorderControl
 
                 string[] tokens = command.Split();
 
-                if (tokens.Length == 3)
+                if (tokens[0] == "Citizen")
                 {
-                    string name = tokens[0];
-                    int age = int.Parse(tokens[1]);
-                    string id = tokens[2];
+                    string name = tokens[1];
+                    int age = int.Parse(tokens[2]);
+                    string id = tokens[3];
+                    string birthdate = tokens[4];
 
-                    Citizens citizen = new Citizens(name, age, id);
+                    Citizens citizen = new Citizens(name, age, id, birthdate);
                     citizens.Add(citizen);
                 }
-                else if (tokens.Length == 2)
+                else if (tokens[0] == "Robot")
                 {
-                    string model = tokens[0];
-                    string id = tokens[1];
+                    string model = tokens[1];
+                    string id = tokens[2];
 
                     Robots robot = new Robots(model, id);
                     robots.Add(robot);
                 }
+                else if (tokens[0] == "Pet")
+                {
+                    string name = tokens[1];
+                    string birthdate = tokens[2];
+                    Pet pet = new Pet(name, birthdate);
+                    pets.Add(pet);
+                    
+                }
             }
 
-            string lastDigitOfFakeId = Console.ReadLine();
+            string lastDigitOfBirthdate = Console.ReadLine();
 
             foreach (var citizen in citizens)
             {
-                string currentId = citizen.Id;
+                string currentId = citizen.Birthdates;
 
-                if (currentId.EndsWith(lastDigitOfFakeId))
+                if (currentId.EndsWith(lastDigitOfBirthdate))
                 {
                     fakeId.Add(currentId);
                 }
             }
 
-            foreach (var robot in robots)
-            {
-                string currentId = robot.Id;
+            //foreach (var robot in robots)
+            //{
+            //    string currentId = robot.Id;
 
-                if (currentId.EndsWith(lastDigitOfFakeId))
+            //    if (currentId.EndsWith(lastDigitOfFakeId))
+            //    {
+            //        fakeId.Add(currentId);
+            //    }
+            //}
+            
+            foreach (var pet in pets)
+            {
+                string currentId = pet.Birthdate;
+
+                if (currentId.EndsWith(lastDigitOfBirthdate))
                 {
                     fakeId.Add(currentId);
                 }
