@@ -1,15 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Vehicles
+﻿namespace Vehicles
 {
-    public interface Vehicles
+    public abstract class Vehicles
     {
-		public double FuelQuantity { get; }
-		public double FuelConsuption { get; }
+		protected Vehicles(double fuelQuantity, double fuelConsuption)
+		{
+			FuelQuantity = fuelQuantity;
+			FuelConsumption = fuelConsuption;
+		}
 
-		double Drive(double distance);
-		double Refuel(double quantity);
+		public double FuelQuantity { get; set; }
+
+		public virtual double FuelConsumption { get; set; }
+
+		public bool CanDrive(double distance)
+			=> FuelQuantity - (distance * FuelConsumption) >= 0;
+
+
+        public void Drive(double distance)
+		{
+			if (CanDrive(distance))
+			{
+				FuelQuantity -= distance * FuelConsumption;
+			}
+		}
+		public virtual void Refuel(double quantity)
+		{
+			FuelQuantity += quantity;
+		}
 	}
 }

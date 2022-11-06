@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Vehicles
 {
@@ -8,12 +7,11 @@ namespace Vehicles
         static void Main()
         {
             string[] carInfo = Console.ReadLine().Split();
-
-            Vehicles car = new Car(double.Parse(carInfo[1]), double.Parse(carInfo[2]));
-
             string[] truckInfo = Console.ReadLine().Split();
 
-            Vehicles truck = new Truck(double.Parse(truckInfo[1]), double.Parse(truckInfo[2]));
+            Car car = new Car(double.Parse(carInfo[1]), double.Parse(carInfo[2]));
+
+            Truck truck = new Truck(double.Parse(truckInfo[1]), double.Parse(truckInfo[2]));
 
 
             int countOfCommands = int.Parse(Console.ReadLine());
@@ -22,35 +20,46 @@ namespace Vehicles
             {
                 string[] commands = Console.ReadLine().Split();
 
-                if (commands[0] == "Drive")
+                string action = commands[0];
+                string vehicle = commands[1];
+                double value = double.Parse(commands[2]);
+
+                if (action == "Drive")
                 {
-                    try
+                    if (vehicle == "Car")
                     {
-                        if (commands[1] == "Car")
+                        if (car.CanDrive(value))
                         {
-                            car.Drive(double.Parse(commands[2]));
-                            Console.WriteLine($"Car travelled {commands[2]} km");
+                            car.Drive(value);
+                            Console.WriteLine($"Car travelled {value} km");
                         }
                         else
                         {
-                            truck.Drive(double.Parse(commands[2]));
-                            Console.WriteLine($"Truck travelled {commands[2]} km");
+                            Console.WriteLine("Car needs refueling");
                         }
                     }
-                    catch (Exception e)
+                    else
                     {
-                        Console.WriteLine(e.Message);
+                        if (truck.CanDrive(value))
+                        {
+                            truck.Drive(value);
+                            Console.WriteLine($"Truck travelled {value} km");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Truck needs refueling");
+                        }
                     }
                 }
                 else
                 {
-                    if (commands[1] == "Car")
+                    if (vehicle == "Car")
                     {
-                        car.Refuel(double.Parse(commands[2]));
+                        car.Refuel(value);
                     }
                     else
                     {
-                        truck.Refuel(double.Parse(commands[2]));
+                        truck.Refuel(value);
                     }
                 }
             }
