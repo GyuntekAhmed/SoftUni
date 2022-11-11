@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace VehiclesExtension
+﻿namespace VehiclesExtension
 {
+    using System;
     public class Bus : Vehicles
     {
         private const double ACConsumption = 1.4;

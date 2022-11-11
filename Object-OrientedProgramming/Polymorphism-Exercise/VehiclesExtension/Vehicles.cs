@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace VehiclesExtension
+﻿namespace VehiclesExtension
 {
     public abstract class Vehicles
     {

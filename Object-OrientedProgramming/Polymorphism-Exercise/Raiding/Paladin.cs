@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace Raiding
+﻿namespace Raiding
 {
+    using System;
     public class Paladin : BaseHero
     {
         public Paladin(string name)

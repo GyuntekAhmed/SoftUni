@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace VehiclesExtension
+﻿namespace VehiclesExtension
 {
+    using System;
     public class Validator
     {
         public static void CheckPositiveNumber(double value)

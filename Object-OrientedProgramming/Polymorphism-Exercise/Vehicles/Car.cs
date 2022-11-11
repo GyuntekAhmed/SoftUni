@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace Vehicles
+﻿namespace Vehicles
 {
+    using System;
     public class Car : Vehicles
     {
         public Car(double fuelQuantity, double fuelConsuption)
