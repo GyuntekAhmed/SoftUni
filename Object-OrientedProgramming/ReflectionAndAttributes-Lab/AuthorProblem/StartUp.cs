@@ -1,12 +1,14 @@
 ﻿using System;
-
 namespace AuthorProblem
 {
+    [Author("Gyuntek")]
     public class StartUp
     {
-        static void Main(string[] args)
+        [Author("Gyuni")]
+        static void Main()
         {
-            Console.WriteLine("Hello World!");
+            Tracker tracker = new Tracker();
+            tracker.PrintMethodsByAuthor();
         }
     }
 }
