@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Xml.Linq;
 
 namespace Stealer
 {
@@ -60,6 +61,43 @@ namespace Stealer
             foreach (MethodInfo method in classPublicMethods.Where(m => m.Name.StartsWith("set")))
             {
                 sb.AppendLine($"{method.Name} have to be private!");
+            }
+
+            return sb.ToString().Trim();
+        }
+
+        public string RevealPrivateMethods(string className)
+        {
+            classType = Type.GetType(className);
+
+            MethodInfo[] classMethods = classType.GetMethods
+                (BindingFlags.Instance | BindingFlags.NonPublic);
+
+            sb.AppendLine($"All Private Methods of Class: {className}");
+            sb.AppendLine($"Base Class: {classType.BaseType.Name}");
+
+            foreach (MemberInfo method in classMethods)
+            {
+                sb.AppendLine(method.Name);
+            }
+
+            return sb.ToString().Trim();
+        }
+
+        public string CollectGettersAndSetters(string className)
+        {
+            classType = Type.GetType(className);
+
+            MethodInfo[] classMethods = classType.GetMethods
+                (BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+
+            foreach (MethodInfo method in classMethods.Where(m => m.Name.StartsWith("get")))
+            {
+                sb.AppendLine($"{method.Name} will return {method.ReturnType}");
+            }
+            foreach (MethodInfo method in classMethods.Where(m => m.Name.StartsWith("set")))
+            {
+                sb.AppendLine($"{method.Name} will set firld of {method.GetParameters().First().ParameterType}");
             }
 
             return sb.ToString().Trim();
