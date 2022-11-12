@@ -7,8 +7,8 @@
 
         public string Password
         {
-            get => this.password;
-            set => this.password = value;
+            get => password;
+            set => password = value;
         }
 
         private int Id { get; set; }

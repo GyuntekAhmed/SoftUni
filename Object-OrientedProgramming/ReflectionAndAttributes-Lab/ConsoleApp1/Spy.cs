@@ -8,7 +8,7 @@ namespace Stealer
     public class Spy
     {
         private StringBuilder sb;
-        private Type classType;
+
         public Spy()
         {
             sb = new StringBuilder();
