@@ -1,4 +1,4 @@
-﻿namespace ValidationAttributes.Utilities
+﻿namespace ValidationAttributes.Utilities.Attributes
 {
     public class MyRangeAttribute : MyValidationAttribute
     {

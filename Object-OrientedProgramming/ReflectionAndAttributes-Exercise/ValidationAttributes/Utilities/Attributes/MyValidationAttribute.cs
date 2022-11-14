@@ -1,4 +1,4 @@
-﻿namespace ValidationAttributes.Utilities
+﻿namespace ValidationAttributes.Utilities.Attributes
 {
     using System;
 

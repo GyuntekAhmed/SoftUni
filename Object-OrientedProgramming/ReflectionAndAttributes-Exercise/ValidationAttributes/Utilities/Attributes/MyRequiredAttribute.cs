@@ -1,4 +1,4 @@
-﻿namespace ValidationAttributes.Utilities
+﻿namespace ValidationAttributes.Utilities.Attributes
 {
     using System;
 
@@ -10,10 +10,10 @@
             if (obj is string str)
             {
                 // Additional Validation
-                return string.IsNullOrEmpty(str);
+                return !string.IsNullOrEmpty(str);
             }
 
-            return obj == null;
+            return obj != null;
         }
     }
 }
