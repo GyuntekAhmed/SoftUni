@@ -1,7 +1,5 @@
 ﻿namespace CommandPattern.Core
 {
-    using System;
-
     using IO.Contracts;
     using Contracts;
 
@@ -27,7 +25,7 @@
                 string input = this.reader.ReadLine();
 
                 string result = this.commandInterpreter.Read(input);
-                this.writer.WriteLine(result);
+                writer.WriteLine(result);
             }
         }
     }
