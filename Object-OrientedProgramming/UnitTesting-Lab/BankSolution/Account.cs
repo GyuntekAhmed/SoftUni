@@ -1,12 +1,18 @@
 ﻿namespace BankSolution
 {
-    public class Acocount
+    public class Account
     {
+        private readonly List<Transaction> transactions;
+
         private decimal balance;
 
-        public Acocount(int amount)
+        public Account(int amount)
         {
             this.Balance = amount;
+            this.transactions = new List<Transaction>
+            {
+                new Transaction(DateTime.UtcNow, amount, "Initial Balance")
+            };
         }
 
         public decimal Balance 
@@ -23,7 +29,7 @@
             }
         }
 
-        public void Deposit(decimal amount)
+        public void Deposit(decimal amount, string reference)
         {
             if (amount <= 0)
             {
@@ -31,16 +37,30 @@
             }
 
             this.balance += amount;
+            this.transactions.Add(new Transaction(DateTime.UtcNow, amount, reference));
         }
 
         public void Withdraw(decimal amount)
         {
+            const decimal withdrawalTax = 0.5m;
+            amount += withdrawalTax;
+
             if (this.Balance < amount)
             {
                 throw new InvalidOperationException("You do not have enough money for this operation.");
             }
 
             this.balance -= amount;
+
+            this.transactions.Add(new Transaction(DateTime.UtcNow, -amount + withdrawalTax, "Withdrawal"));
+            this.transactions.Add(new Transaction(DateTime.UtcNow, -withdrawalTax, "Withdrawal all bank tax"));
+        }
+
+        public List<string> TransactionHistory()
+        {
+            return this.transactions
+                .Select(t => t.ToString())
+                .ToList();
         }
     }
 }
