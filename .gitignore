@@ -12,6 +12,8 @@
 *.csproj
 *.sln
 *.zip
+*.lutconfig
+*.lutignore
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
