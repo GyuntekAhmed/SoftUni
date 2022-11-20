@@ -1,9 +1,8 @@
 namespace Database.Tests
 {
-    using System;
-    using System.Collections.Generic;
-
     using NUnit.Framework;
+    using System.Collections.Generic;
+    using System;
 
     [TestFixture]
     public class DatabaseTests
