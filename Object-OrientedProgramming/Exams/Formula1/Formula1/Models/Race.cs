@@ -58,7 +58,6 @@
         public ICollection<IPilot> Pilots
         {
             get { return pilots; }
-            set { pilots = value; }
         }
 
         public void AddPilot(IPilot pilot)
