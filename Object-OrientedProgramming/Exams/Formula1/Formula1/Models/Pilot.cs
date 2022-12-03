@@ -44,10 +44,10 @@
             get { return car; }
             private set
             {
-                if (car == null)
+                if (value == null)
                 {
                     throw new NullReferenceException
-                        (string.Format(ExceptionMessages.InvalidCarForPilot));
+                        (string.Format(ExceptionMessages.InvalidCarForPilot, value));
                 }
 
                 car = value;
