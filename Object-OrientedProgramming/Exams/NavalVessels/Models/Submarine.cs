@@ -7,7 +7,8 @@
     {
         private const double Initial_Armor_Thickness = 200;
 
-        public Submarine(string name, double mainWeaponCaliber, double speed, double armorThickness) : base(name, mainWeaponCaliber, speed, armorThickness)
+        public Submarine(string name, double mainWeaponCaliber, double speed)
+            : base(name, mainWeaponCaliber, speed, Initial_Armor_Thickness)
         {
             SubmergeMode = false;
         }

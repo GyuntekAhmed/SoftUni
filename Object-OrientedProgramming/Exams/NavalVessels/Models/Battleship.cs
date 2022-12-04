@@ -7,8 +7,8 @@
     {
         private const double Initial_Armor_Thickness = 300;
 
-        public Battleship(string name, double mainWeaponCaliber, double speed, double armorThickness)
-            : base(name, mainWeaponCaliber, speed, armorThickness)
+        public Battleship(string name, double mainWeaponCaliber, double speed)
+            : base(name, mainWeaponCaliber, speed, Initial_Armor_Thickness)
         {
             SonarMode = false;
         }

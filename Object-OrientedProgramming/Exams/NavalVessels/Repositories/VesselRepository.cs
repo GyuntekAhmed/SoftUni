@@ -1,12 +1,10 @@
-﻿
-namespace NavalVessels.Repositories
+﻿namespace NavalVessels.Repositories
 {
-    using System;
     using System.Collections.Generic;
+    using System.Linq;
      
     using Models.Contracts;
     using Contracts;
-    using System.Linq;
 
     public class VesselRepository : IRepository<IVessel>
     {

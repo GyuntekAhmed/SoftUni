@@ -11,10 +11,6 @@
     {
         private string name;
         private ICaptain captain;
-        private double armorThickness;
-        private double mainWeaponCaliber;
-        private double speed;
-        private ICollection<string> targets;
 
         protected Vessel
             (string name, double mainWeaponCaliber, double speed, double armorThickness)
@@ -23,8 +19,8 @@
             MainWeaponCaliber = mainWeaponCaliber;
             Speed = speed;
             ArmorThickness = armorThickness;
-            Captain = captain;
-            targets = new List<string>();        }
+            Targets = new List<string>();      
+        }
 
         public string Name
         {
@@ -56,17 +52,9 @@
 
         public double ArmorThickness { get; set; }
 
-        public double MainWeaponCaliber
-        {
-            get { return mainWeaponCaliber; }
-            protected set { mainWeaponCaliber = value; }
-        }
+        public double MainWeaponCaliber { get; protected set; }
 
-        public double Speed
-        {
-            get { return speed; }
-            protected set { speed = value; }
-        }
+        public double Speed { get; protected set; }
 
         public ICollection<string> Targets { get; private set; }
 
@@ -77,14 +65,14 @@
                 throw new NullReferenceException(string.Format(ExceptionMessages.InvalidTarget));
             }
 
-            target.ArmorThickness -= mainWeaponCaliber;
+            target.ArmorThickness -= MainWeaponCaliber;
 
             if (target.ArmorThickness < 0)
             {
                 target.ArmorThickness = 0;
             }
 
-            targets.Add(target.Name);
+            Targets.Add(target.Name);
             Captain.IncreaseCombatExperience();
             target.Captain.IncreaseCombatExperience();
         }
@@ -95,9 +83,9 @@
         {
             StringBuilder sb = new StringBuilder();
 
-            string targetsOut = Targets.Any() ? string.Join(", ", Targets) : "None";
+            string targetsOut = this.Targets.Any() ? String.Join(", ", this.Targets) : "None";
 
-            sb.AppendLine($"- {Name}")
+            sb.AppendLine($"- {this.Name}")
              .AppendLine($"*Type: {this.GetType().Name}")
              .AppendLine($"*Armor thickness: {ArmorThickness}")
              .AppendLine($"*Main weapon caliber: {MainWeaponCaliber}")
