@@ -57,7 +57,7 @@ namespace PlanetWars
         {
             this.Budget += amount;
         }
-
+            
         public void SpendFunds(double amount)
         {
             if(amount > this.Budget)
