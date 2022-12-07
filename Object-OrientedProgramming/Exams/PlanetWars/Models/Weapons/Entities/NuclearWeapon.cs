@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PlanetWars.Models.Weapons.Entities
+﻿namespace PlanetWars.Models.Weapons.Entities
 {
-    internal class NuclearWeapon
+    public class NuclearWeapon : Weapon
     {
+        private const double price = 15;
+        public NuclearWeapon(int destructionLevel)
+            : base(price, destructionLevel)
+        {
+        }
     }
 }
