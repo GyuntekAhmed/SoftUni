@@ -1,5 +1,4 @@
 ﻿using Gym.Models.Athletes.Contracts;
-using Gym.Models.Athletes.Entities;
 using Gym.Models.Equipment.Contracts;
 using Gym.Models.Gyms.Contracts;
 using Gym.Utilities.Messages;
