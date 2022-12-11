@@ -5,12 +5,12 @@ using NUnit.Framework;
 public class HeroRepositoryTests
 {
     private Hero hero;
-    private HeroRepository heroRepository;
+    private HeroRepository heroes;
 
     [SetUp]
     public void SetUp()
     {
-        heroRepository = new HeroRepository();
+        heroes = new HeroRepository();
         hero = new Hero("Me", 5);
     }
 
@@ -33,34 +33,34 @@ public class HeroRepositoryTests
 
         Assert.Throws<ArgumentNullException>(() =>
         {
-            heroRepository.Create(hero2);
+            heroes.Create(hero2);
         },
         "Hero is null");
     }
     [Test]
     public void CreateThrowWhenContainsHero()
     {
-        heroRepository.Create(hero);
+        heroes.Create(hero);
 
         Assert.Throws<InvalidOperationException>(() =>
         {
-            heroRepository.Create(hero);
+            heroes.Create(hero);
         },
         $"Hero with name {hero.Name} already exists");
     }
     [Test]
     public void CreateCorrectly()
     {
-        heroRepository.Create(hero);
+        heroes.Create(hero);
 
-        Assert.AreEqual(1, heroRepository.Heroes.Count);
+        Assert.AreEqual(1, heroes.Heroes.Count);
     }
     [Test]
-    public void RemoveThrowWithNullName()
+    public void RemoveThrowsWhenNameIsNull()
     {
         Assert.Throws<ArgumentNullException>(() =>
         {
-            heroRepository.Remove(null);
+            heroes.Remove(null);
         },
         "Name cannot be null");
     }
@@ -69,12 +69,12 @@ public class HeroRepositoryTests
     {
         Hero hero2 = new Hero("You", 6);
 
-        heroRepository.Create(hero);
-        heroRepository.Create(hero2);
+        heroes.Create(hero);
+        heroes.Create(hero2);
 
-        heroRepository.Remove(hero.Name);
+        heroes.Remove(hero.Name);
 
-        Assert.AreEqual(1, heroRepository.Heroes.Count);
+        Assert.AreEqual(1, heroes.Heroes.Count);
     }
 
     [Test]
@@ -82,19 +82,19 @@ public class HeroRepositoryTests
     {
         Hero hero2 = new Hero("You", 7);
 
-        heroRepository.Create(hero);
-        heroRepository.Create(hero2);
+        heroes.Create(hero);
+        heroes.Create(hero2);
 
-        Hero highHero = heroRepository.GetHeroWithHighestLevel();
+        Hero highHero = heroes.GetHeroWithHighestLevel();
 
         Assert.AreEqual(7, highHero.Level);
     }
     [Test]
     public void GetHeroCorrectly()
     {
-        heroRepository.Create(hero);
+        heroes.Create(hero);
 
-        Hero hero2 = heroRepository.GetHero("Me");
+        Hero hero2 = heroes.GetHero("Me");
 
         Assert.AreEqual("Me", hero2.Name);
     }
