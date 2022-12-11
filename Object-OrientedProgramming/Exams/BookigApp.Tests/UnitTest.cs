@@ -1,9 +1,10 @@
-using FrontDeskApp;
-using NUnit.Framework;
-using System;
-
 namespace BookigApp.Tests
 {
+    using System;
+
+    using FrontDeskApp;
+    using NUnit.Framework;
+
     public class Tests
     {
         private Room room;

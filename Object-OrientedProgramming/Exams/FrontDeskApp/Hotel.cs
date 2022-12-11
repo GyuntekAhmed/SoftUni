@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace FrontDeskApp
+﻿namespace FrontDeskApp
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class Hotel
     {
         private string fullName;

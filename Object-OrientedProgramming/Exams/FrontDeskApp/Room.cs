@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FrontDeskApp
+﻿namespace FrontDeskApp
 {
+    using System;
+
     public class Room
     {
         private int bedCapacity;
