@@ -12,7 +12,7 @@
 
         protected Delicacy(string delicacyName, double price)
         {
-            Name = name;
+            Name = delicacyName;
             Price = price;
         }
 
