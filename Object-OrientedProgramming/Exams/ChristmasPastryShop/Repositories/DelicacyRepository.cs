@@ -1,10 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ChristmasPastryShop.Repositories
+﻿namespace ChristmasPastryShop.Repositories
 {
-    internal class DelicacyRepository
+    using System.Collections.Generic;
+
+    using Contracts;
+    using Models.Delicacies.Contracts;
+
+    public class DelicacyRepository : IRepository<IDelicacy>
     {
+        private List<IDelicacy> models;
+
+        public DelicacyRepository()
+        {
+            models = new List<IDelicacy>();
+        }
+
+        public IReadOnlyCollection<IDelicacy> Models => models;
+
+        public void AddModel(IDelicacy model)
+        {
+            models.Add(model);
+        }
     }
 }
