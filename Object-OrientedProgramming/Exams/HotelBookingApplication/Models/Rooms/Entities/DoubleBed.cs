@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BookingApp.Models.Rooms.Entities
+﻿namespace BookingApp.Models.Rooms.Entities
 {
-    internal class DoubleBed
+    public class DoubleBed : Room
     {
+        private const int bedCapacity = 2;
+
+        public DoubleBed() : base(bedCapacity)
+        {
+        }
     }
 }
