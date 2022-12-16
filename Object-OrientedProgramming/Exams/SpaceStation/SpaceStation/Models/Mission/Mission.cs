@@ -12,18 +12,13 @@
         {
             foreach (var astronaut in astronauts)
             {
-                if (astronaut.Oxygen != 0)
+                foreach (var item in planet.Items)
                 {
-                    foreach (var item in planet.Items)
+                    if (astronaut.CanBreath)
                     {
                         astronaut.Breath();
                         astronaut.Bag.Items.Add(item);
                         planet.Items.Remove(item);
-
-                        if (astronaut.Oxygen == 0)
-                        {
-                            break;
-                        }
                     }
                 }
             }
