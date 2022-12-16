@@ -10,7 +10,7 @@
 
         public override void Breath()
         {
-            Oxygen -= 5; // May be is wrong !!!
+            Oxygen -= 5;
         }
     }
 }

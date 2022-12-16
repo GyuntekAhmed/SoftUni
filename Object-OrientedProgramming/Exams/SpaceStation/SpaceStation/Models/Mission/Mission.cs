@@ -1,6 +1,5 @@
 ﻿namespace SpaceStation.Models.Mission
 {
-    using System;
     using System.Collections.Generic;
 
     using Astronauts.Contracts;
