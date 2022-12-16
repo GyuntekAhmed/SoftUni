@@ -4,17 +4,17 @@
     using System.Collections.Generic;
 
     using Contracts;
-    using SpaceStation.Utilities.Messages;
+    using Utilities.Messages;
 
     public class Planet : IPlanet
     {
         private string name;
-        private List<IPlanet> items;
+        private List<string> items;
 
         public Planet(string name)
         {
             Name = name;
-            items = new List<IPlanet>();
+            items = new List<string>();
         }
 
         public string Name
@@ -32,6 +32,6 @@
             }
         }
 
-        public ICollection<string> Items => (ICollection<string>)items;
+        public ICollection<string> Items => items;
     }
 }

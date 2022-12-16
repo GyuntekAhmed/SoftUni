@@ -14,7 +14,7 @@
             {
                 foreach (var item in planet.Items)
                 {
-                    if (astronaut.CanBreath)
+                    if (!astronaut.CanBreath)
                     {
                         astronaut.Breath();
                         astronaut.Bag.Items.Add(item);

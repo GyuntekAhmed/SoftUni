@@ -1,10 +1,10 @@
 ﻿namespace SpaceStation.Repositories
 {
-    using System.Collections.Generic;
     using System.Linq;
+    using System.Collections.Generic;
 
-    using Models.Astronauts.Contracts;
     using Contracts;
+    using Models.Astronauts.Contracts;
 
     public class AstronautRepository : IRepository<IAstronaut>
     {

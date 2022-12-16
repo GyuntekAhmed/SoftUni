@@ -1,7 +1,7 @@
 ﻿namespace SpaceStation.Repositories
 {
-    using System.Collections.Generic;
     using System.Linq;
+    using System.Collections.Generic;
 
     using Contracts;
     using Models.Planets.Contracts;
