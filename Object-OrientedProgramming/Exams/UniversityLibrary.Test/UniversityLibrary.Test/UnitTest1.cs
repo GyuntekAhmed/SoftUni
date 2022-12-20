@@ -27,9 +27,30 @@ namespace UniversityLibrary.Test
             string actualAuthor = textBook.Author;
             string actualCategory = textBook.Category;
 
-            Assert.That(actualTitle, Is.EqualTo(title));
-            Assert.That(actualAuthor, Is.EqualTo(author));
-            Assert.That(actualCategory, Is.EqualTo(category));
+            Assert.Multiple(() =>
+            {
+                Assert.That(actualTitle, Is.EqualTo(title));
+                Assert.That(actualAuthor, Is.EqualTo(author));
+                Assert.That(actualCategory, Is.EqualTo(category));
+            });
+        }
+        [Test]
+        public void UniversityLibraryShouldSetCorrectly()
+        {
+            int expextedCount = 0;
+            int actualCount = library.Catalogue.Count;
+
+            Assert.That(actualCount, Is.EqualTo(expextedCount));
+        }
+        [Test]
+        public void AddCorrectly()
+        {
+            library.AddTextBookToLibrary(textBook);
+
+            int expextedCount = 1;
+            int actualCount = library.Catalogue.Count;
+
+            Assert.That(actualCount, Is.EqualTo(expextedCount));
         }
     }
 }
