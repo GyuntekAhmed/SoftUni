@@ -17,6 +17,7 @@ namespace UniversityLibrary.Test
             category = "General";
 
             textBook = new TextBook(title, author, category);
+            textBook.Holder = "Me";
             library = new UniversityLibrary();
         }
 
@@ -26,12 +27,14 @@ namespace UniversityLibrary.Test
             string actualTitle = textBook.Title;
             string actualAuthor = textBook.Author;
             string actualCategory = textBook.Category;
+            string actualHolder = textBook.Holder;
 
             Assert.Multiple(() =>
             {
                 Assert.That(actualTitle, Is.EqualTo(title));
                 Assert.That(actualAuthor, Is.EqualTo(author));
                 Assert.That(actualCategory, Is.EqualTo(category));
+                Assert.That(actualHolder, Is.EqualTo("Me"));
             });
         }
         [Test]
