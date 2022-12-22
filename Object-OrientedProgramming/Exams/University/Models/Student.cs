@@ -47,6 +47,7 @@
                     throw new ArgumentException
                         (string.Format(ExceptionMessages.NameNullOrWhitespace));
                 }
+
                 firstName = value;
             }
         }
@@ -62,7 +63,7 @@
 
         public void JoinUniversity(IUniversity university)
         {
-            
+            this.university = university;
         }
     }
 }
