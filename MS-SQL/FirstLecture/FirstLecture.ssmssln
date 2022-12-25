@@ -3,12 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # SQL Server Management Studio Solution File, Format Version 19.00
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "CarRental", "CarRental\CarRental.ssmssqlproj", "{65B8361B-8229-4AAD-87E6-B2253E943382}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "Hotel Database", "Hotel Database\Hotel Database.ssmssqlproj", "{06B9962A-83ED-4787-9DCB-E30FA3237C72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Default|Default = Default|Default
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4556ABA7-1796-41A3-A330-16996BC1ABDE}.Default|Default.ActiveCfg = Default
+		{65B8361B-8229-4AAD-87E6-B2253E943382}.Default|Default.ActiveCfg = Default
+		{DCA07C25-56C5-47BD-8334-D5C7387FFA2E}.Default|Default.ActiveCfg = Default
+		{06B9962A-83ED-4787-9DCB-E30FA3237C72}.Default|Default.ActiveCfg = Default
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
