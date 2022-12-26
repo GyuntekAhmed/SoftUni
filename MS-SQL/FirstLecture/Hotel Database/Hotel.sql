@@ -118,3 +118,9 @@ Insert Into Occupancies Values
 (1, 120, GETDATE(), 100, 120, 1, 1, null),
 (2, 121, GETDATE(), 101, 121, 2, 2, null),
 (3, 122, GETDATE(), 102, 122, 3, 3, null)
+
+UPDATE Payments
+SET TaxRate /= 0.97
+SELECT TaxRate FROM Payments
+
+DELETE FROM Occupancies
