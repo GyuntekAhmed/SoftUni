@@ -19,11 +19,23 @@
     </LogicalFolder>
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
       <Items>
-        <FileNode Name="CRUD.sql">
+        <FileNode Name="Queries for Diablo Database.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FNR24JL\SQLEXPRESS01:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>DESKTOP-FNR24JL\SQLEXPRESS01</AssociatedConnSrvName>
           <AssociatedConnUserName />
-          <FullPath>C:\Users\Pc\Desktop\Github\SoftUni-Course\MS-SQL\CRUD\CRUD.sql</FullPath>
+          <FullPath>Queries for Diablo Database.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Queries for Geography Database.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FNR24JL\SQLEXPRESS01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-FNR24JL\SQLEXPRESS01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>Queries for Geography Database.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Queries for SoftUni Database.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FNR24JL\SQLEXPRESS01:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-FNR24JL\SQLEXPRESS01</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>Queries for SoftUni Database.sql</FullPath>
         </FileNode>
       </Items>
     </LogicalFolder>
