@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# SQL Server Management Studio Solution File, Format Version 19.00
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "QueriesForSoftUniDatabase", "QueriesForSoftUniDatabase\QueriesForSoftUniDatabase.ssmssqlproj", "{43F647A8-F252-477D-81C0-99A0208605C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Default = Default|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43F647A8-F252-477D-81C0-99A0208605C2}.Default|Default.ActiveCfg = Default
+		{907F1F24-8725-45CF-B5F7-89FE6C4A4223}.Default|Default.ActiveCfg = Default
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4243E7D7-9150-4AE0-9E26-FA9036448D12}
+	EndGlobalSection
+EndGlobal
