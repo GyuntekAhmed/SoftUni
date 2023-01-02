@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "QueriesForSoftUniDatabase", "QueriesForSoftUniDatabase\QueriesForSoftUniDatabase.ssmssqlproj", "{43F647A8-F252-477D-81C0-99A0208605C2}"
 EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "QueriesForGeographyDatabase", "QueriesForGeographyDatabase\QueriesForGeographyDatabase.ssmssqlproj", "{1BC211E4-C92B-43BB-8AD3-65BF8DD59F01}"
+EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "QueriesForDiabloDatabase", "QueriesForDiabloDatabase\QueriesForDiabloDatabase.ssmssqlproj", "{E2267043-994D-45B1-8960-5F5570073E94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Default|Default = Default|Default
@@ -12,6 +16,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{43F647A8-F252-477D-81C0-99A0208605C2}.Default|Default.ActiveCfg = Default
 		{907F1F24-8725-45CF-B5F7-89FE6C4A4223}.Default|Default.ActiveCfg = Default
+		{1BC211E4-C92B-43BB-8AD3-65BF8DD59F01}.Default|Default.ActiveCfg = Default
+		{E2267043-994D-45B1-8960-5F5570073E94}.Default|Default.ActiveCfg = Default
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
