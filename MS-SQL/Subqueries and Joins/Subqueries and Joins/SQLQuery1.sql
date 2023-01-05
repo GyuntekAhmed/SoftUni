@@ -26,3 +26,9 @@ SELECT TOP(3) e.EmployeeID, e.FirstName
   FULL JOIN EmployeesProjects AS ep ON e.EmployeeID = ep.EmployeeID
 	WHERE ep.EmployeeID IS NULL
 	ORDER BY e.EmployeeID
+
+SELECT e.FirstName, e.LastName, e.HireDate, d.[Name] AS DeptName
+	FROM Employees AS e
+  JOIN Departments AS d ON d.DepartmentID = e.DepartmentID
+	WHERE d.Name IN ('Finance' , 'Sales') AND e.HireDate > '1999/1/1'
+	ORDER BY e.HireDate
