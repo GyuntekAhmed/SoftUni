@@ -20,3 +20,9 @@ SELECT TOP(5) e.EmployeeID, e.FirstName, e.Salary, d.Name AS DepartmentName
   JOIN Departments AS d ON d.DepartmentID = e.DepartmentID
 	WHERE Salary > 15000
 	ORDER BY d.DepartmentID
+
+SELECT TOP(3) e.EmployeeID, e.FirstName
+	FROM Employees AS e
+  FULL JOIN EmployeesProjects AS ep ON e.EmployeeID = ep.EmployeeID
+	WHERE ep.EmployeeID IS NULL
+	ORDER BY e.EmployeeID
