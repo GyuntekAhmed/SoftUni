@@ -32,3 +32,10 @@ SELECT e.FirstName, e.LastName, e.HireDate, d.[Name] AS DeptName
   JOIN Departments AS d ON d.DepartmentID = e.DepartmentID
 	WHERE d.Name IN ('Finance' , 'Sales') AND e.HireDate > '1999/1/1'
 	ORDER BY e.HireDate
+
+SELECT TOP(5) e.EmployeeID, FirstName, p.Name
+	FROM Employees AS e
+  JOIN EmployeesProjects AS ep ON ep.EmployeeID = e.EmployeeID
+  JOIN Projects AS p ON p.ProjectID = ep.ProjectID
+	WHERE p.StartDate > '2002/08/13' AND p.EndDate IS NULL
+	ORDER BY e.EmployeeID
