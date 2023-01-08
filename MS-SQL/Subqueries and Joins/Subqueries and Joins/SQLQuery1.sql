@@ -24,7 +24,7 @@ SELECT TOP(5) e.EmployeeID, e.FirstName, e.Salary, d.Name AS DepartmentName
 SELECT TOP(3) e.EmployeeID, e.FirstName
 	FROM Employees AS e
   FULL JOIN EmployeesProjects AS ep ON e.EmployeeID = ep.EmployeeID
-	WHERE ep.EmployeeID IS NULL
+	WHERE ep.ProjectID IS NULL
 	ORDER BY e.EmployeeID
 
 SELECT e.FirstName, e.LastName, e.HireDate, d.[Name] AS DeptName
@@ -35,13 +35,18 @@ SELECT e.FirstName, e.LastName, e.HireDate, d.[Name] AS DeptName
 
 SELECT TOP(5) e.EmployeeID, FirstName, p.Name AS ProjectName
 	FROM Employees AS e
-  JOIN EmployeesProjects AS ep ON ep.EmployeeID = e.EmployeeID
-  JOIN Projects AS p ON p.ProjectID = ep.ProjectID
+  JOIN EmployeesProjects AS ep
+	ON ep.EmployeeID = e.EmployeeID
+  JOIN Projects AS p 
+	ON p.ProjectID = ep.ProjectID
 	WHERE p.StartDate > '2002/08/13' AND p.EndDate IS NULL
 	ORDER BY e.EmployeeID
 
-SELECT TOP(5) e.EmployeeID, FirstName, p.Name AS ProjectName, p.StartDate
-	FROM Employees AS e
-  JOIN EmployeesProjects AS ep ON ep.EmployeeID = e.EmployeeID
-  JOIN Projects AS p ON p.ProjectID = ep.ProjectID
+SELECT e.EmployeeID, e.FirstName, p.name AS ProjectName
+	FROM employees AS e
+ JOIN EmployeesProjects AS ep
+	ON e.EmployeeID = ep.EmployeeID
+LEFT OUTER JOIN projects AS p
+	ON ep.ProjectID = p.ProjectID
+	AND p.StartDate < '2005/01/01'
 	WHERE e.EmployeeID = 24
