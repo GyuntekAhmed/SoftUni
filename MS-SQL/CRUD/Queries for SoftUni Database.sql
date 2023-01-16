@@ -42,4 +42,25 @@ UPDATE Employees
    WHERE DepartmentID IN (1, 2, 4, 11)
 
 SELECT Salary
-   FROM Employees
+	FROM Employees
+	WHERE JobTitle = 'Sales Representative'
+
+SELECT FirstName, LastName, JobTitle
+	FROM Employees
+	WHERE Salary BETWEEN 20000 AND 30000
+
+SELECT FirstName, LastName, Salary
+	FROM Employees
+	WHERE Salary > 50000
+	ORDER BY Salary DESC
+
+SELECT TOP(5) FirstName, LastName
+	FROM Employees
+	ORDER BY Salary DESC
+
+SELECT FirstName, LastName
+	FROM Employees
+	WHERE DepartmentID != 4
+
+SELECT DISTINCT(JobTitle)
+	FROM Employees
