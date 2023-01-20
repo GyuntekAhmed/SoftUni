@@ -45,3 +45,29 @@ ORDER BY [MagicWandCreator], [DepositGroup]
 		FROM [WizzardDeposits]
 	)	  AS [AgeGroupQuery]
 	GROUP BY [AgeGroup]
+
+	 SELECT left([FirstName], 1) AS [FirstLetter]
+		    FROM [WizzardDeposits]
+		   WHERE [DepositGroup] = 'Troll Chest'
+		GROUP BY LEFT([FirstName], 1)
+		ORDER BY [FirstLetter]
+
+   SELECT [DepositGroup],
+		  [IsDepositExpired],
+		  AVG(1.0 * DepositInterest)
+	 FROM [WizzardDeposits]
+	WHERE [DepositStartDate] > '01/01/1985'
+ GROUP BY [DepositGroup], [IsDepositExpired]
+ ORDER BY [DepositGroup] DESC, [IsDepositExpired]
+
+ SELECT SUM(ws.Difference)
+	FROM
+	(
+		SELECT DepositAmount -
+		(
+			SELECT DepositAmount
+			FROM WizzardDeposits AS wsd
+			WHERE wsd.Id = wd.Id + 1
+		) AS Difference
+		FROM WizzardDeposits AS wd
+	) AS ws
