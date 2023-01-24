@@ -48,3 +48,7 @@ FROM (
 	AS RankingSubquery
  WHERE [Rank] = 2
  ORDER BY Salary DESC
+
+ SELECT FirstName, LastName
+	FROM Employees
+ WHERE FirstName LIKE 'Sa%'
