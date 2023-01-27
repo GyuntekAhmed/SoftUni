@@ -64,3 +64,17 @@ INSERT INTO [Issues] VALUES
 ('Typo fix in Judge.html', 'open', 4, 3),
 ('Implement documentation for UsersService.cs', 'closed', 8, 2),
 ('Unreachable code in Index.cs', 'open', 9, 8)
+
+UPDATE [Issues]
+   SET [IssueStatus] = 'closed'
+ WHERE [AssigneeId] = 6
+
+  SELECT *
+	FROM [RepositoriesContributors]
+   WHERE [RepositoryId] = 3
+
+DELETE FROM [RepositoriesContributors]
+	  WHERE [RepositoryId] = 3
+
+DELETE FROM [Issues]
+	  WHERE [Id] IN (13, 46, 65)
