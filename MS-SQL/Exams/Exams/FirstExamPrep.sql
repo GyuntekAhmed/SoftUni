@@ -78,3 +78,4 @@ DELETE FROM [RepositoriesContributors]
 
 DELETE FROM [Issues]
 	  WHERE [Id] IN (13, 46, 65)
+
