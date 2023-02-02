@@ -146,3 +146,61 @@ LEFT JOIN [Jobs]
 		ON [m].[MechanicId] = [j].[MechanicId]
   GROUP BY [m].[FirstName], [m].[LastName], [m].[MechanicId]
   ORDER BY [m].[MechanicId]
+
+   SELECT (CONCAT([m].[FirstName], ' ', [m].[LastName])) AS [Available]
+     FROM [Mechanics]
+	   AS [m]
+LEFT JOIN [Jobs]
+	   AS [j]
+	   ON [m].[MechanicId] = [j].[MechanicId]
+	WHERE [j].[JobId] IS NULL
+					  OR 
+					  (
+					  SELECT COUNT(JobId)
+							FROM [Jobs]
+						   WHERE [Status] != 'Finished' AND
+								 [MechanicId] = [m].[MechanicId]
+						GROUP BY [MechanicId], [Status]
+					  ) IS NULL
+	GROUP BY [m].[MechanicId], [m].[FirstName], [m].[LastName]
+	ORDER BY [m].[MechanicId]
+
+   SELECT [j].JobId,
+ 	   	  ISNULL(SUM([p].[Price] * [op].[Quantity]), 0) AS [Total]
+     FROM [Jobs]
+       AS [j]
+LEFT JOIN [Orders]
+       AS [o]
+ 	   ON [j].[JobId] = [o].[JobId]
+LEFT JOIN [OrderParts]
+       AS [op]
+ 	   ON [o].[OrderId] = [op].[OrderId]
+LEFT JOIN [Parts]
+       AS [p]
+ 	   ON [op].[PartId] = [p].[PartId]
+    WHERE [j].[Status] = 'Finished'
+ GROUP BY [j].[JobId]
+ ORDER BY [Total] DESC, [j].[JobId]
+
+   SELECT [p].[PartId],
+		  [p].[Description],
+		  [pn].[Quantity] AS [Required],
+		  [p].[StockQty] AS [InStock],
+		  IIF([o].[Delivered] = 0, [op].[Quantity], 0) AS [Ordered]
+     FROM [Parts]
+       AS [p]
+LEFT JOIN [PartsNeeded]
+       AS [pn]
+  	   ON [pn].[PartId] = [p].[PartId]
+LEFT JOIN [OrderParts]
+       AS [op]
+  	   ON [op].[PartId] = [p].[PartId]
+LEFT JOIN [Jobs]
+       AS [j]
+       ON [j].[JobId] = [pn].[PartId]
+LEFT JOIN [Orders]
+       AS [o]
+	   ON [o].[JobId] = [j].[JobId]
+    WHERE [j].[Status] != 'Finished' AND
+		  [p].[StockQty] + IIF([o].[Delivered] = 0, [op].[Quantity], 0) < [pn].[Quantity]
+ ORDER BY [p].[PartId]
