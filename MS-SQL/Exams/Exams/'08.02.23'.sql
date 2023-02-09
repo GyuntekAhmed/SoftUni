@@ -57,3 +57,10 @@ CREATE TABLE [FlightDestinations]
 	[PassengerId] INT FOREIGN KEY REFERENCES [Passengers](Id) NOT NULL,
 	[TicketPrice] DECIMAL(15,2) DEFAULT(15) NOT NULL
 )
+
+INSERT INTO [Passengers] ([FullName], [Email])
+	 SELECT CONCAT([FirstName] , ' ' , [LastName]),
+			CONCAT([FirstName], [LastName], '@gmail.com')
+	   FROM [Pilots]
+	  WHERE [Id] >= 5 AND [Id] <= 15
+
