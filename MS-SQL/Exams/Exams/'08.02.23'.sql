@@ -64,3 +64,11 @@ INSERT INTO [Passengers] ([FullName], [Email])
 	   FROM [Pilots]
 	  WHERE [Id] >= 5 AND [Id] <= 15
 
+UPDATE [Aircraft]
+   SET [Condition] = 'A'
+ WHERE [Condition] IN ('C', 'B') AND
+	   ([FlightHours] IS NULL OR [FlightHours] <= 100) AND
+	   [Year] >= 2013
+
+DELETE [Passengers]
+ WHERE LEN([FullName]) <= 10
