@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VillainNames.IO
+﻿namespace VillainNames.IO
 {
-    internal interface IReader
+    public interface IReader
     {
+        string Read();
     }
 }
