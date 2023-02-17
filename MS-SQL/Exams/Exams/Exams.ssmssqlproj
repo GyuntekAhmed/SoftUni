@@ -3,7 +3,19 @@
   <Items>
     <LogicalFolder Name="Connections" Type="2" Sorted="true">
       <Items>
-        <ConnectionNode Name="DESKTOP-FNR24JL\SQLEXPRESS01:DESKTOP-FNR24JL\Pc">
+        <ConnectionNode Name="ASUSX543M:ASUSX543M\MYASUSPC">
+          <Created>2023-02-17T22:12:43.2836516+02:00</Created>
+          <Type>SQL</Type>
+          <Server>ASUSX543M</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB />
+          <LoginTimeout>30</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+        <ConnectionNode Name="DESKTOP-FNR24JL\SQLEXPRESS01:ASUSX543M\MYASUSPC">
           <Created>2023-01-25T20:42:20.6962504+02:00</Created>
           <Type>SQL</Type>
           <Server>DESKTOP-FNR24JL\SQLEXPRESS01</Server>
@@ -36,6 +48,12 @@
           <AssociatedConnSrvName>DESKTOP-FNR24JL\SQLEXPRESS01</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>'08.02.23'.sql</FullPath>
+        </FileNode>
+        <FileNode Name="'17.02.23'.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:ASUSX543M:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>ASUSX543M</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>'17.02.23'.sql</FullPath>
         </FileNode>
         <FileNode Name="'31.01.23'ExamPrep.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-FNR24JL\SQLEXPRESS01:True</AssociatedConnectionMoniker>
