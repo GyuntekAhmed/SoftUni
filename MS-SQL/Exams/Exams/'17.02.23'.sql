@@ -86,3 +86,63 @@ ORDER BY [Nationality],
 		 [Age] DESC,
 		 [Name]
 
+  SELECT [s].[Name] AS 'Site',
+  	     [l].[Name] AS 'Location',
+  	     [s].[Establishment],
+  	     [c].[Name] AS 'Category'
+    FROM [Sites]
+      AS [s]
+    JOIN [Locations]
+      AS [l]
+      ON [s].[LocationId] = [l].[Id]
+    JOIN [Categories]
+      AS [c]
+      ON [s].[CategoryId] = [c].[Id]
+ORDER BY [c].[Name] DESC,
+		 [l].[Name],
+		 [s].[Name]
+
+  SELECT [l].[Province],
+	     [l].[Municipality],
+	     [l].[Name] AS 'Location',
+	     COUNT([s].[Id]) AS 'CountOfSites'
+    FROM [Locations]
+      AS [l]
+    JOIN [Sites]
+      AS [s]
+	  ON [l].[Id] = [s].[LocationId]
+   WHERE [l].[Province] = 'Sofia'
+GROUP BY [l].[Province],
+		 [l].[Municipality],
+		 [l].[Name]
+ORDER BY COUNT([s].[Id]) DESC,
+		 [l].[Name]
+
+  SELECT [s].[Name] AS 'Site',
+	     [l].[Name] AS 'Location',
+	     [l].[Municipality],
+	     [l].[Province],
+	     [s].[Establishment]
+    FROM [Sites]
+      AS [s]
+    JOIN [Locations]
+      AS [l]
+  	  ON [s].[LocationId] = [l].[Id]
+   WHERE LEFT([l].[Name], 1) NOT LIKE '[B, M, D]'
+     AND [s].[Establishment] LIKE '%BC'
+ORDER BY [s].[Name]
+
+   SELECT [t].[Name],
+  	      [t].[Age],
+  	      [t].[PhoneNumber],
+  	      [t].[Nationality],
+  	      ISNULL([bp].[Name], '(no bonus prize)') AS 'BonusPrize'
+     FROM [Tourists]
+       AS [t]
+LEFT JOIN [TouristsBonusPrizes]
+       AS [tbp]
+  	   ON [t].[Id] = [tbp].[TouristId]
+LEFT JOIN [BonusPrizes]
+       AS [bp]
+  	   ON [tbp].[BonusPrizeId] = [bp].[Id]
+ ORDER BY [t].[Name]
