@@ -146,3 +146,80 @@ LEFT JOIN [BonusPrizes]
        AS [bp]
   	   ON [tbp].[BonusPrizeId] = [bp].[Id]
  ORDER BY [t].[Name]
+
+   SELECT SUBSTRING([t].[Name], CHARINDEX(' ', [t].[Name]) + 1, LEN([t].[Name])) AS [LastName],
+		  [t].[Nationality],
+		  [t].[Age],
+		  [t].[PhoneNumber]
+     FROM [Tourists]
+       AS [t]
+     JOIN [SitesTourists]
+	   AS [st]
+	   ON [t].[Id] = [st].[TouristId]
+     JOIN [Sites]
+	   AS [s]
+	   ON [st].[SiteId] = [s].[Id]
+     JOIN [Categories]
+	   AS [c]
+	   ON [s].[CategoryId] = [c].[Id]
+	WHERE [c].[Name] = 'History and archaeology'
+ GROUP BY [t].[Name],
+		  [t].[Nationality],
+		  [t].[Age],
+		  [t].[PhoneNumber]
+ ORDER BY [LastName]
+
+ GO
+
+CREATE FUNCTION udf_GetTouristsCountOnATouristSite (@Site VARCHAR(100))
+RETURNS INT
+AS
+BEGIN
+	DECLARE @countOfTourists INT =
+	(    
+	 SELECT COUNT([st].[TouristId])
+	   FROM [Sites]
+	     AS [s]
+	   JOIN [SitesTourists]
+	     AS [st]
+		 ON [s].[Id] = [st].[SiteId]
+	  WHERE [s].[Name] = @Site
+	)
+	RETURN @countOfTourists
+END
+
+GO
+
+CREATE PROC usp_AnnualRewardLottery(@TouristName VARCHAR(50))
+AS
+BEGIN
+IF (SELECT COUNT(s.Id) FROM Sites AS s
+			JOIN SitesTourists AS st ON s.Id = st.SiteId
+			JOIN Tourists AS t ON st.TouristId = t.Id
+			WHERE t.Name = @TouristName) >= 100
+	BEGIN 
+			UPDATE Tourists
+			SET	Reward = 'Gold badge'
+			WHERE Name = @TouristName
+	END
+ELSE IF (SELECT COUNT(s.Id) FROM Sites AS s
+			JOIN SitesTourists AS st ON s.Id = st.SiteId
+			JOIN Tourists AS t ON st.TouristId = t.Id
+			WHERE t.Name = @TouristName) >= 50
+	BEGIN 
+			UPDATE Tourists
+			SET	Reward = 'Silver badge'
+			WHERE Name = @TouristName
+	END
+ELSE IF (SELECT COUNT(s.Id) FROM Sites AS s
+			JOIN SitesTourists AS st ON s.Id = st.SiteId
+			JOIN Tourists AS t ON st.TouristId = t.Id
+			WHERE t.Name = @TouristName) >= 25
+	BEGIN 
+			UPDATE Tourists
+			SET	Reward = 'Bronze badge'
+			WHERE Name = @TouristName
+	END
+SELECT Name, Reward FROM Tourists
+WHERE Name = @TouristName
+END
