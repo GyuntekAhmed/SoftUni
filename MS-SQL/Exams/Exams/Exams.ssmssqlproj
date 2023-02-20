@@ -61,6 +61,12 @@
           <AssociatedConnUserName />
           <FullPath>'31.01.23'ExamPrep.sql</FullPath>
         </FileNode>
+        <FileNode Name="FinalExam.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:ASUSX543M:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>ASUSX543M</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>FinalExam.sql</FullPath>
+        </FileNode>
         <FileNode Name="FirstExamPrep.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:ASUSX543M:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>ASUSX543M</AssociatedConnSrvName>
