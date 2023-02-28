@@ -1,16 +1,21 @@
-﻿namespace P02_FootballBetting.Data.Models
+﻿namespace P02_FootballBetting.Data.Models;
+
+using System.ComponentModel.DataAnnotations;
+
+using Common;
+
+public class Country
 {
-    using System.ComponentModel.DataAnnotations;
-
-    using P02_FootballBetting.Data.Common;
-
-    public class Country
+    public Country()
     {
-        [Key]
-        public int CountryId { get; set; }
-
-        [Required]
-        [MaxLength(GlobalConstants.CountryNameMaxLength)]
-        public string Name { get; set; }
+        this.Towns = new HashSet<Town>();
     }
+
+    [Key]
+    public int CountryId { get; set; }
+
+    [MaxLength(GlobalConstants.CountryNameMaxLength)]
+    public string Name { get; set; } = null!;
+
+    public virtual ICollection<Town> Towns { get; set; }
 }

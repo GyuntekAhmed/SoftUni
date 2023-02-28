@@ -1,10 +1,9 @@
-﻿namespace P02_FootballBetting
+﻿namespace P02_FootballBetting;
+
+public class StartUp
 {
-    public class StartUp
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            
-        }
+        
     }
 }
