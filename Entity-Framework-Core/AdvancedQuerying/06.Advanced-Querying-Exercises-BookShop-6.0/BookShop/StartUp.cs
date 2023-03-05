@@ -1,10 +1,11 @@
 ﻿namespace BookShop
 {
-    using BookShop.Models.Enums;
-    using Data;
-    using Initializer;
     using System.Linq;
     using System.Text;
+
+    using BookShop.Models.Enums;
+    using Data;
+    using Microsoft.EntityFrameworkCore;
 
     public class StartUp
     {
@@ -13,9 +14,10 @@
             using var db = new BookShopContext();
             //DbInitializer.ResetDatabase(db);
 
-            //string command = Console.ReadLine();
+            string command = Console.ReadLine();
+            //int year = int.Parse(Console.ReadLine());
 
-            Console.WriteLine(GetBooksByPrice(db));
+            Console.WriteLine(GetBooksByCategory(db, command));
         }
 
         public static string GetBooksByAgeRestriction(BookShopContext context, string command)
@@ -71,10 +73,36 @@
 
             foreach (var b in booksTitle)
             {
-                output.AppendLine($"{b.Title} - ${b.Price}");
+                output.AppendLine($"{b.Title} - ${b.Price:f2}");
             }
 
             return output.ToString().TrimEnd();
+        }
+
+        public static string GetBooksNotReleasedIn(BookShopContext context, int year)
+        {
+            string[] books = context
+                .Books
+                .Where(b => b.ReleaseDate.Value.Year != year)
+                .OrderBy(b => b.BookId)
+                .Select(b => b.Title)
+                .ToArray();
+
+            return string.Join(Environment.NewLine, books);
+        }
+
+        public static string GetBooksByCategory(BookShopContext context, string input)
+        {
+            string[] categories = input.ToLower().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
+            string[] books = context
+                .Books
+                .Where(b => categories.Any())
+                .OrderBy(b => b.Title)
+                .Select(b => b.Title)
+                .ToArray();
+
+            return string.Join(Environment.NewLine, books);
         }
     }
 }
