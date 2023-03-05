@@ -3,6 +3,7 @@
     using BookShop.Models.Enums;
     using Data;
     using Initializer;
+    using System.Linq;
     using System.Text;
 
     public class StartUp
@@ -14,7 +15,7 @@
 
             //string command = Console.ReadLine();
 
-            Console.WriteLine(GetGoldenBooks(db));
+            Console.WriteLine(GetBooksByPrice(db));
         }
 
         public static string GetBooksByAgeRestriction(BookShopContext context, string command)
@@ -49,6 +50,31 @@
                 .ToArray();
 
             return string.Join(Environment.NewLine, bookTitles);
+        }
+
+        public static string GetBooksByPrice(BookShopContext context)
+        {
+            StringBuilder output = new StringBuilder();
+
+            var booksTitle = context
+                .Books
+                //.Where(b => b.Price > 40)
+                //.OrderByDescending(b => b.Price)
+                .Select(b => new
+                {
+                    Title = b.Title,
+                    Price = b.Price
+                })
+                .Where(b => b.Price > 40)
+                .OrderByDescending(b => b.Price)
+                .ToArray();
+
+            foreach (var b in booksTitle)
+            {
+                output.AppendLine($"{b.Title} - ${b.Price}");
+            }
+
+            return output.ToString().TrimEnd();
         }
     }
 }
