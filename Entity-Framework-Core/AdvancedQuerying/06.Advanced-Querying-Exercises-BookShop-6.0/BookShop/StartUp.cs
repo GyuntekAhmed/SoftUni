@@ -1,5 +1,6 @@
 ﻿namespace BookShop
 {
+    using System.Globalization;
     using System.Linq;
     using System.Text;
 
@@ -14,10 +15,10 @@
             using var db = new BookShopContext();
             //DbInitializer.ResetDatabase(db);
 
-            string command = Console.ReadLine();
-            //int year = int.Parse(Console.ReadLine());
+            //string command = Console.ReadLine();
+            int command = int.Parse(Console.ReadLine());
 
-            Console.WriteLine(GetBooksByCategory(db, command));
+            Console.WriteLine(CountBooks(db, command));
         }
 
         public static string GetBooksByAgeRestriction(BookShopContext context, string command)
@@ -97,12 +98,70 @@
 
             string[] books = context
                 .Books
-                .Where(b => categories.Any())
+                .Where(b => b.BookCategories.Any(bc => categories.Contains(bc.Category.Name.ToLower())))
                 .OrderBy(b => b.Title)
                 .Select(b => b.Title)
                 .ToArray();
 
             return string.Join(Environment.NewLine, books);
+        }
+
+        public static string GetBooksReleasedBefore(BookShopContext context, string date)
+        {
+            var parsedDate = DateTime.ParseExact(date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+
+            var books = context.Books
+                .Where(b => b.ReleaseDate < parsedDate)
+                .OrderByDescending(b => b.ReleaseDate)
+                .Select(b => $"{b.Title} - {b.EditionType} - ${b.Price:F2}")
+                .ToArray();
+
+            return string.Join(Environment.NewLine, books);
+        }
+
+        public static string GetAuthorNamesEndingIn(BookShopContext context, string endingWith)
+        {
+            var authors = context.Authors
+                .Where(a => a.FirstName.EndsWith(endingWith))
+                .OrderBy(a => a.FirstName)
+                .ThenBy(a => a.LastName)
+                .Select(a => $"{a.FirstName} {a.LastName}")
+                .ToArray();
+
+            return string.Join(Environment.NewLine, authors);
+        }
+
+        public static string GetBookTitlesContaining(BookShopContext context, string input)
+        {
+            string[] books = context.Books
+                .Where(b => b.Title.ToLower().Contains(input.ToLower()))
+                .Select(b => b.Title)
+                .OrderBy(t => t)
+                .ToArray();
+
+            return string.Join(Environment.NewLine, books);
+        }
+
+        public static string GetBooksByAuthor(BookShopContext context, string input)
+        {
+            string[] books = context.Books
+                .Where(b => b.Author.LastName.ToLower().StartsWith(input.ToLower()))
+                .OrderBy(b => b.BookId)
+                .Select(b => b.Author.FirstName == null
+                    ? $"{b.Title} ({b.Author.LastName})"
+                    : $"{b.Title} ({b.Author.FirstName} {b.Author.LastName})")
+                .ToArray();
+
+            return string.Join(Environment.NewLine, books);
+        }
+
+        public static int CountBooks(BookShopContext context, int lengthCheck)
+        {
+            int numberOfBooks = context.Books
+                .Where(b => b.Title.Length > lengthCheck)
+                .Count();
+
+            return numberOfBooks;
         }
     }
 }
