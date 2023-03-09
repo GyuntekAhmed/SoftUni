@@ -4,10 +4,10 @@
     {
         public int OrderId { get; set; }
 
-        public string Customer { get; set; }
+        public string Customer { get; set; } = null!;
 
-        public string Employee { get; set; }
+        public string Employee { get; set; } = null!;
 
-        public string DateTime { get; set; }
+        public string DateTime { get; set; } = null!;
     }
 }

@@ -1,20 +1,21 @@
 ﻿namespace FastFood.Core.Controllers
 {
     using System;
-    using AutoMapper;
-    using Data;
     using Microsoft.AspNetCore.Mvc;
+    using AutoMapper;
+
+    using Data;
     using ViewModels.Employees;
 
     public class EmployeesController : Controller
     {
-        private readonly FastFoodContext _context;
-        private readonly IMapper _mapper;
+        private readonly FastFoodContext context;
+        private readonly IMapper mapper;
 
         public EmployeesController(FastFoodContext context, IMapper mapper)
         {
-            _context = context;
-            _mapper = mapper;
+            this.context = context;
+            this.mapper = mapper;
         }
 
         public IActionResult Register()

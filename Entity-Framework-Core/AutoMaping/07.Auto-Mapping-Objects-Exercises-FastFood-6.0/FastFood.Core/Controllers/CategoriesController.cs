@@ -2,19 +2,20 @@
 {
     using System;
     using AutoMapper;
-    using Data;
     using Microsoft.AspNetCore.Mvc;
+
     using ViewModels.Categories;
+    using Data;
 
     public class CategoriesController : Controller
     {
-        private readonly FastFoodContext _context;
-        private readonly IMapper _mapper;
+        private readonly FastFoodContext context;
+        private readonly IMapper mapper;
 
         public CategoriesController(FastFoodContext context, IMapper mapper)
         {
-            _context = context;
-            _mapper = mapper;
+            this.context = context;
+            this.mapper = mapper;
         }
 
         public IActionResult Create()

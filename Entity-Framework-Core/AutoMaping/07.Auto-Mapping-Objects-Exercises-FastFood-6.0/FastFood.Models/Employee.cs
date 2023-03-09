@@ -1,10 +1,16 @@
-﻿namespace FastFood.Models
+﻿// ReSharper disable VirtualMemberCallInConstructor
+namespace FastFood.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class Employee
     {
+        public Employee()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+
         public int Id { get; set; }
 
         [Required]
@@ -22,8 +28,8 @@
         public int PositionId { get; set; }
 
         [Required]
-        public Position Position { get; set; } = null!;
+        public virtual Position Position { get; set; } = null!;
 
-        public ICollection<Order> Orders { get; set; } = new List<Order>(); 
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

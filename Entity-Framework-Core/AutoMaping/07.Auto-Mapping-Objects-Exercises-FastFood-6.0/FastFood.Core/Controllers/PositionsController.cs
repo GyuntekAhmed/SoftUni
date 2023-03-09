@@ -1,22 +1,23 @@
 ﻿namespace FastFood.Core.Controllers
 {
     using System.Linq;
+    using Microsoft.AspNetCore.Mvc;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+
     using Data;
-    using FastFood.Models;
-    using Microsoft.AspNetCore.Mvc;
+    using Models;
     using ViewModels.Positions;
 
     public class PositionsController : Controller
     {
-        private readonly FastFoodContext _context;
-        private readonly IMapper _mapper;
+        private readonly FastFoodContext context;
+        private readonly IMapper mapper;
 
         public PositionsController(FastFoodContext context, IMapper mapper)
         {
-            _context = context;
-            _mapper = mapper;
+            this.context = context;
+            this.mapper = mapper;
         }
 
         public IActionResult Create()
@@ -32,19 +33,19 @@
                 return RedirectToAction("Error", "Home");
             }
 
-            var position = _mapper.Map<Position>(model);
+            var position = mapper.Map<Position>(model);
 
-            _context.Positions.Add(position);
+            context.Positions.Add(position);
 
-            _context.SaveChanges();
+            context.SaveChanges();
 
             return RedirectToAction("All", "Positions");
         }
 
         public IActionResult All()
         {
-            var positions = _context.Positions
-                .ProjectTo<PositionsAllViewModel>(_mapper.ConfigurationProvider)
+            var positions = context.Positions
+                .ProjectTo<PositionsAllViewModel>(mapper.ConfigurationProvider)
                 .ToList();
 
             return View(positions);

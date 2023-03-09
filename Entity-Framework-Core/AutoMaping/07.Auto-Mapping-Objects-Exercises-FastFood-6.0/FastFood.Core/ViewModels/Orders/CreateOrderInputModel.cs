@@ -2,7 +2,7 @@
 {
     public class CreateOrderInputModel
     {
-        public string Customer { get; set; }
+        public string Customer { get; set; } = null!;
 
         public int ItemId { get; set; }
 
