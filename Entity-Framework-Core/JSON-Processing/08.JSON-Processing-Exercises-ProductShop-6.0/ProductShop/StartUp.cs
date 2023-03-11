@@ -9,16 +9,11 @@
 
     public class StartUp
     {
-        private static IMapper mapper;
+        //private static IMapper mapper;
 
         public static void Main()
         {
-            var mapperConfiguration = new MapperConfiguration(cfg => {
-                cfg.AddProfile<ProductShopProfile>();
-            });
-
-            mapper = mapperConfiguration.CreateMapper();
-
+            //Mapper.Initialize(cfg => cfg.AddProfile(typeof(ProductShopProfile)));
             ProductShopContext dbContext = new ProductShopContext();
             string inputJson = File.ReadAllText("../../../Datasets/users.json");
 
@@ -34,9 +29,16 @@
 
         public static string ImportUsers(ProductShopContext context, string inputJson)
         {
+            
             ImportUserDto[] userDtos = JsonConvert.DeserializeObject<ImportUserDto[]>(inputJson);
 
             ICollection<User> users = new List<User>();
+
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<ImportUserDto, User>();
+            });
+
+            var mapper = config.CreateMapper();
 
             foreach (ImportUserDto userDto in userDtos)
             {
