@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ProductShop.Models;
-namespace ProductShop.Data
+﻿namespace ProductShop.Data
 {
+    using Microsoft.EntityFrameworkCore;
+
+    using Models;
+
     public class ProductShopContext : DbContext
     {
         public ProductShopContext()
@@ -31,7 +33,6 @@ namespace ProductShop.Data
                     .UseLazyLoadingProxies();
             }
 
-            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
