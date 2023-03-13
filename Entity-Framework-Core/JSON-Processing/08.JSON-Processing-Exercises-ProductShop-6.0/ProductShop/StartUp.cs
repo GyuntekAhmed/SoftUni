@@ -9,11 +9,8 @@
 
     public class StartUp
     {
-        //private static IMapper mapper;
-
         public static void Main()
         {
-            //Mapper.Initialize(cfg => cfg.AddProfile(typeof(ProductShopProfile)));
             ProductShopContext dbContext = new ProductShopContext();
             string inputJson = File.ReadAllText("../../../Datasets/users.json");
 

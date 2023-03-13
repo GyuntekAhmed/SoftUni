@@ -1,7 +1,10 @@
-﻿using Newtonsoft.Json;
-
-namespace ProductShop.DTOs.Import
+﻿namespace ProductShop.DTOs.Import
 {
+    using System.ComponentModel.DataAnnotations;
+    using Newtonsoft.Json;
+
+    using Common;
+
     [JsonObject]
     public class ImportUserDto
     {
@@ -9,6 +12,8 @@ namespace ProductShop.DTOs.Import
         public string? FirstName { get; set; }
 
         [JsonProperty("lastName")]
+        [Required]
+        [MinLength(GlobalConstants.UserLastNameMinLength)]
         public string LastName { get; set; } = null!;
 
         [JsonProperty("age")]
