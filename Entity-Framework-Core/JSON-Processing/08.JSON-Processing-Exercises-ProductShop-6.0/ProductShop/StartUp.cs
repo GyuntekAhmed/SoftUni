@@ -14,9 +14,9 @@
         {
             ProductShopContext context = new ProductShopContext();
             string inputjson =
-                File.ReadAllText(@"../../../Datasets/products.json");
+                File.ReadAllText(@"../../../Datasets/categories-products.json");
 
-            string result = ImportProducts(context, inputjson);
+            string result = ImportCategoryProducts(context, inputjson);
             Console.WriteLine(result);
         }
 
@@ -60,12 +60,12 @@
         {
             IMapper mapper = CreateMapper();
 
-            ImportCategpryDto[] categpryDtos =
-                JsonConvert.DeserializeObject<ImportCategpryDto[]>(inputJson);
+            ImportCategoryDto[] categpryDtos =
+                JsonConvert.DeserializeObject<ImportCategoryDto[]>(inputJson);
 
             ICollection<Category> categories = new List<Category>();
 
-            foreach (ImportCategpryDto categpryDto in categpryDtos)
+            foreach (ImportCategoryDto categpryDto in categpryDtos)
             {
                 if (string.IsNullOrEmpty(categpryDto.Name))
                 {
@@ -81,6 +81,29 @@
             context.SaveChanges();
 
             return $"Successfully imported {categories.Count}";
+        }
+
+        public static string ImportCategoryProducts(ProductShopContext context, string inputJson)
+        {
+            IMapper mapper = CreateMapper();
+
+            ImportCategoryProductDto[] categoryProductDtos =
+                JsonConvert.DeserializeObject<ImportCategoryProductDto[]>(inputJson);
+
+            ICollection<CategoryProduct> categoryProducts = new List<CategoryProduct>();
+
+            foreach (ImportCategoryProductDto cpd in categoryProductDtos)
+            {
+                CategoryProduct categoryProduct =
+                    mapper.Map<CategoryProduct>(cpd);
+
+                categoryProducts.Add(categoryProduct);
+            }
+
+            context.CategoriesProducts.AddRange(categoryProducts);
+            context.SaveChanges();
+
+            return $"Successfully imported {categoryProducts.Count}";
         }
 
         private static IMapper CreateMapper()
