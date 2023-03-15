@@ -7,6 +7,9 @@
     using DTOs.Import;
     using Models;
     using Newtonsoft.Json.Serialization;
+    using ProductShop.DTOs.Export;
+    using Microsoft.EntityFrameworkCore;
+    using AutoMapper.QueryableExtensions;
 
     public class StartUp
     {
@@ -16,7 +19,7 @@
             string inputjson =
                 File.ReadAllText(@"../../../Datasets/categories-products.json");
 
-            string result = ImportCategoryProducts(context, inputjson);
+            string result = GetProductsInRange(context);
             Console.WriteLine(result);
         }
 
@@ -104,6 +107,35 @@
             context.SaveChanges();
 
             return $"Successfully imported {categoryProducts.Count}";
+        }
+
+        public static string GetProductsInRange(ProductShopContext context)
+        {
+            // #Anonymous object + Manual Mapping
+            //var products = context.Products
+            //    .Where(p => p.Price >= 500 && p.Price <= 1000)
+            //    .OrderBy(p => p.Price)
+            //    .Select(p => new
+            //    {
+            //        name = p.Name,
+            //        price = p.Price,
+            //        seller = p.Seller.FirstName + " " + p.Seller.LastName
+            //    })
+            //    .AsNoTracking()
+            //    .ToArray();
+
+            // #DTO + AutoMapper
+            IMapper mapper = CreateMapper();
+
+            ExportProductInRangeDto[] exProdDto = context
+                .Products
+                .Where(p => p.Price >= 500 && p.Price <= 1000)
+                .OrderBy(p => p.Price)
+                .AsNoTracking()
+                .ProjectTo<ExportProductInRangeDto>(mapper.ConfigurationProvider)
+                .ToArray();
+
+            return JsonConvert.SerializeObject(exProdDto, Formatting.Indented);
         }
 
         private static IMapper CreateMapper()
