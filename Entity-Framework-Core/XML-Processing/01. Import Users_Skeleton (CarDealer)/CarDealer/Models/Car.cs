@@ -16,7 +16,7 @@
 
         public long TraveledDistance { get; set; }
 
-        public virtual ICollection<Sale> Sales { get; set; }  
+        public virtual ICollection<Sale> Sales { get; set; }
 
         public virtual ICollection<PartCar> PartsCars { get; set; }
     }
