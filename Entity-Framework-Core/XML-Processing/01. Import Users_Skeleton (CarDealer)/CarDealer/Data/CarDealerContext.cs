@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using CarDealer.Models;
-
-namespace CarDealer.Data
+﻿namespace CarDealer.Data
 {
+    using Microsoft.EntityFrameworkCore;
+
+    using Models;
+
     public class CarDealerContext : DbContext
     {
         public CarDealerContext()
