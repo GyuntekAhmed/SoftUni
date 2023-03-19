@@ -3,6 +3,7 @@
     using AutoMapper;
 
     using DTOs.Import;
+    using DTOs.Export;
     using Models;
 
     public class ProductShopProfile : Profile
@@ -20,6 +21,8 @@
             this.CreateMap<ImportCategoryDto, Category>();
 
             this.CreateMap<ImportCategoryDto, CategoryProduct>();
+
+            this.CreateMap<Product, ExportProductInRangeDto>();
         }
     }
 }

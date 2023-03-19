@@ -3,6 +3,7 @@
     using AutoMapper;
 
     using DTOs.Import;
+    using DTOs.Export;
     using Models;
     using Data;
     using Utilities;
@@ -16,7 +17,7 @@
             string inputXml =
                 File.ReadAllText("../../../Datasets/products.xml");
 
-            string output = ImportProducts(context, inputXml);
+            string output = GetUsersWithProducts(context);
 
             Console.WriteLine(output);
         }
@@ -118,6 +119,108 @@
             context.SaveChanges();
 
             return $"Successfully imported {categoryProducts.Length}";
+        }
+
+        public static string GetProductsInRange(ProductShopContext context)
+        {
+            IMapper mapper = InitializeAutoMapper();
+            XmlHelper xmlHelper = new XmlHelper();
+
+            ExportProductInRangeDto[] productsInRange = context.Products
+                .Where(p => p.Price >= 500 && p.Price <= 1000)
+                .OrderBy(p => p.Price)
+                .Take(10)
+                .Select(p => new ExportProductInRangeDto()
+                {
+                    Price = p.Price,
+                    Name = p.Name,
+                    Buyer = p.Buyer.FirstName + " " + p.Buyer.LastName
+                })
+                .ToArray();
+
+            return xmlHelper.Serialize(productsInRange, "Products");
+        }
+
+        public static string GetSoldProducts(ProductShopContext context)
+        {
+            XmlHelper xmlHelper = new XmlHelper();
+
+            ExportSoldProductsDto[] usersSoldProducts = context.Users
+                .Where(u => u.ProductsSold.Any())
+                .OrderBy(u => u.LastName)
+                .ThenBy(u => u.FirstName)
+                .Take(5)
+                .Select(u => new ExportSoldProductsDto()
+                {
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    SoldProducts = u.ProductsSold.Select(p => new ProductDto()
+                    {
+                        Name = p.Name,
+                        Price = p.Price
+                    })
+                    .ToArray()
+                })
+                .ToArray();
+
+            return xmlHelper.Serialize<ExportSoldProductsDto[]>(usersSoldProducts, "Users");
+        }
+
+        public static string GetCategoriesByProductsCount(ProductShopContext context)
+        {
+            XmlHelper xmlHelper = new XmlHelper();
+
+            ExportCategoriesByProductsCountDto[] categoriesByProductsCount = context
+                .Categories
+                .Select(c => new ExportCategoriesByProductsCountDto()
+                {
+                    Name = c.Name,
+                    Count = c.CategoryProducts.Count(),
+                    AveragePrice = c.CategoryProducts.Average(p => p.Product.Price),
+                    TotalRevenue = c.CategoryProducts.Sum(p => p.Product.Price)
+                })
+                .OrderByDescending(c => c.Count)
+                .ThenBy(c => c.TotalRevenue)
+                .ToArray();
+
+            return xmlHelper.Serialize<ExportCategoriesByProductsCountDto[]>(categoriesByProductsCount, "Categories");
+        }
+
+        public static string GetUsersWithProducts(ProductShopContext context)
+        {
+            XmlHelper xmlHelper = new XmlHelper();
+
+            var usersInfo = context
+                .Users
+                .Where(u => u.ProductsSold.Any())
+                .OrderByDescending(u => u.ProductsSold.Count)
+                .Select(u => new UserInfo()
+                {
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Age = u.Age,
+                    SoldProducts = new SoldProductsCount()
+                    {
+                        Count = u.ProductsSold.Count,
+                        Products = u.ProductsSold.Select(p => new SoldProduct()
+                        {
+                            Name = p.Name,
+                            Price = p.Price
+                        })
+                        .OrderByDescending(p => p.Price)
+                        .ToArray()
+                    }
+                })
+                .Take(10)
+                .ToArray();
+
+            ExportUserCountDto exportUserCountDto = new ExportUserCountDto()
+            {
+                Count = context.Users.Count(u => u.ProductsSold.Any()),
+                Users = usersInfo
+            };
+
+            return xmlHelper.Serialize<ExportUserCountDto>(exportUserCountDto, "Users");
         }
 
         private static IMapper InitializeAutoMapper()
