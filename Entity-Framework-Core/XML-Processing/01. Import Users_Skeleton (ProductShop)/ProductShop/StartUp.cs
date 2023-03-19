@@ -14,9 +14,9 @@
             using ProductShopContext context = new ProductShopContext();
 
             string inputXml =
-                File.ReadAllText("../../../Datasets/categories.xml");
+                File.ReadAllText("../../../Datasets/products.xml");
 
-            string output = ImportCategories(context, inputXml);
+            string output = ImportProducts(context, inputXml);
 
             Console.WriteLine(output);
         }
@@ -96,6 +96,28 @@
             context.SaveChanges();
 
             return $"Successfully imported {categories.Count}";
+        }
+
+        public static string ImportCategoryProducts(ProductShopContext context, string inputXml)
+        {
+            IMapper mapper = InitializeAutoMapper();
+            XmlHelper xmlHelper = new XmlHelper();
+
+            ImportCategoryProductDto[] categoryProductDtos =
+                xmlHelper.Deserialize<ImportCategoryProductDto[]>(inputXml, "CategoryProducts");
+
+            CategoryProduct[] categoryProducts = categoryProductDtos
+                .Select(cp => new CategoryProduct()
+                {
+                    CategoryId = cp.CategoryId,
+                    ProductId = cp.ProductId
+                })
+                .ToArray();
+
+            context.CategoryProducts.AddRange(categoryProducts);
+            context.SaveChanges();
+
+            return $"Successfully imported {categoryProducts.Length}";
         }
 
         private static IMapper InitializeAutoMapper()

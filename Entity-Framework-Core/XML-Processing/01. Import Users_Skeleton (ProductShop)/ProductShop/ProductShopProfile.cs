@@ -18,6 +18,8 @@
             //    opt => opt.MapFrom(s => s.BuyerId!.Value));
 
             this.CreateMap<ImportCategoryDto, Category>();
+
+            this.CreateMap<ImportCategoryDto, CategoryProduct>();
         }
     }
 }
