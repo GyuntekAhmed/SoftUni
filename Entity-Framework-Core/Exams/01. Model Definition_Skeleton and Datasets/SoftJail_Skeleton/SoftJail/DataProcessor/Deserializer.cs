@@ -1,16 +1,70 @@
 ﻿namespace SoftJail.DataProcessor
 {
 
-    using Data;
     using System;
+    using System.Text;
+    using System.Linq;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
+    using AutoMapper;
+    using Newtonsoft.Json;
+
+    using Data;
+    using ImportDto;
+    using Data.Models;
 
     public class Deserializer
     {
         public static string ImportDepartmentsCells(SoftJailDbContext context, string jsonString)
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+
+            ImportDepartmentWithCellsDto[] departmentDtos =
+                JsonConvert.DeserializeObject<ImportDepartmentWithCellsDto[]>(jsonString);
+
+            ICollection<Department> departments = new HashSet<Department>();
+
+            foreach (var departmentlDto in departmentDtos)
+            {
+                if (!IsValid(departmentlDto))
+                {
+                    sb.AppendLine($"Invalid Data");
+                    continue;
+                }
+
+                if (!departmentlDto.Cells.Any())
+                {
+                    sb.AppendLine($"Invalid Data");
+                    continue;
+                }
+
+                if (departmentlDto.Cells.Any(c => !IsValid(c)))
+                {
+                    sb.AppendLine($"Invalid Data");
+                    continue;
+                }
+
+                Department department = new Department()
+                {
+                    Name = departmentlDto.Name
+                };
+
+                foreach (var depCellDto in departmentlDto.Cells)
+                {
+                    Cell cell = Mapper.Map<Cell>(depCellDto);
+                    department.Cells.Add(cell);
+                }
+
+                departments.Add(department);
+
+                sb.AppendLine($"Imported {department.Name} with {department.Cells.Count} cells");
+            }
+
+            context.Departments.AddRange(departments);
+            context.SaveChanges();
+
+            return sb.ToString().Trim();
         }
 
         public static string ImportPrisonersMails(SoftJailDbContext context, string jsonString)

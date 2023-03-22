@@ -10,5 +10,8 @@
 
         public const int DepartmentNameMinLength = 3;
         public const int DepartmentNameMaxLength = 25;
+
+        public const int CellNumberMinValue = 1;
+        public const int CellNumberMaxValue = 1000;
     }
 }
