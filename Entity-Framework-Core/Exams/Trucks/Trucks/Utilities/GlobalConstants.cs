@@ -6,6 +6,7 @@
         public const int ClientNationalityMaxLength = 40;
 
         public const int DespatcherNameMaxLength = 40;
+        public const int DespatcherNameMinLength = 2;
 
     }
 }

@@ -1,8 +1,11 @@
 ﻿namespace Trucks.DataProcessor
 {
     using System.ComponentModel.DataAnnotations;
-    using Data;
+    using System.Text;
 
+    using Data.Models;
+    using ImportDto;
+    using Data;
 
     public class Deserializer
     {
@@ -16,7 +19,48 @@
 
         public static string ImportDespatcher(TrucksContext context, string xmlString)
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+
+            XmlHelper xmlHelper = new XmlHelper();
+
+            ImportDespatcherDto[] despatcherDtos = xmlHelper
+                .Deserialize<ImportDespatcherDto[]>(xmlString, "Trucks");
+
+            ICollection<Despatcher> despatchers = new HashSet<Despatcher>();
+            ICollection<Truck> trucks = new HashSet<Truck>();
+
+            foreach (ImportDespatcherDto despatcherDto in despatcherDtos)
+            {
+                if (!IsValid(despatcherDto.Name))
+                {
+                    sb.AppendLine(ErrorMessage);
+                    continue;
+                }
+
+                if (!IsValid(despatcherDto.Position))
+                {
+                    sb.AppendLine(ErrorMessage);
+                    continue;
+                }
+
+                foreach (ImportTruckDto[] truckDto in despatcherDto.TruckDtos)
+                {
+                    if (!IsValid(truckDto))
+                    {
+                        sb.AppendLine(ErrorMessage);
+                        continue;
+                    }
+
+                }
+                //Supplier supplier = mapper.Map<Supplier>(supplierDto);
+
+                //suppliers.Add(supplier);
+            }
+
+            //context.Suppliers.AddRange(suppliers);
+            //context.SaveChanges();
+
+            //return $"Successfully imported {suppliers.Count}";
         }
         public static string ImportClient(TrucksContext context, string jsonString)
         {

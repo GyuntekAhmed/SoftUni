@@ -26,10 +26,10 @@
         public int CargoCapacity { get; set; }
 
         [Required]
-        public CategoryType CategoryType { get; set; }
+        public virtual CategoryType CategoryType { get; set; }
 
         [Required]
-        public MakeType MakeType { get; set; }
+        public virtual MakeType MakeType { get; set; }
 
         [ForeignKey("Despatcher")]
         public int DespatcherId { get; set; }
