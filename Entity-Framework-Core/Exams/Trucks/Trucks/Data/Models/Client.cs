@@ -2,8 +2,6 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using Utilities;
-
     public class Client
     {
         public Client()
@@ -15,11 +13,11 @@
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(GlobalConstants.ClientNameMaxLength)]
+        [MaxLength(40)]
         public string Name { get; set; } = null!;
 
         [Required]
-        [MaxLength(GlobalConstants.ClientNationalityMaxLength)]
+        [MaxLength(40)]
         public string Nationality { get; set; } = null!;
 
         [Required]

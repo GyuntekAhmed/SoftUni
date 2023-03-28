@@ -15,23 +15,22 @@
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        public string RegistrationNumber { get; set; } = null!;
+        [MaxLength(8)]
+        public string? RegistrationNumber { get; set; }
 
         [Required]
+        [MaxLength(17)]
         public string VinNumber { get; set; } = null!;
 
         public int TankCapacity { get; set; }
 
         public int CargoCapacity { get; set; }
 
-        [Required]
-        public virtual CategoryType CategoryType { get; set; }
+        public CategoryType CategoryType { get; set; }
 
-        [Required]
-        public virtual MakeType MakeType { get; set; }
+        public MakeType MakeType { get; set; }
 
-        [ForeignKey("Despatcher")]
+        [ForeignKey(nameof(Despatcher))]
         public int DespatcherId { get; set; }
         public virtual Despatcher Despatcher { get; set; } = null!;
 

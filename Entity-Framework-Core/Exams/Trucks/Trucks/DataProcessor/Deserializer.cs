@@ -2,10 +2,11 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.Text;
-
-    using Data.Models;
-    using ImportDto;
     using Data;
+    using Trucks.Data.Models;
+    using Trucks.Data.Models.Enums;
+    using Trucks.DataProcessor.ImportDto;
+    using Trucks.Utilities;
 
     public class Deserializer
     {
@@ -17,33 +18,27 @@
         private const string SuccessfullyImportedClient
             = "Successfully imported client - {0} with {1} trucks.";
 
+        private static XmlHelper xmlHelper;
+
         public static string ImportDespatcher(TrucksContext context, string xmlString)
         {
             StringBuilder sb = new StringBuilder();
+            xmlHelper = new XmlHelper();
 
-            XmlHelper xmlHelper = new XmlHelper();
+            ImportDespatcherDto[] despatcherDtos =
+                xmlHelper.Deserialize<ImportDespatcherDto[]>(xmlString, "Despatchers");
 
-            ImportDespatcherDto[] despatcherDtos = xmlHelper
-                .Deserialize<ImportDespatcherDto[]>(xmlString, "Trucks");
-
-            ICollection<Despatcher> despatchers = new HashSet<Despatcher>();
-            ICollection<Truck> trucks = new HashSet<Truck>();
-
+            ICollection<Despatcher> validDespatcher = new HashSet<Despatcher>();
             foreach (ImportDespatcherDto despatcherDto in despatcherDtos)
             {
-                if (!IsValid(despatcherDto.Name))
+                if (!IsValid(despatcherDto))
                 {
                     sb.AppendLine(ErrorMessage);
                     continue;
                 }
 
-                if (!IsValid(despatcherDto.Position))
-                {
-                    sb.AppendLine(ErrorMessage);
-                    continue;
-                }
-
-                foreach (ImportTruckDto[] truckDto in despatcherDto.TruckDtos)
+                ICollection<Truck> validTrucks = new HashSet<Truck>();
+                foreach (ImportTruckDto truckDto in despatcherDto.Trucks)
                 {
                     if (!IsValid(truckDto))
                     {
@@ -51,16 +46,33 @@
                         continue;
                     }
 
+                    Truck truck = new Truck()
+                    {
+                        RegistrationNumber = truckDto.RegistrationNumber,
+                        VinNumber = truckDto.VinNumber,
+                        TankCapacity = truckDto.TankCapacity,
+                        CargoCapacity = truckDto.CargoCapacity,
+                        CategoryType = (CategoryType)truckDto.CategoryType,
+                        MakeType = (MakeType)truckDto.MakeType
+                    };
+                    validTrucks.Add(truck);
                 }
-                //Supplier supplier = mapper.Map<Supplier>(supplierDto);
 
-                //suppliers.Add(supplier);
+                Despatcher despatcher = new Despatcher()
+                {
+                    Name = despatcherDto.Name,
+                    Position = despatcherDto.Position,
+                    Trucks = validTrucks
+                };
+                validDespatcher.Add(despatcher);
+                sb
+                    .AppendLine(String.Format(SuccessfullyImportedDespatcher, despatcher.Name, validTrucks.Count));
             }
 
-            //context.Suppliers.AddRange(suppliers);
-            //context.SaveChanges();
+            context.Despatchers.AddRange(validDespatcher);
+            context.SaveChanges();
 
-            //return $"Successfully imported {suppliers.Count}";
+            return sb.ToString().TrimEnd();
         }
         public static string ImportClient(TrucksContext context, string jsonString)
         {

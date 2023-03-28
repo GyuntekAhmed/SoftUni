@@ -3,22 +3,20 @@
     using System.ComponentModel.DataAnnotations;
     using System.Xml.Serialization;
 
-    using Utilities;
-
-    [XmlType]
+    [XmlType("Despatcher")]
     public class ImportDespatcherDto
     {
+        [XmlElement("Name")]
         [Required]
-        [XmlElement]
-        [MinLength(GlobalConstants.DespatcherNameMinLength)]
-        [MaxLength(GlobalConstants.DespatcherNameMaxLength)]
+        [MinLength(2)]
+        [MaxLength(40)]
         public string Name { get; set; } = null!;
 
+        [XmlElement("Position")]
         [Required]
-        [XmlElement]
         public string Position { get; set; } = null!;
 
-        [XmlArray]
-        public virtual ICollection<ImportTruckDto[]> TruckDtos { get; set; } = null!;
+        [XmlArray("Trucks")]
+        public ImportTruckDto[] Trucks { get; set; } = null!;
     }
 }

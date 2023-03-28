@@ -4,11 +4,11 @@
 
     public class ClientTruck
     {
-        [ForeignKey("ClientId")]
+        [ForeignKey(nameof(Client))]
         public int ClientId { get; set; }
         public virtual Client Client { get; set; } = null!;
 
-        [ForeignKey("Truck")]
+        [ForeignKey(nameof(Truck))]
         public int TruckId { get; set; }
         public virtual Truck Truck { get; set; } = null!;
     }

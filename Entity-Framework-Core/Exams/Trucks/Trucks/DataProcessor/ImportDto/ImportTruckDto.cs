@@ -2,28 +2,37 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.Xml.Serialization;
+    using Trucks.Utilities;
 
-    [XmlType]
+    [XmlType("Truck")]
     public class ImportTruckDto
     {
-        [Required]
-        [XmlElement]
-        public string RegistrationNumber { get; set; } = null!;
+        [XmlElement("RegistrationNumber")]
+        [MinLength(8)]
+        [MaxLength(8)]
+        [RegularExpression(ValidationConstants.TruckRegistrationNumberRegEx)]
+        public string? RegistrationNumber { get; set; }
 
+        [XmlElement("VinNumber")]
         [Required]
-        [XmlElement]
+        [MinLength(17)]
+        [MaxLength(17)]
         public string VinNumber { get; set; } = null!;
 
-        [XmlElement]
+        [XmlElement("TankCapacity")]
+        [Range(950, 1420)]
         public int TankCapacity { get; set; }
 
-        [XmlElement]
+        [XmlElement("CargoCapacity")]
+        [Range(5000, 29000)]
         public int CargoCapacity { get; set; }
 
-        [XmlElement]
+        [XmlElement("CategoryType")]
+        [Range(0, 3)]
         public int CategoryType { get; set; }
 
-        [XmlElement]
+        [XmlElement("MakeType")]
+        [Range(0, 4)]
         public int MakeType { get; set; }
     }
 }
