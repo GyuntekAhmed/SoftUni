@@ -1,14 +1,13 @@
 ﻿namespace Footballers.DataProcessor
 {
-    using System.ComponentModel.DataAnnotations;
-    using System.Text;
-
-    using AutoMapper;
-
-    using Data;
+    using Footballers.Utilities;
+    using Footballers.Data;
     using Footballers.Data.Models;
     using Footballers.Data.Models.Enums;
-    using ImportDto;
+    using Footballers.DataProcessor.ImportDto;
+    using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
+    using System.Text;
 
     public class Deserializer
     {
@@ -23,13 +22,11 @@
         public static string ImportCoaches(FootballersContext context, string xmlString)
         {
             StringBuilder sb = new StringBuilder();
-
-            IMapper mapper = InitializeAutoMapper();
             XmlHelper xmlHelper = new XmlHelper();
 
             ImportCoachDto[] coachDtos = xmlHelper.Deserialize<ImportCoachDto[]>(xmlString, "Coaches");
 
-            ICollection<Coach> coaches = new HashSet<Coach>();
+            ICollection<Coach> validCoaches = new HashSet<Coach>();
 
             foreach (ImportCoachDto coachDto in coachDtos)
             {
@@ -39,19 +36,9 @@
                     continue;
                 }
 
-                if (string.IsNullOrEmpty(coachDto.Nationality))
-                {
-                    sb.AppendLine(ErrorMessage);
-                    continue;
-                }
+                ICollection<Footballer> validFootballers = new HashSet<Footballer>();
 
-                Coach coach = new Coach()
-                {
-                    Name = coachDto.Name,
-                    Nationality = coachDto.Nationality
-                };
-
-                foreach (ImportCoachFootballersDto footballerDto in coachDto.Footballers)
+                foreach (ImportFootballerDto footballerDto in coachDto.Footballers)
                 {
                     if (!IsValid(footballerDto))
                     {
@@ -59,20 +46,29 @@
                         continue;
                     }
 
-                    if (!IsValid(footballerDto.ContractStartDate))
+                    DateTime footballerContractStartDate;
+                    bool isFootballerContractStartDateValid = DateTime.TryParseExact(footballerDto.ContractStartDate,
+                        "dd/MM/yyyy", CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out footballerContractStartDate);
+
+                    if (!isFootballerContractStartDateValid)
                     {
                         sb.AppendLine(ErrorMessage);
                         continue;
                     }
 
-                    if (!IsValid(footballerDto.ContractEndDate))
+                    DateTime footballerContractEndDate;
+                    bool isFootballerContractEndDateValid = DateTime.TryParseExact(footballerDto.ContractEndDate,
+                        "dd/MM/yyyy", CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out footballerContractEndDate);
+
+                    if (!isFootballerContractEndDateValid)
                     {
                         sb.AppendLine(ErrorMessage);
                         continue;
                     }
-
-                    var footballerContractStartDate = footballerDto.ContractStartDate;
-                    var footballerContractEndDate = footballerDto.ContractEndDate;
 
                     if (footballerContractStartDate >= footballerContractEndDate)
                     {
@@ -80,24 +76,33 @@
                         continue;
                     }
 
-                    Footballer f = new Footballer()
+                    Footballer footballer = new Footballer()
                     {
                         Name = footballerDto.Name,
                         ContractStartDate = footballerContractStartDate,
                         ContractEndDate = footballerContractEndDate,
                         BestSkillType = (BestSkillType)footballerDto.BestSkillType,
-                        PositionType = (PositionType)footballerDto.PositionType
+                        PositionType = (PositionType)footballerDto.PositionType,
                     };
 
-                    coach.Footballers.Add(f);
+                    validFootballers.Add(footballer);
                 }
 
-                coaches.Add(coach);
-                sb.AppendLine(String.Format(SuccessfullyImportedCoach, coach.Name, coach.Footballers.Count));
+                Coach coach = new Coach()
+                {
+                    Name = coachDto.Name,
+                    Nationality = coachDto.Nationality,
+                    Footballers = validFootballers
+                };
+
+                validCoaches.Add(coach);
+
+                sb.AppendLine(string.Format(SuccessfullyImportedCoach, coach.Name, validFootballers.Count));
             }
 
-            context.Coaches.AddRange(coaches);
+            context.Coaches.AddRange(validCoaches);
             context.SaveChanges();
+
             return sb.ToString().TrimEnd();
         }
 
@@ -113,11 +118,5 @@
 
             return Validator.TryValidateObject(dto, validationContext, validationResult, true);
         }
-
-        private static IMapper InitializeAutoMapper()
-            => new Mapper(new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<FootballersProfile>();
-            }));
     }
 }

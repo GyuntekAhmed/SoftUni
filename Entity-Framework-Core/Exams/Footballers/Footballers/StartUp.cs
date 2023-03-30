@@ -15,11 +15,11 @@ namespace Footballers
         {
             var context = new FootballersContext();
 
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<FootballersProfile>();
-            });
-            var mapper = new Mapper(config);
+            //var config = new MapperConfiguration(cfg =>
+            //{
+            //    cfg.AddProfile<FootballersProfile>();
+            //});
+            //var mapper = new Mapper(config);
 
             ResetDatabase(context, shouldDropDatabase: true);
 
@@ -43,11 +43,11 @@ namespace Footballers
 
             PrintAndExportEntityToFile(coaches, exportDir + "Actual Result - ImportCoaches.txt");
 
-            var teams =
-             DataProcessor.Deserializer.ImportTeams(context,
-                 File.ReadAllText(baseDir + "teams.json"));
+            //var teams =
+            // DataProcessor.Deserializer.ImportTeams(context,
+            //     File.ReadAllText(baseDir + "teams.json"));
 
-            PrintAndExportEntityToFile(teams, exportDir + "Actual Result - ImportTeams.txt");
+            //PrintAndExportEntityToFile(teams, exportDir + "Actual Result - ImportTeams.txt");
         }
 
         private static void ExportEntities(FootballersContext context, string exportDir)

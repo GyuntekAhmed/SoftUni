@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     using Enums;
+    using Utilities;
 
     public class Footballer
     {
@@ -16,14 +17,14 @@
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(40)]
+        [MaxLength(GlobalConstants.FootballerNameMaxLength)]
         public string Name { get; set; } = null!;
 
         [Required]
         public DateTime ContractStartDate { get; set; }
 
         [Required]
-        public DateTime ContractEndDate { get; set; }
+        public DateTime ContractEndDate{ get; set; }
 
         [Required]
         public PositionType PositionType { get; set; }
@@ -35,6 +36,6 @@
         public int CoachId { get; set; }
         public virtual Coach Coach { get; set; } = null!;
 
-        public virtual ICollection<TeamFootballer> TeamsFootballers { get; set; } = null!;
+        public virtual ICollection<TeamFootballer> TeamsFootballers { get; set; }
     }
 }

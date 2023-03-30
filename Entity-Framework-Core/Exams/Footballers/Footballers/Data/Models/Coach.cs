@@ -2,6 +2,8 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using Utilities;
+
     public class Coach
     {
         public Coach()
@@ -13,12 +15,12 @@
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(40)]
+        [MaxLength(GlobalConstants.CoachNameMaxLength)]
         public string Name { get; set; } = null!;
 
         [Required]
         public string Nationality { get; set; } = null!;
 
-        public virtual ICollection<Footballer> Footballers { get; set; } = null!;
+        public virtual ICollection<Footballer> Footballers { get; set; }
     }
 }

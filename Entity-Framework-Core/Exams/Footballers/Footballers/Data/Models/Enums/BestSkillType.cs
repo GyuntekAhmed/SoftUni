@@ -3,9 +3,9 @@
     public enum BestSkillType
     {
         Defence,
-        Dribble,
-        Pass,
-        Shoot,
+        Dribble, 
+        Pass, 
+        Shoot, 
         Speed
     }
 }
