@@ -2,11 +2,14 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.Text;
+
+    using Newtonsoft.Json;
+
     using Data;
-    using Trucks.Data.Models;
-    using Trucks.Data.Models.Enums;
-    using Trucks.DataProcessor.ImportDto;
-    using Trucks.Utilities;
+    using Data.Models;
+    using Data.Models.Enums;
+    using ImportDto;
+    using Utilities;
 
     public class Deserializer
     {
@@ -76,7 +79,62 @@
         }
         public static string ImportClient(TrucksContext context, string jsonString)
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+
+            ImportClientDto[] clientDtos = JsonConvert.DeserializeObject<ImportClientDto[]>(jsonString);
+
+            ICollection<Client> validClients = new HashSet<Client>();
+            ICollection<int> truckIds = context.Trucks
+                .Select(t => t.Id)
+                .ToArray();
+
+            foreach (ImportClientDto clientDto in clientDtos)
+            {
+                if (!IsValid(clientDto))
+                {
+                    sb.AppendLine(ErrorMessage);
+                    continue;
+                }
+
+                if (clientDto.Type == "usual")
+                {
+                    sb.AppendLine(ErrorMessage);
+                    continue;
+                }
+
+                Client client = new Client()
+                {
+                    Name = clientDto.Name,
+                    Nationality = clientDto.Nationality,
+                    Type = clientDto.Type
+                };
+
+                foreach (int truckId in clientDto.TrucksId.Distinct())
+                {
+                    if (!truckIds.Contains(truckId))
+                    {
+                        sb.AppendLine(ErrorMessage);
+                        continue;
+                    }
+
+                    ClientTruck clientTruck = new ClientTruck()
+                    {
+                        Client = client,
+                        TruckId = truckId
+                    };
+
+                    client.ClientsTrucks.Add(clientTruck);
+                }
+
+                validClients.Add(client);
+
+                sb.AppendLine(string.Format(SuccessfullyImportedClient, client.Name, client.ClientsTrucks.Count));
+            }
+
+            context.Clients.AddRange(validClients);
+            context.SaveChanges();
+
+            return sb.ToString().TrimEnd();
         }
 
         private static bool IsValid(object dto)
