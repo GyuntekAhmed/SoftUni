@@ -1,14 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Globalization;
-
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-
-using Footballers.Data;
-
-namespace Footballers
+﻿namespace Footballers
 {
+    using System;
+    using System.IO;
+    using System.Globalization;
+
+    using Microsoft.EntityFrameworkCore;
+
+    using Data;
+
     public class StartUp
     {
         public static void Main()
@@ -27,7 +26,7 @@ namespace Footballers
 
             ImportEntities(context, projectDir + @"Datasets/", projectDir + @"ImportResults/");
 
-            //ExportEntities(context, projectDir + @"ExportResults/");
+            ExportEntities(context, projectDir + @"ExportResults/");
 
             using (var transaction = context.Database.BeginTransaction())
             {

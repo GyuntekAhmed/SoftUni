@@ -1,14 +1,15 @@
 ﻿namespace Footballers.DataProcessor
 {
-    using Footballers.Utilities;
-    using Footballers.Data;
-    using Footballers.Data.Models;
-    using Footballers.Data.Models.Enums;
-    using Footballers.DataProcessor.ImportDto;
     using System.ComponentModel.DataAnnotations;
     using System.Globalization;
     using System.Text;
     using Newtonsoft.Json;
+
+    using Utilities;
+    using Data;
+    using Data.Models;
+    using Data.Models.Enums;
+    using DataProcessor.ImportDto;
 
     public class Deserializer
     {

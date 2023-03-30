@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Footballers.Data.Models
+﻿namespace Footballers.Data.Models
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class TeamFootballer
     {
         [ForeignKey(nameof(Team))]
