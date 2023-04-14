@@ -1,0 +1,10 @@
+article p{
+    background: dodgerblue;
+    color: white;
+}
+article#red-article{
+    background: red;
+}
+.text-center{
+    text-align: center;
+}
