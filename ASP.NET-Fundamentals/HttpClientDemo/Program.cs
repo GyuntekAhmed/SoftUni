@@ -26,7 +26,7 @@ namespace HttpClientDemo
                         Encoding.UTF8.GetString(buffer, 0, lenght);
                     Console.WriteLine(requestString);
 
-                    string html = $"<h1>Hello from NikiServer {DateTime.Now}</h1>" +
+                    string html = $"<h1>Hello from GyuniServer {DateTime.Now}</h1>" +
                         $"<form action=/tweet method=post><input name=username /><input name=password />" +
                         $"<input type=submit /></form>";
 
