@@ -1,3 +1,0 @@
-Create a program, which emulates typing an SMS, following this guide:
-
-Following the guide, 2 becomes “a”, 22 becomes “b” and so on.

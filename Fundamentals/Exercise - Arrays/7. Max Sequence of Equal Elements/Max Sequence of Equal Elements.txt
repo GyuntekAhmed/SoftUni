@@ -1,2 +1,0 @@
-Create a program that finds the longest sequence of equal elements in an array of integers.
-If several equal sequences are present in the array, print out the leftmost one

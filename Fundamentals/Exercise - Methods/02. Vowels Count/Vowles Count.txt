@@ -1,1 +1,0 @@
-Create a method that receives a single string and prints out the number of vowels contained in it.

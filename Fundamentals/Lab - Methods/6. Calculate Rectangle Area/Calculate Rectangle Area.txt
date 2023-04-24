@@ -1,1 +1,0 @@
-Create a method that calculates and returns the area of a rectangle

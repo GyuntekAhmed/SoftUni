@@ -1,1 +1,0 @@
-Create a method that prints out the smallest of three integer numbers.

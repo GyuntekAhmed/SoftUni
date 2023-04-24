@@ -1,9 +1,0 @@
-Create a program, which helps you buy the games. The valid games are the following games in this table:
-  Name	        Price
-
-OutFall 4	$39.99
-CS: OG          $15.99
-Zplinter Zell	$19.99
-Honored 2	$59.99
-RoverWatch	$29.99
-RoverWatch Origins Edition	$39.99

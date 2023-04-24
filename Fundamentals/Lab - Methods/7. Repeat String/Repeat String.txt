@@ -1,4 +1,0 @@
-Create a method that receives two parameters:
-•	A string 
-•	A number n (integer) represents how many times the string will be repeated
- The method should return a new string, containing the initial one, repeated n times without space. 

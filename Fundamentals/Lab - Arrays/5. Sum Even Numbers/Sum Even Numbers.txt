@@ -1,1 +1,0 @@
-Read an array from the console and sum only its even values. 

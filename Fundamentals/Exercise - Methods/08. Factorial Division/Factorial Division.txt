@@ -1,3 +1,0 @@
-Read two integers.
-Calculate the factorial of each number.
-Divide the first result by the second and print the result of the division formatted to the second decimal point.

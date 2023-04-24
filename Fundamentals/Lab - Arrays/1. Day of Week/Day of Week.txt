@@ -1,1 +1,0 @@
-Enter a number in range 1-7 and print out the word representing it or "Invalid Day!". Use an array of strings.

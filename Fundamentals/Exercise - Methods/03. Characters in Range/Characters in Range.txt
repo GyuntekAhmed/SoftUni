@@ -1,3 +1,0 @@
-Create a method that receives two characters and prints all the characters between them according to ASCII (on a single line).
-
-NOTE: If the second letter's ASCII value is less than that of the first one then the two initial letters should be swapped.
