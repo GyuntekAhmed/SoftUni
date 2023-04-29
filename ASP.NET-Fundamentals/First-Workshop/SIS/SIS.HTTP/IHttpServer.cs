@@ -1,7 +1,11 @@
 ﻿namespace SIS.HTTP
 {
-    public class Class1
+    public interface IHttpServer
     {
+        Task StartAsync();
 
+        Task ResetAsync();
+
+        void Stop();
     }
 }

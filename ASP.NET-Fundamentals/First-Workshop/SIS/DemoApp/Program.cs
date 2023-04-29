@@ -1,10 +1,13 @@
-﻿namespace DemoApp
+﻿using SIS.HTTP;
+
+namespace DemoApp
 {
-    internal class Program
+    class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            var httpServer = new HttpServer(80);
+            await httpServer.StartAsync();
         }
     }
 }
