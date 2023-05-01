@@ -8,10 +8,14 @@
     public class HttpServer : IHttpServer
     {
         private readonly TcpListener tcpListener;
-        public HttpServer(int port)
+        private readonly IList<Route> routeTable;
+        private readonly IDictionary<string, IDictionary<string, string>> sessions;
+
+        public HttpServer(int port, IList<Route> routeTable)
         {
             this.tcpListener = new TcpListener(IPAddress.Loopback, port);
-
+            this.routeTable = routeTable;
+            this.sessions = new Dictionary<string, IDictionary<string, string>>();
         }
 
         public async Task StartAsync()
@@ -42,32 +46,64 @@
         private async Task ProcessClientAsync(TcpClient tcpClient)
         {
             using NetworkStream networkStream = tcpClient.GetStream();
-            byte[] requestBytes = new byte[1000000]; // TODO: Use buffer
-            int bytesRead = await networkStream.ReadAsync(requestBytes, 0, requestBytes.Length);
-            string requestAsString = Encoding.UTF8.GetString(requestBytes, 0, bytesRead);
 
-            HttpRequest request = new HttpRequest(requestAsString);
-            string content = "<h1>random page</h1>";
-
-            if (request.Path == "/")
+            try
             {
-                content = "<h1>home page</h1>";
+                byte[] requestBytes = new byte[1000000]; // TODO: Use buffer
+                int bytesRead = await networkStream.ReadAsync(requestBytes, 0, requestBytes.Length);
+                string requestAsString = Encoding.UTF8.GetString(requestBytes, 0, bytesRead);
+
+                HttpRequest request = new HttpRequest(requestAsString);
+                var sessionCookie = request.Cookies.FirstOrDefault(x => x.Name == HttpConstants.SessionIdCookieName);
+
+                if (sessionCookie != null && this.sessions.ContainsKey(sessionCookie.Value))
+                {
+                    request.SessionData = this.sessions[sessionCookie.Value];
+                }
+
+                Console.WriteLine($"{request.Method} {request.Path}");
+
+                HttpResponse response;
+                var route = this.routeTable.FirstOrDefault(x => x.HttpMethod == request.Method && x.Path == request.Path);
+                if (route == null)
+                {
+                    response = new HttpResponse(HttpResponseCode.NotFound, new byte[0]);
+                    response.StatusCode = HttpResponseCode.NotFound;
+                }
+                else
+                {
+                    response = route.Action(request);
+                }
+
+                response.Headers.Add(new Header("Server", "SoftUniServer/2.0"));
+                
+                if (sessionCookie == null || !this.sessions.ContainsKey(sessionCookie.Value))
+                {
+                    var newSessionId = Guid.NewGuid().ToString();
+                    this.sessions.Add(newSessionId, new Dictionary<string, string>());
+                    response.Cookies.Add(
+                        new ResponseCookie(HttpConstants.SessionIdCookieName, newSessionId)
+                            { HttpOnly = true, MaxAge = 30*3600 });
+                }
+                
+
+                byte[] responseBytes = Encoding.UTF8.GetBytes(response.ToString());
+                await networkStream.WriteAsync(responseBytes, 0, responseBytes.Length);
+                await networkStream.WriteAsync(response.Body, 0, response.Body.Length);
             }
-            else if (request.Path == "/users/login")
+            catch (Exception ex)
             {
-                content = "<h1>login page</h1>";
+
+                var errorResponse = new HttpResponse(
+                    HttpResponseCode.InternalServerError,
+                    Encoding.UTF8.GetBytes(ex.ToString()));
+                errorResponse.Headers.Add(new Header("Content-Type", "text/plain"));
+
+                byte[] responseBytes = Encoding.UTF8.GetBytes(errorResponse.ToString());
+                await networkStream.WriteAsync(responseBytes, 0, responseBytes.Length);
+                await networkStream.WriteAsync(errorResponse.Body, 0, errorResponse.Body.Length);
             }
 
-            byte[] stringContent = Encoding.UTF8.GetBytes(content);
-            var response = new HttpResponse(HttpResponseCode.OK, stringContent);
-            response.Headers.Add(new Header("Server", "SoftUniServer/2.0"));
-            response.Headers.Add(new Header("Content-Type", "text/html"));
-
-            byte[] responseBytes = Encoding.UTF8.GetBytes(response.ToString());
-            await networkStream.WriteAsync(responseBytes, 0, responseBytes.Length);
-            await networkStream.WriteAsync(response.Body, 0, response.Body.Length);
-            Console.WriteLine(request);
-            Console.WriteLine(new string('=', 60));
         }
     }
 }
