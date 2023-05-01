@@ -1,10 +1,10 @@
-﻿using System.Net;
-using System.Net.Sockets;
-using System.Text.RegularExpressions;
-using System.Text;
-
-namespace SIS.HTTP
+﻿namespace SIS.HTTP
 {
+    using System.Net;
+    using System.Net.Sockets;
+    using System.Text;
+
+
     public class HttpServer : IHttpServer
     {
         private readonly TcpListener tcpListener;
@@ -41,18 +41,21 @@ namespace SIS.HTTP
 
         private async Task ProcessClientAsync(TcpClient tcpClient)
         {
-            const string NewLine = "\r\n";
             using NetworkStream networkStream = tcpClient.GetStream();
             byte[] requestBytes = new byte[1000000]; // TODO: Use buffer
             int bytesRead = await networkStream.ReadAsync(requestBytes, 0, requestBytes.Length);
-            string request = Encoding.UTF8.GetString(requestBytes, 0, bytesRead);
-            byte[] fileContent = Encoding.UTF8.GetBytes("<h1>Hello, Word from Gyuni!!!</h1>");
-            string headers = "HTTP/1.0 200 OK" + NewLine +
-                              "Server: SoftUniServer/1.0" + NewLine +
-                              "Content-Type: text/html" + NewLine +
-                              "Content-Lenght: " + fileContent.Length + NewLine +
-                              NewLine;
-            
+            string requestAsString = Encoding.UTF8.GetString(requestBytes, 0, bytesRead);
+            HttpRequest request = new HttpRequest(requestAsString);
+            byte[] fileContent =
+                Encoding.UTF8.GetBytes
+                ("<form method='post'><input name='username' /><input type='submit' /></form><h1>Hello, Word from Gyuni!!!</h1>");
+            string headers = "HTTP/1.0 200 OK" +
+                              HttpConstants.NewLine +
+                              "Server: SoftUniServer/1.0" + HttpConstants.NewLine +
+                              "Content-Type: text/html" + HttpConstants.NewLine +
+                              "Content-Lenght: " + fileContent.Length + HttpConstants.NewLine +
+                              HttpConstants.NewLine;
+
             byte[] headersBytes = Encoding.UTF8.GetBytes(headers);
             await networkStream.WriteAsync(headersBytes, 0, headersBytes.Length);
             await networkStream.WriteAsync(fileContent, 0, fileContent.Length);
