@@ -45,20 +45,27 @@
             byte[] requestBytes = new byte[1000000]; // TODO: Use buffer
             int bytesRead = await networkStream.ReadAsync(requestBytes, 0, requestBytes.Length);
             string requestAsString = Encoding.UTF8.GetString(requestBytes, 0, bytesRead);
-            HttpRequest request = new HttpRequest(requestAsString);
-            byte[] fileContent =
-                Encoding.UTF8.GetBytes
-                ("<form method='post'><input name='username' /><input type='submit' /></form><h1>Hello, Word from Gyuni!!!</h1>");
-            string headers = "HTTP/1.0 200 OK" +
-                              HttpConstants.NewLine +
-                              "Server: SoftUniServer/1.0" + HttpConstants.NewLine +
-                              "Content-Type: text/html" + HttpConstants.NewLine +
-                              "Content-Lenght: " + fileContent.Length + HttpConstants.NewLine +
-                              HttpConstants.NewLine;
 
-            byte[] headersBytes = Encoding.UTF8.GetBytes(headers);
-            await networkStream.WriteAsync(headersBytes, 0, headersBytes.Length);
-            await networkStream.WriteAsync(fileContent, 0, fileContent.Length);
+            HttpRequest request = new HttpRequest(requestAsString);
+            string content = "<h1>random page</h1>";
+
+            if (request.Path == "/")
+            {
+                content = "<h1>home page</h1>";
+            }
+            else if (request.Path == "/users/login")
+            {
+                content = "<h1>login page</h1>";
+            }
+
+            byte[] stringContent = Encoding.UTF8.GetBytes(content);
+            var response = new HttpResponse(HttpResponseCode.OK, stringContent);
+            response.Headers.Add(new Header("Server", "SoftUniServer/2.0"));
+            response.Headers.Add(new Header("Content-Type", "text/html"));
+
+            byte[] responseBytes = Encoding.UTF8.GetBytes(response.ToString());
+            await networkStream.WriteAsync(responseBytes, 0, responseBytes.Length);
+            await networkStream.WriteAsync(response.Body, 0, response.Body.Length);
             Console.WriteLine(request);
             Console.WriteLine(new string('=', 60));
         }
