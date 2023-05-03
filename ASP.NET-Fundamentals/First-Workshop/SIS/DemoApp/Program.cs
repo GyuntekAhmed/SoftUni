@@ -4,10 +4,13 @@ using SIS.HTTP.Response;
 
 namespace DemoApp
 {
-    class Program
+    public static class Program
     {
         static async Task Main(string[] args)
         {
+            var db = new ApplicationDbContext();
+            db.Database.EnsureCreated();
+
             var routeTable = new List<Route>
             {
                 new Route(HttpMethodType.Get, "/", Index),
