@@ -1,5 +1,4 @@
-﻿using System.Text;
-using SIS.HTTP;
+﻿using SIS.HTTP;
 using SIS.HTTP.Response;
 
 namespace DemoApp
@@ -14,9 +13,7 @@ namespace DemoApp
             var routeTable = new List<Route>
             {
                 new Route(HttpMethodType.Get, "/", Index),
-                new Route(HttpMethodType.Get, "/users/login", Login),
-                new Route(HttpMethodType.Post, "/users/login", DoLogin),
-                new Route(HttpMethodType.Post, "/contact", Contact),
+                new Route(HttpMethodType.Post, "/Tweets/Create", CreateTweet),
                 new Route(HttpMethodType.Post, "/favicon.ico", Favicon),
             };
 
@@ -24,29 +21,30 @@ namespace DemoApp
             await httpServer.StartAsync();
         }
 
-        private static HttpResponse Favicon(HttpRequest request)
+        private static HttpResponse CreateTweet(HttpRequest request)
         {
-            throw new NotImplementedException();
+            var db = new ApplicationDbContext();
+            db.Tweets.Add(new Tweet
+            {
+                CreatedOn = DateTime.UtcNow,
+                Creator = request.FormData["creator"],
+                Content = request.FormData["tweetName"]
+            });
+
+            return new HtmlResponse("Thank you for your tweet!!!");
         }
 
-        public static HttpResponse Contact(HttpRequest request)
+        private static HttpResponse Favicon(HttpRequest request)
         {
-            return new HtmlResponse("<h1>contact</h1>");
+            return new HtmlResponse("<h1Favicon</h1>");
         }
 
         public static HttpResponse Index(HttpRequest request)
         {
-            return new HtmlResponse("<h1>home page</h1>");
-        }
-
-        public static HttpResponse Login(HttpRequest request)
-        {
-            return new HtmlResponse("<h1>login page</h1>");
-        }
-
-        public static HttpResponse DoLogin(HttpRequest request)
-        {
-            return new HtmlResponse("<h1>login page form</h1>");
+            var username = request.SessionData.ContainsKey("Username") ? request.SessionData["Username"] : "Anonymous";
+            return new HtmlResponse(
+                $"<form action='/Tweets/Create' method='post'><input name='creator' /><br />" +
+                $"<textarea name='tweetName'></textarea><br /><input type='submit'/></form>");
         }
     }
 }
