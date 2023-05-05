@@ -5,7 +5,6 @@ namespace SIS.HTTP.Response
     public class HtmlResponse : HttpResponse
     {
         public HtmlResponse(string html)
-            : base()
         {
             this.Headers.Add(new Header("Content-Type", "text/html"));
             this.StatusCode = HttpResponseCode.OK;
