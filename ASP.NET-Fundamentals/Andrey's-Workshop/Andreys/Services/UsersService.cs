@@ -1,11 +1,13 @@
 ﻿namespace Andreys.Services
 {
+    using System.Security.Cryptography;
     using System.Linq;
     using System.Text;
 
     using Data;
     using Models;
     using SIS.MvcFramework;
+    using System;
 
     public class UsersService : IUsersService
     {
@@ -47,6 +49,7 @@
         {
             var user = new User
             {
+                Id = Guid.NewGuid().ToString(),
                 Role = IdentityRole.User,
                 Username = username,
                 Email = email,

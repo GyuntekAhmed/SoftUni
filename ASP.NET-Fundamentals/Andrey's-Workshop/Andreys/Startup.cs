@@ -3,9 +3,10 @@
     using System.Collections.Generic;
 
     using Data;
+    using Services;
 
-    using SIS.MvcFramework;
     using SIS.HTTP;
+    using SIS.MvcFramework;
 
     public class Startup : IMvcApplication
     {
@@ -19,6 +20,8 @@
 
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
+            serviceCollection.Add<IUsersService,UsersService>();
+            serviceCollection.Add<IProductService,ProductsService>();
         }
     }
 }

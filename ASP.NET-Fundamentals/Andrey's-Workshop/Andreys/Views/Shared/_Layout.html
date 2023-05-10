@@ -20,13 +20,13 @@
                     <li class="nav-item">
                         <a class="nav-link text-white active h5" href="/">Home</a>
                     </li>
-                    @if (user == null)
+                    @if (User == null)
                     {
                     <li class="nav-item">
                         <a class="nav-link text-white active h5" href="/Users/Login">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white active h5" href="/Users/Login">Register</a>
+                        <a class="nav-link text-white active h5" href="/Users/Register">Register</a>
                     </li>
                     }
                     @else
@@ -35,7 +35,7 @@
                         <a class="nav-link text-white active h5" href="/Products/Add">Add Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-danger active h5" href="/Logout">Logout</a>
+                        <a class="nav-link text-danger active h5" href="/Users/Logout">Logout</a>
                     </li>
                     }
                 </ul>
