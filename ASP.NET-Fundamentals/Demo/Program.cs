@@ -8,6 +8,7 @@ namespace Demo
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
             var app = builder.Build();
 

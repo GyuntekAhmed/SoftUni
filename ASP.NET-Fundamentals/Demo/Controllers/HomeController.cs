@@ -15,11 +15,23 @@ namespace Demo.Controllers
 
         public IActionResult Index()
         {
+            // View Data => Dictionary
+            // View Bag => Obect
+            ViewData["MyData"] = "I am inserting data from controller in view";
+            
+
             return View();
         }
 
         public IActionResult Privacy()
         {
+            return View();
+        }
+
+        public IActionResult About()
+        {
+            ViewBag.Message = "This is an ASP.NET Core MVC app.";
+
             return View();
         }
 
