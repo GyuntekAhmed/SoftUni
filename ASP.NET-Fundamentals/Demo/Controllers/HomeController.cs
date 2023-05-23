@@ -35,6 +35,12 @@ namespace Demo.Controllers
             return View();
         }
 
+        [ActionName("AboutMvc")]
+        public IActionResult Info()
+        {
+            return this.Redirect("https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
