@@ -26,6 +26,13 @@ namespace MVCIntroDemo.Controllers
         }
 
         [HttpGet]
+        public IActionResult NumbersToN()
+        {
+            ViewData["Count"] = -1;
+            return View();
+        }
+
+        [HttpPost]
         public IActionResult NumbersToN(int count = -1)
         {
             ViewData["Count"] = count;
