@@ -25,6 +25,13 @@ namespace MVCIntroDemo.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult NumbersToN(int count = -1)
+        {
+            ViewData["Count"] = count;
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
