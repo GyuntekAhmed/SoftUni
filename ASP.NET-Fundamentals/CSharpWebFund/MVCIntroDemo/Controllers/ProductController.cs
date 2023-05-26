@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
+using static MVCIntroDemo.Seeding.ProductsData;
+
 namespace MVCIntroDemo.Controllers
 {
     public class ProductController : Controller
     {
-        public IActionResult Index()
+        public IActionResult All()
         {
-            return View();
+            return View(Products);
         }
     }
 }
