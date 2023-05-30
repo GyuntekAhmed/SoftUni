@@ -23,6 +23,9 @@ namespace ASPNETCoreDatabases.Infrastructure.Model
         [Comment("Product quantity")]
         public int Quantity { get; set; }
 
+        [Comment("Product price")]
+        public decimal? Price { get; set; }
+
         public List<ProductNote> ProductNotes { get; set; }
     }
 }
