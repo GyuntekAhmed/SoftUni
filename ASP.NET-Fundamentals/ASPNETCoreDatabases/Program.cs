@@ -1,3 +1,5 @@
+using ASPNETCoreDatabases.Core.Contracts;
+using ASPNETCoreDatabases.Core.Services;
 using ASPNETCoreDatabases.Infrastructure.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +16,8 @@ namespace ASPNETCoreDatabases
 
             builder.Services.AddDbContext<WebShopDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddScoped<IProductService, ProductService>();
 
             var app = builder.Build();
 
