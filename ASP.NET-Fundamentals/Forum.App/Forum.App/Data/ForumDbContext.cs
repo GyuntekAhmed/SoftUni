@@ -2,6 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
 
+    using Config;
     using Models;
 
     public class ForumDbContext : DbContext
@@ -16,6 +17,8 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new PostEntityConfig());
+
             base.OnModelCreating(modelBuilder);
         }
     }
