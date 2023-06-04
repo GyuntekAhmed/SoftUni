@@ -1,4 +1,4 @@
-﻿namespace Forum.App.Data.Seeding
+﻿namespace Forum.Data.Seeding
 {
     using Models;
 

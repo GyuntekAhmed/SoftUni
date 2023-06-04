@@ -1,4 +1,4 @@
-﻿namespace Forum.App.Data.Config
+﻿namespace Forum.Data.Config
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -12,12 +12,12 @@
 
         public PostEntityConfig()
         {
-            this.postSeeder = new PostSeeder();
+            postSeeder = new PostSeeder();
         }
 
         public void Configure(EntityTypeBuilder<Post> builder)
         {
-            builder.HasData(this.postSeeder.GeneratePost());
+            builder.HasData(postSeeder.GeneratePost());
         }
     }
 }

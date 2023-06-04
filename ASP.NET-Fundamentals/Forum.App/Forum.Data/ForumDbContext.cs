@@ -1,4 +1,4 @@
-﻿namespace Forum.App.Data
+﻿namespace Forum.Data
 {
     using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +10,7 @@
         public ForumDbContext(DbContextOptions<ForumDbContext> options)
             : base(options)
         {
-            
+
         }
 
         public DbSet<Post> Posts { get; set; } = null!;

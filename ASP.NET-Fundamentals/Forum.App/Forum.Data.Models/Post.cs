@@ -1,14 +1,14 @@
-﻿namespace Forum.App.Data.Models
+﻿namespace Forum.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
 
-    using static Forum.App.Common.EntityValidations.Post;
+    using static Forum.Common.Validations.EntityValidations.Post;
 
     public class Post
     {
         public Post()
         {
-            this.Id = Guid.NewGuid();
+            Id = Guid.NewGuid();
         }
 
         [Key]

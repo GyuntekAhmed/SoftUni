@@ -1,4 +1,4 @@
-﻿namespace Forum.App.Common
+﻿namespace Forum.Common.Validations
 {
     public static class EntityValidations
     {
