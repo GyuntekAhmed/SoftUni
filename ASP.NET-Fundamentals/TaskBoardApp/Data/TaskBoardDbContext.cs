@@ -11,12 +11,11 @@ namespace TaskBoardApp.Data
         public TaskBoardDbContext(DbContextOptions<TaskBoardDbContext> options)
             : base(options)
         {
-            Database.Migrate();
         }
 
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Task> Tasks { get; set; } = null!;
 
-        public DbSet<Board> Boards { get; set; }
+        public DbSet<Board> Boards { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -31,11 +30,10 @@ namespace TaskBoardApp.Data
             builder
                 .Entity<IdentityUser>()
                 .HasData(TestUser);
-            SeedUsers();
+            SeedBoards();
             builder
                 .Entity<Board>()
                 .HasData(OpenBoard, InProgressBoard, DoneBoard);
-            SeedUsers();
             builder
                 .Entity<Task>()
                 .HasData(new Task()
@@ -79,13 +77,13 @@ namespace TaskBoardApp.Data
         }
 
 
-        private IdentityUser TestUser { get; set; }
+        private IdentityUser TestUser { get; set; } = null!;
 
-        private Board OpenBoard { get; set; }
+        private Board OpenBoard { get; set; } = null!;
 
-        private Board InProgressBoard { get; set; }
+        private Board InProgressBoard { get; set; } = null!;
 
-        private Board DoneBoard { get; set; }
+        private Board DoneBoard { get; set; } = null!;
 
         private void SeedUsers()
         {
@@ -97,7 +95,7 @@ namespace TaskBoardApp.Data
                 NormalizedUserName = "GYUNTEKAHMED@GMAIL.COM"
             };
 
-            TestUser.PasswordHash = hasher.HashPassword(TestUser, "111111");
+            TestUser.PasswordHash = hasher.HashPassword(TestUser, "aaaaaa");
         }
 
         private void SeedBoards()
@@ -112,6 +110,12 @@ namespace TaskBoardApp.Data
             {
                 Id = 2,
                 Name = "In Progress"
+            };
+
+            DoneBoard = new Board()
+            {
+                Id = 3,
+                Name = "Done"
             };
         }
     }
