@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using TaskBoardApp.Data;
 using TaskBoardApp.Models.Task;
@@ -6,6 +7,7 @@ using Task = TaskBoardApp.Data.Models.Task;
 
 namespace TaskBoardApp.Controllers
 {
+    [Authorize]
     public class TaskController : Controller
     {
         private readonly TaskBoardDbContext data;
@@ -30,7 +32,7 @@ namespace TaskBoardApp.Controllers
         {
             if (!GetBoards().Any(b => b.Id == model.BoardId))
             {
-                ModelState.AddModelError(nameof(model.BoardId), "Board does not exist.");
+                ModelState.AddModelError(nameof(model.BoardId), "Selected   Board does not exist.");
             }
 
             string currentUserId = GetUserId();

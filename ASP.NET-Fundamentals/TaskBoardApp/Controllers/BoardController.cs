@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskBoardApp.Data;
 using TaskBoardApp.Models.Board;
@@ -15,6 +16,7 @@ namespace TaskBoardApp.Controllers
             data = context;
         }
 
+        [Authorize]
         public async Task<IActionResult> All()
         {
             var boards = await data
