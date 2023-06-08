@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace Watchlist.Data.Models
+﻿namespace Watchlist.Data.Models
 {
+    using Microsoft.AspNetCore.Identity;
+
     public class User : IdentityUser
     {
         public User()

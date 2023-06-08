@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Watchlist.Data.Models
+﻿namespace Watchlist.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using static Common.ValidationConstants.Movie;
+
     public class Movie
     {
         public Movie()
@@ -14,16 +15,17 @@ namespace Watchlist.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(TitleMaxLength)]
         public string Title { get; set; } = null!;
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(DirectorMaxLength)]
         public string Director { get; set; } = null!;
 
         [Required]
         public string ImageUrl { get; set; } = null!;
 
+        [Required]
         public decimal Rating { get; set; }
 
         [ForeignKey(nameof(Genre))]
