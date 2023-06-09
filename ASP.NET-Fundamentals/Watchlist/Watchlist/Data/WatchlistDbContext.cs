@@ -19,7 +19,18 @@
         {
             builder.Entity<UserMovie>()
                 .HasKey(u => new { u.UserId, u.MovieId });
-           /* builder
+
+            builder.Entity<User>()
+                .Property(u => u.UserName)
+                .HasMaxLength(20)
+                .IsRequired();
+
+            builder.Entity<User>()
+                .Property(u => u.Email)
+                .HasMaxLength(60)
+                .IsRequired();
+
+            builder
                 .Entity<Genre>()
                 .HasData(new Genre()
                 {
@@ -46,7 +57,7 @@
                     Id = 5,
                     Name = "Romantic"
                 });
-           */
+
             base.OnModelCreating(builder);
         }
     }
