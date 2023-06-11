@@ -27,7 +27,7 @@ namespace Library.Data.Models
         public string Description { get; set; } = null!;
 
         [Required]
-        public string ImageUrl { get; set; } = null!;
+        public string Url { get; set; } = null!;
 
         [Required]
         public decimal Rating { get; set; }

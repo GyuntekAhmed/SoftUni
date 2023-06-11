@@ -1,4 +1,6 @@
+using Library.Contracts;
 using Library.Data;
+using Library.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,14 +12,18 @@ builder.Services.AddDbContext<LibraryDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<LibraryDbContext>();
+builder.Services.Configure<IdentityOptions>(options =>
 {
-    options.SignIn.RequireConfirmedAccount = false;
+    // Password settings.
     options.Password.RequireDigit = false;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
-})
-    .AddEntityFrameworkStores<LibraryDbContext>();
+});
+
+builder.Services.AddScoped<IBookService, BookService>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
