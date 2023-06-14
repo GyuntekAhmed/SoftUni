@@ -64,10 +64,10 @@ namespace Library.Data
             base.OnModelCreating(builder);
         }
 
-        DbSet<Book> Books { get; set; } = null!;
+        public DbSet<Book> Books { get; set; } = null!;
 
-        DbSet<Category> Categories { get; set; } = null!;
+        public DbSet<Category> Categories { get; set; } = null!;
 
-        DbSet<IdentityUserBook> IdentityUserBooks { get; set; } = null!;
+        public DbSet<IdentityUserBook> IdentityUserBooks { get; set; } = null!;
     }
 }
