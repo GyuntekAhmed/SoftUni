@@ -1,6 +1,4 @@
-﻿using System.Security.Policy;
-
-namespace Library.Common
+﻿namespace Library.Common
 {
     public static class ValidationConstants
     {
