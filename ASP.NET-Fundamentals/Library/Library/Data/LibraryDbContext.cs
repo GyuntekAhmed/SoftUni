@@ -1,9 +1,10 @@
-﻿using Library.Data.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-
-namespace Library.Data
+﻿namespace Library.Data
 {
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+
+    using Models;
+
     public class LibraryDbContext : IdentityDbContext
     {
         public LibraryDbContext(DbContextOptions<LibraryDbContext> options)

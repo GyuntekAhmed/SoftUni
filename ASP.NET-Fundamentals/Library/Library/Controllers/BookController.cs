@@ -1,9 +1,11 @@
-﻿using Library.Contracts;
-using Library.Models;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Library.Controllers
+﻿namespace Library.Controllers
 {
+
+    using Microsoft.AspNetCore.Mvc;
+
+    using Contracts;
+    using Models;
+
     public class BookController : BaseController
     {
         private readonly IBookService bookService;
@@ -56,7 +58,7 @@ namespace Library.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> AddToCollection(int id)
+        public async Task<IActionResult> AddBookToCollectionAsync(int id)
         {
             var book = await bookService.GetBookByIdAsync(id);
 

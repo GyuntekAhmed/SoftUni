@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Library.Data.Models
+﻿namespace Library.Data.Models
 {
+    using Microsoft.AspNetCore.Identity;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class IdentityUserBook
     {
         [ForeignKey(nameof(Collector))]

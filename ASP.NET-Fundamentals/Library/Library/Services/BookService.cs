@@ -1,11 +1,12 @@
-﻿using Library.Contracts;
-using Library.Data;
-using Library.Data.Models;
-using Library.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace Library.Services
+﻿namespace Library.Services
 {
+    using Microsoft.EntityFrameworkCore;
+
+    using Contracts;
+    using Data;
+    using Data.Models;
+    using Models;
+
     public class BookService : IBookService
     {
         private readonly LibraryDbContext dbContext;

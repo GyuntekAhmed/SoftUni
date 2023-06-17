@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using static Library.Common.ValidationConstants.BookValidationConstants;
-
-namespace Library.Models
+﻿namespace Library.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using static Common.ValidationConstants.BookValidationConstants;
+
     public class AddCollectionBookViewModel
     {
         public int Id { get; set; }

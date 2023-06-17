@@ -1,7 +1,7 @@
-﻿using Library.Models;
-
-namespace Library.Contracts
+﻿namespace Library.Contracts
 {
+    using Models;
+
     public interface IBookService
     {
         Task<IEnumerable<AllBookViewModel>> GetAllBooksAsync();
