@@ -1,11 +1,14 @@
-﻿using Homies.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-
-namespace Homies.Controllers
+﻿namespace Homies.Controllers
 {
-    public class HomeController : Controller
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Diagnostics;
+
+    using Models;
+
+    public class HomeController : BaseController
     {
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
