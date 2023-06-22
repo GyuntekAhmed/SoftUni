@@ -1,9 +1,9 @@
 ﻿namespace Homies.Data
 {
-    using Homies.Data.Models;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
+    using Models;
     using Type = Models.Type;
 
     public class HomiesDbContext : IdentityDbContext
