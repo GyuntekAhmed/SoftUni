@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300&family=Raleway:ital,wght@1,600&family=Satisfy&display=swap');
+
+body {
+    font-family: 'Lexend', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+h1, h2 {
+    font-family: "Satisfy", cursive;
+    line-height: 1.2;
+    font-weight: bold;
+}
+
+.none {
+    list-style: none;
+}
