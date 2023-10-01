@@ -1,0 +1,21 @@
+.main-nav ul {
+    padding: 0;
+}
+
+.main-nav li {
+    display: block;
+    position: relative;
+    list-style: none outside;
+}
+
+.main-nav a {
+    display: block;
+    padding: 0.5em 0.8em;
+    color: rgb(5, 199, 189);
+    text-decoration: none;
+}
+
+.main-nav ul > li {
+    display: inline-block;
+    margin: 0 0.2em;
+}

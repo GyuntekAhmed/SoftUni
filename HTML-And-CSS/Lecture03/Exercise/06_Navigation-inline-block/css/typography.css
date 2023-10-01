@@ -1,0 +1,22 @@
+html {
+    font: 1em/1.5 Helvetica, sans-serif;
+}
+
+body,
+input,
+textarea {
+    font: inherit;
+}
+
+p,
+ul,
+ol {
+    padding-bottom: 1.5em;
+}
+
+.site-title {
+    text-transform: uppercase;
+    font-size: 2em;
+    font-weight: 700;
+    padding-bottom: 0;
+}

@@ -1,0 +1,23 @@
+h1 {
+    padding-bottom: 0.4em;
+}
+
+.site {
+    max-width: 90%;
+    margin: 4em auto;
+}
+
+.site-header {
+    position: relative;
+    padding: 1.5em 0;
+    line-height: 1;
+    border-bottom: 1px solid black;
+    margin-bottom: 1.5em;
+}
+
+.main-nav {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translateY(-30%);
+}
