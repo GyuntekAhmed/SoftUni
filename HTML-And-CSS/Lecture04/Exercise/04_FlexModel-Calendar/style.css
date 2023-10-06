@@ -1,0 +1,45 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font: 16px/1.5 Verdana, sans-serif;
+}
+
+body {
+    padding: 2em;
+}
+
+.container {
+  display: flex;
+  max-width: 65vw;
+}
+
+section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+span {
+  border: 1px solid black;
+  padding: 0.5em;
+  text-align: center;
+  flex-grow: 1;
+  padding-bottom: 2em;
+}
+
+section.notes {
+  flex-direction: column;
+}
+
+section.week span:nth-child(1),
+section.week span:nth-child(7) {
+  flex-basis: 100%;
+  padding-bottom: 3em;
+}
+
+section.notes span {
+  padding-bottom: 7em;
+}
