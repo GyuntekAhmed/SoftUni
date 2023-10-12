@@ -1,6 +1,5 @@
 body {
   display: flex;
-  orientation: portrait;
 }
 
 div {
@@ -12,4 +11,10 @@ div {
   border: 2px solid black;
   font-weight: bold;
   text-align: center;
+}
+
+@media (orientation: portrait) {
+  body {
+    flex-direction: column;
+  }
 }

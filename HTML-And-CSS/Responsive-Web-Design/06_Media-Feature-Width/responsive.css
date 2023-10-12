@@ -1,0 +1,23 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@media (width: 360px) {
+  article {
+    color: red;
+  }
+}
+
+@media (min-width: 35rem) {
+  article {
+    background: yellow;
+  }
+}
+
+@media (max-width: 50rem) {
+  article {
+    border: 2px solid blue;
+  }
+}
