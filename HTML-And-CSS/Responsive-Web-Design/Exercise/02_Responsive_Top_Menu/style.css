@@ -21,6 +21,12 @@ header, footer {
     flex: 1 1 100%;
 }
 
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 main {
     flex: 1 1 70%;
 }
@@ -31,14 +37,33 @@ aside {
 
 aside li {
     list-style: none;
+    padding-bottom: 0.5em;
 }
 
 a {
     text-decoration: none;
 }
 
+nav ul {
+    display: flex;
+}
+
+nav li {
+    display: block;
+}
+
+nav a {
+    display: block;
+    padding: 1em 1.5em;
+}
+
 @media (max-width: 500px){
     body {
         flex-direction: column;
+    }
+
+    nav, ul,
+    header {
+        display: block;
     }
 }
