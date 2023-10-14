@@ -1,0 +1,37 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    box-sizing: inherit;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    align-items: center vertical;
+}
+
+header li {
+    display: block;
+    list-style: none;
+    background-color: rgb(164, 193, 248);
+    padding-top: 1em;
+}
+
+h1 {
+    background-color: rgb(164, 193, 248);
+    padding: 1em 0.2em;
+}
+
+@media (max-width:500px) {
+    body {
+        flex-direction: column;
+    }
+}
