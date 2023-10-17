@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font: 12px/1.4 Georgia, "Times New Roman", Times, serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  padding: 2em;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+img {
+  max-width: 270px;
+  border-radius: 1em;
+}
+
+.content {
+  border-radius: 1em;
+  text-align: center;
+  max-width: 270px;
+  background-color: #85a5aa;
+}
+
+h2 {
+    margin: 1em 0;
+}
+
+button {
+    display: flex;
+    margin: 1em;
+    padding: 0.5em;
+    border-radius: 1em;
+    background-color: rgb(82, 139, 192);
+    color: white;
+}
+
+span {
+    color: rgb(82, 139, 192);
+}
