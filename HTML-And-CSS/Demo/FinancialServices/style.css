@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300&family=Merriweather:wght@300&family=Poppins&family=Raleway:ital,wght@1,600&family=Satisfy&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -5,54 +7,66 @@
 }
 
 html {
-  font: 12px/1.4 Georgia, "Times New Roman", Times, serif;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
+  font: 12px/1.5 Poppins, sans-serif;
 }
 
 body {
   padding: 2em;
 }
 
-header {
-  text-align: center;
-  margin-bottom: 2em;
+img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .container {
-  display: flex;
-  justify-content: space-between;
+  max-width: 100em;
+  margin: 0 auto;
 }
 
-img {
-  max-width: 270px;
-  border-radius: 1em;
-}
-
-.content {
-  border-radius: 1em;
+.section-header {
   text-align: center;
-  max-width: 270px;
-  background-color: #85a5aa;
+  padding-bottom: 2em;
 }
 
-h2 {
-    margin: 1em 0;
+.section-header h2 span {
+  color: #327DC4;
 }
 
-button {
-    display: flex;
-    margin: 1em;
-    padding: 0.5em;
-    border-radius: 1em;
-    background-color: rgb(82, 139, 192);
-    color: white;
+.section-content {
+  display: flex;
+  gap: 1.5em;
 }
 
-span {
-    color: rgb(82, 139, 192);
+.section-content article,
+.section-content article  .media{
+  display: block;
+  overflow: hidden;
+  border-radius: 1em;
+}
+
+.section-content article {
+  flex: 1 1 30%;
+  background: #819DAF;
+  color: #000;
+}
+
+.section-content article .entry-content {
+  padding: 1.5em;
+}
+
+.section-content article .entry-content p {
+  margin: 1em 0 1em 0;
+}
+
+.section-content article .button {
+  color: #fff;
+  display: inline-block;
+  text-decoration: none;
+  background: #327DC4;
+  border: 1px solid #4550C7;
+  outline: 1px solid #fff;
+  padding: 0.5em 1em;
+  border-radius: 2em;
 }
