@@ -115,3 +115,97 @@
 // }
 
 //print(0, 26);
+
+// function multiTable(num){
+//    for (let i = 1; i <= 10; i++) {
+//        let sum = i * num;
+
+//        console.log(`${num} X ${i} = ${sum}`);
+//    }
+// }
+
+// multiTable(2);
+
+// function sumOfDigits(numbers) {
+
+//     let numStr = numbers.toString();
+    
+//     let sum = 0;
+    
+//     for (let i = 0; i < numStr.length; i++) {
+//         sum += parseInt(numStr[i]);
+//     }
+    
+//     console.log(sum);
+// }
+
+// sumOfDigits(543);
+
+// function split(char1, char2, char3) {
+
+//     let result = char3 + " " + char2 + " " + char1;
+    
+//     console.log(result);
+// }
+
+// split(`1`, `L`, `&`);
+
+// function calc(fruit, grams, price) {
+//     let kg = grams * 0.001;
+//     let money = kg * price;
+    
+//     console.log(`I need $${money.toFixed(2)} to buy ${kg.toFixed(2)} kilograms ${fruit}.`);
+// }
+
+// calc(`apple`, 1563, 2.35);
+
+// function checkDigits(number) {
+//     let numberStr = number.toString();
+//     let firstDigit = numberStr[0];
+
+//     let allSame = true;
+//     let digitSum = 0;
+
+//     for (let i = 0; i < numberStr.length; i++) {
+//         digitSum += parseInt(numberStr[i]);
+
+//         if (numberStr[i] !== firstDigit) {
+//             allSame = false;
+//         }
+//     }
+
+//     console.log(allSame);
+    
+//     console.log(digitSum);
+// }
+
+// checkDigits(1234);
+
+function checkSpeed(speed, area) {
+    const speedLimits = {
+        'motorway': 130,
+        'interstate': 90,
+        'city': 50,
+        'residential': 20,
+    };
+
+    const difference = speed - speedLimits[area];
+
+    if (difference <= 0) {
+        console.log(`Driving ${speed} km/h in a ${area} zone`);
+    } else {
+        let status = '';
+        if (difference <= 20) {
+            status = 'speeding';
+        } else if (difference <= 40) {
+            status = 'excessive speeding';
+        } else {
+            status = 'reckless driving';
+        }
+
+        console.log(`The speed is ${difference} km/h faster than the allowed speed of ${speedLimits[area]} - ${status}`);
+    }
+}
+
+// Example usage:
+checkSpeed(40, 'city');
