@@ -25,7 +25,6 @@
 
 // Ages(20);
 
-
 // function Vacation(countOfPeoples, typeOfGroup, day){
 
 //     let price;
@@ -75,7 +74,7 @@
 //     if (typeOfGroup == "Students" && countOfPeoples >= 30) {
 //         sum *= 0.85;
 //     }
-    
+
 //     if (typeOfGroup == "Regular") {
 //         if (countOfPeoples >= 10 && countOfPeoples <= 20) {
 //             sum *= 0.95
@@ -129,13 +128,13 @@
 // function sumOfDigits(numbers) {
 
 //     let numStr = numbers.toString();
-    
+
 //     let sum = 0;
-    
+
 //     for (let i = 0; i < numStr.length; i++) {
 //         sum += parseInt(numStr[i]);
 //     }
-    
+
 //     console.log(sum);
 // }
 
@@ -144,7 +143,7 @@
 // function split(char1, char2, char3) {
 
 //     let result = char3 + " " + char2 + " " + char1;
-    
+
 //     console.log(result);
 // }
 
@@ -153,7 +152,7 @@
 // function calc(fruit, grams, price) {
 //     let kg = grams * 0.001;
 //     let money = kg * price;
-    
+
 //     console.log(`I need $${money.toFixed(2)} to buy ${kg.toFixed(2)} kilograms ${fruit}.`);
 // }
 
@@ -175,37 +174,91 @@
 //     }
 
 //     console.log(allSame);
-    
+
 //     console.log(digitSum);
 // }
 
 // checkDigits(1234);
 
-function checkSpeed(speed, area) {
-    const speedLimits = {
-        'motorway': 130,
-        'interstate': 90,
-        'city': 50,
-        'residential': 20,
-    };
+// function checkSpeed(speed, area) {
+//   let isSpeedingUp = false;
+//   let limit = 0;
+//   let diff = 0;
+//   let status = "";
 
-    const difference = speed - speedLimits[area];
+//   switch (area) {
+//     case "motorway":
+//       limit = 130;
+//       break;
+//     case "interstate":
+//       limit = 90;
+//       break;
+//     case "city":
+//       limit = 50;
+//       break;
+//     case "residential":
+//       limit = 20;
+//       break;
+//   }
 
-    if (difference <= 0) {
-        console.log(`Driving ${speed} km/h in a ${area} zone`);
-    } else {
-        let status = '';
-        if (difference <= 20) {
-            status = 'speeding';
-        } else if (difference <= 40) {
-            status = 'excessive speeding';
-        } else {
-            status = 'reckless driving';
-        }
+//   if (speed > limit) {
+//     isSpeedingUp = true;
+//     diff = Math.abs(speed - limit);
+//   }
 
-        console.log(`The speed is ${difference} km/h faster than the allowed speed of ${speedLimits[area]} - ${status}`);
-    }
-}
+//   if (diff <= 20) {
+//     status = "speeding";
+//   } else if (diff <= 40) {
+//     status = "excessive speeding";
+//   } else {
+//     status = "reckless driving";
+//   }
 
-// Example usage:
-checkSpeed(40, 'city');
+//   if (!isSpeedingUp) {
+//     console.log(`Driving ${speed} km/h in a ${limit} zone`);
+//   } else {
+//     console.log(
+//       `The speed is ${diff} km/h faster than the allowed speed of ${limit} - ${status}`
+//     );
+//   }
+// }
+
+// checkSpeed(21, 'residential');
+
+// function cookingByNumbers(numAsString, op1, op2, op3, op4, op5) {
+//     let num = Number(numAsString);
+//     let arrOp = [];
+//     arrOp.push(op1);
+//     arrOp.push(op2);
+//     arrOp.push(op3);
+//     arrOp.push(op4);
+//     arrOp.push(op5);
+
+//     for (let i = 0; i < arrOp.length; i++) {
+//         let currOp = arrOp[i];
+
+//         switch (currOp) {
+//             case "chop":
+//                 num/= 2;
+//                 break;
+//                 case "dice":
+//                 num = Math.sqrt(num);
+//                 break;
+//                 case "spice":
+//                 num += 1;
+//                 break;
+//                 case "bake":
+//                 num *= 3;
+//                 break;
+//                 case "fillet":
+//                 num *= 0.80;
+//                 break;
+//         }
+
+//         console.log(num);
+//     }
+// }
+
+// cookingByNumbers('9', 'dice', 'spice', 'chop', 'bake',
+
+// 'fillet');
