@@ -29,10 +29,15 @@
 // 2);
 
 // function printSortedNames(names) {
-//     names.sort();
+//     names.sort((a,b) =>{
+//         return a.localeCompare(b);
+//     });
 
-//     for (let i = 0; i < names.length; i++) {
-//         console.log(`${i + 1}. ${names[i]}`);
+//     let index = 1;
+
+//     for (const name of names) {
+//         console.log(`${index}.${name}`);
+//         index++;
 //     }
 // }
 
@@ -58,3 +63,68 @@
 // const resultArray = sortArrayAlternating(numbersArray);
 
 // console.log(resultArray); // This will print the sorted array with alternating elements
+
+// function arrayString(words, text) {
+//     let wordsArr = words.split(', ');
+//     let textArr = text.split(' ');
+
+//     for (let i = 0; i < wordsArr.length; i++) {
+        
+//         for (let j = 0; j < textArr.length; j++) {
+            
+//             if (textArr[j].includes('*') && textArr[j].length === wordsArr[i].length) {
+//                 textArr[j] = wordsArr[i];
+//             }
+//         }
+//     }
+
+//     console.log(textArr.join(' '));
+// }
+
+// arrayString('great',
+// 'softuni is ***** place for learning new programming languages');
+
+// function hashTag(text) {
+//     let regex = /#[A-Za-z]+/gm;
+
+//     let matches = text.match(regex);
+
+//     for (let word of matches) {
+//         word = word.replace('#','');
+//         console.log(word);
+//     }
+// }
+
+// hashTag('Nowadays everyone uses # to tag a #special word in #socialMedia');
+
+// function substring(word, text) {
+    
+//     let wordsArr = text.toLowerCase().split(' ');
+
+//     let output = `${word} not found!`;
+
+//     for (let i = 0; i < wordsArr.length; i++) {
+//         let currentWord = wordsArr[i];
+
+//         if (currentWord === word) {
+//             output = currentWord;
+//         }
+//     }
+
+//     console.log(output);
+// }
+
+// substring('javascript',
+// 'JavaScript is the best programming language');
+// substring('python',
+// 'JavaScript is the best programming language');
+
+function spliter(text) {
+    let regex = /[A-Z][a-z]*/g;
+    let wordsArr = text.match(regex);
+    let result = wordsArr.join(', ');
+
+    console.log(result);
+}
+
+spliter('SplitMeIfYouCanHaHaYouCantOrYouCan');
