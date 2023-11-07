@@ -74,3 +74,92 @@
 // oddAndEvenSum(3495892137259234);
 
 
+// function checkPalindromes(numbers) {
+//     function isPalindrome(number) {
+//         const numberStr = number.toString();
+//         const reversedNumberStr = numberStr.split('').reverse().join('');
+//         return numberStr === reversedNumberStr;
+//     }
+//     for (const number of numbers) {
+//         const isPalin = isPalindrome(number);
+//         console.log(isPalin);
+//     }
+// }
+
+// // Example usage:
+// const numbersArray = [123,323,421,121];
+// checkPalindromes(numbersArray);
+
+// function nXnMatrix(n) {
+//     for (let i = 0; i < n; i++) {
+//         let row = '';
+//         for (let j = 0; j < n; j++) {
+//             row += `${n} `;
+//         }
+//         console.log(row);
+//     }
+// }
+
+// nXnMatrix(3);
+
+// function perfectNumber(num) {
+//     let sum = 0;
+
+//     for (let i = 1; i < num; i++) {
+        
+//         if (num % i === 0) {
+//             sum += i;
+//         }
+//     }
+
+//     if (sum === num) {
+//         console.log("We have a perfect number!");
+//     }
+//     else{
+//         console.log("It's not so perfect.");
+//     }
+// }
+
+// perfectNumber(28);
+// perfectNumber(1236498);
+
+// function loadingBar(percentage) {
+
+//     let bar = "";
+
+//     for (let i = 1; i <= 100; i+= 10) {
+        
+//         if (i < percentage) {
+//             bar += "%";        
+//         }else{
+//             bar += ".";
+//         }
+//     }
+
+//     if (percentage === 100) {
+//         console.log("100% Complete!");
+//         console.log(`[${bar}]`);
+//     }else {
+//         console.log(`${percentage}% [${bar}]`);
+//         console.log("Still loading...");
+//     }
+// }
+
+// loadingBar(30);
+
+function factorialDivision(x, y) {
+    let sumX = 1;
+    let sumY = 1;
+
+    for (let i = 1; i <= x; i++) {
+        sumX *= i;
+    }
+
+    for (let i = 1; i <= y; i++) {
+        sumY *= i;
+    }
+
+    console.log((sumX / sumY).toFixed(2));
+}
+
+factorialDivision(6, 2);
