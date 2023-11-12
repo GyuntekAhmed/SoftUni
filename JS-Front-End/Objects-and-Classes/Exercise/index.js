@@ -24,28 +24,184 @@
 //   ];
 // createEmployeeList(employees);
 
+// function parseTable(input) {
+//     for (const row of input) {
+//         const [town, latitude, longitude] = row.split(' | ').map(entry => entry.trim());
+//         const parsedLatitude = parseFloat(latitude).toFixed(2);
+//         const parsedLongitude = parseFloat(longitude).toFixed(2);
 
-function parseTable(input) {
-    for (const row of input) {
-        const [town, latitude, longitude] = row.split(' | ').map(entry => entry.trim());
-        const parsedLatitude = parseFloat(latitude).toFixed(2);
-        const parsedLongitude = parseFloat(longitude).toFixed(2);
+//         const obj = {
+//             town: town,
+//             latitude: parsedLatitude,
+//             longitude: parsedLongitude
+//         };
 
-        const obj = {
-            town: town,
-            latitude: parsedLatitude,
-            longitude: parsedLongitude
-        };
+//         console.log(obj);
+//     }
+// }
 
-        console.log(obj);
-    }
-}
+// // Example usage:
+// const inputTable = [
+//     'Sofia | 42.696552 | 23.32601',
+//     'Beijing | 39.913818 | 116.363625',
+//     'New York | 40.730610 | -73.935242'
+// ];
 
-// Example usage:
-const inputTable = [
-    'Sofia | 42.696552 | 23.32601',
-    'Beijing | 39.913818 | 116.363625',
-    'New York | 40.730610 | -73.935242'
-];
+// parseTable(inputTable);
 
-parseTable(inputTable);
+// function store(currentStock, deliveredStock) {
+//   const products = [...currentStock, ...deliveredStock];
+
+//   const stock = products.reduce((acc, curr, index) => {
+//     if (index % 2 === 0) {
+//         if (!acc.hasOwnProperty(curr)) {
+//             acc[curr] = Number(products[index + 1]);
+//         } else {
+//             acc[curr] += Number(products[index + 1])
+//         }
+//     }
+
+//     return acc;
+//   }, {});
+
+//   Object.keys(stock).forEach((key) => {
+//     console.log(`${key} -> ${stock[key]}`);
+//   })
+// }
+
+// store(
+//   ["Chips", "5", "CocaCola", "9", "Bananas", "14", "Pasta", "4", "Beer", "2"],
+//   ["Flour", "44", "Oil", "12", "Pasta", "7", "Tomatoes", "70", "Bananas", "30"]
+// );
+
+// function moviesList(input) {
+//   let movies = [];
+
+//   input.forEach((command) => {
+//     if (command.includes("addMovie")) {
+//       const [_, name] = command.split("addMovie ");
+//       movies.push({ name });
+//     } else if (command.includes("directedBy")) {
+//       const [movieName, directorName] = command.split(" directedBy ");
+//       const movie = movies.find((m) => m.name === movieName);
+
+//       if (movie) {
+//         movie.director = directorName;
+//       }
+//     } else if (command.includes(`onDate`)) {
+//       const [movieName, date] = command.split(" onDate ");
+//       const movie = movies.find((m) => m.name === movieName);
+
+//       if (movie) {
+//         movie.date = date;
+//       }
+//     }
+//   });
+
+//   movies
+//     .filter((m) => m.name && m.director && m.date)
+//     .forEach((m) => console.log(JSON.stringify(m)));
+// }
+
+// moviesList([
+//   "addMovie Fast and Furious",
+//   "addMovie Godfather",
+//   "Inception directedBy Christopher Nolan",
+//   "Godfather directedBy Francis Ford Coppola",
+//   "Godfather onDate 29.07.2018",
+//   "Fast and Furious onDate 30.07.2018",
+//   "Batman onDate 01.08.2018",
+//   "Fast and Furious directedBy Rob Cohen",
+// ]);
+
+// function findWords(input) {
+//   const [searchWords, ...words] = input;
+
+//   const wordOccurences = searchWords.split(" ").reduce((acc, curr) => {
+//     acc[curr] = 0;
+//     return acc;
+//   }, {});
+
+//   words.forEach((word) => {
+//     if (wordOccurences.hasOwnProperty(word)) {
+//       wordOccurences[word] += 1;
+//     }
+//   });
+
+//   const sortedWords = Object.entries(wordOccurences);
+//   sortedWords.sort((a, b) => b[1] - a[1]);
+
+//   for (const [word, count] of sortedWords) {
+//     console.log(`${word} - ${count}`);
+//   }
+// }
+
+// findWords([
+//   "this sentence",
+//   "In",
+//   "this",
+//   "sentence",
+//   "you",
+//   "have",
+//   "to",
+//   "count",
+//   "the",
+//   "occurrences",
+//   "of",
+//   "the",
+//   "words",
+//   "this",
+//   "and",
+//   "sentence",
+//   "because",
+//   "this",
+//   "is",
+//   "your",
+//   "task",
+// ]);
+
+// function registerCarPark(input) {
+//   const parking = [];
+
+//   input.forEach((entry) => {
+//     const [command, number] = entry.split(", ");
+
+//     if (command === "IN") {
+//       parking.push(number);
+//     } else if (command === "OUT") {
+//       const index = parking.indexOf(number);
+//       parking.splice(index, 1);
+//     }
+//   });
+
+//   parking.sort();
+
+//   if (parking.length != 0) {
+//     parking.forEach((c) => {
+//       console.log(c);
+//     });
+//   } else {
+//     console.log("Parking Lot is Empty");
+//   }
+// }
+
+// registerCarPark([
+//   "IN, CA2844AA",
+//   "IN, CA1234TA",
+//   "OUT, CA2844AA",
+//   "IN, CA9999TT",
+//   "IN, CA2866HI",
+//   "OUT, CA1234TA",
+//   "IN, CA2844AA",
+//   "OUT, CA2866HI",
+//   "IN, CA9876HH",
+//   "IN, CA2822UU",
+// ]);
+// registerCarPark([
+//   "IN, CA2844AA",
+//   "IN, CA1234TA",
+//   "OUT, CA2844AA",
+//   "OUT, CA1234TA",
+// ]);
+
+
