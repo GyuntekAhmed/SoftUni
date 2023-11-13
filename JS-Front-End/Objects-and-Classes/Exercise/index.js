@@ -204,4 +204,51 @@
 //   "OUT, CA1234TA",
 // ]);
 
+// function parser(input) {
+//     const dictionary = input
+//     .map(jsonStr => JSON.parse(jsonStr))
+//     .reduce((acc, curr) => {
+//         return {
+//             ...acc,
+//             ...curr,
+//         }
+//     }, {});
+
+//     const sortedDictionary = Object.keys(dictionary).sort();
+
+//     sortedDictionary.forEach((term) =>
+//      console.log(`Term: ${term} => Definition: ${dictionary[term]}`));
+// }
+
+// parser([
+//     '{"Cup":"A small bowl-shaped container for drinking from, typically having a handle"}',
+//     '{"Cake":"An item of soft sweet food made from a mixture of flour, fat, eggs, sugar, and other ingredients, baked and sometimes iced or decorated."} ',
+//     '{"Watermelon":"The large fruit of a plant of the gourd family, with smooth green skin, red pulp, and watery juice."} ',
+//     '{"Music":"Vocal or instrumental sounds (or both) combined in such a way as to produce beauty of form, harmony, and expression of emotion."} ',
+//     '{"Art":"The expression or application of human creative skill and imagination, typically in a visual form such as painting or sculpture, producing works to be appreciated primarily for their beauty or emotional power."} '
+//     ]);
+
+// class Vehicle {
+//   constructor(type, model, parts, fuel) {
+//     this.type = type;
+//     this.model = model;
+//     this.parts = {
+//       engine: parts.engine,
+//       power: parts.power,
+//       quality: parts.engine * parts.power,
+//     };
+//     this.fuel = fuel;
+//   }
+
+//   drive(fuelLost) {
+//     this.fuel -= fuelLost;
+//   }
+// }
+
+// let parts = { engine: 6, power: 100 };
+// let vehicle = new Vehicle("a", "b", parts, 200);
+// vehicle.drive(100);
+// console.log(vehicle.fuel);
+// console.log(vehicle.parts.quality);
+
 
