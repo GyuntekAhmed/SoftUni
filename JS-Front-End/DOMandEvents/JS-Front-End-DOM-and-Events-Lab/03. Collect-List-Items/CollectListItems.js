@@ -1,6 +1,7 @@
 function extractText() {
-    const ancor = document.getElementById(`more`);
-    const span = document.getElementById(`text`);
-    span.style.display = `inline`;
-    ancor.style.display = `none`;
+    const listItems = Array.from(document.querySelectorAll("li"));
+
+    const text = listItems.map((item) => item.textContent).join("\n");
+    
+    document.querySelector("textarea").value = text;
 }
