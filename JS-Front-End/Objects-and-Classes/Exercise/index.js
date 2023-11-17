@@ -251,34 +251,93 @@
 // console.log(vehicle.fuel);
 // console.log(vehicle.parts.quality);
 
-function solve(input) {
-  const products = input.reduce((acc, curr) => {
-    const [key, value] = curr.split(" : ");
-    acc[key] = Number(value);
+// function solve(input) {
+//   const products = input.reduce((acc, curr) => {
+//     const [key, value] = curr.split(" : ");
+//     acc[key] = Number(value);
 
-    return acc;
-  }, {});
+//     return acc;
+//   }, {});
 
-  const sortedKeys = Object.keys(products).sort();
+//   const sortedKeys = Object.keys(products).sort();
 
-  let letter = sortedKeys[0][0];
-  console.log(letter);
-  sortedKeys.forEach((key) => {
-    if (key[0] !== letter) {
-      letter = key[0];
-      console.log(letter);
+//   let letter = sortedKeys[0][0];
+//   console.log(letter);
+//   sortedKeys.forEach((key) => {
+//     if (key[0] !== letter) {
+//       letter = key[0];
+//       console.log(letter);
+//     }
+//     console.log(`  ${key}: ${products[key]}`);
+//   });
+// }
+
+// solve([
+//   "Appricot : 20.4",
+//   "Fridge : 1500",
+//   "TV : 1499",
+//   "Deodorant : 10",
+//   "Boiler : 300",
+//   "Apple : 1.25",
+//   "Anti-Bug Spray : 15",
+//   "T-Shirt : 10",
+// ]);
+
+// function inventory(input) {
+//   let heroes = [];
+
+//   for (const heroData of input) {
+//     let [name, level, items] = heroData.split(" / ");
+
+//     let hero = {
+//       name,
+//       level: Number(level),
+//       items: items,
+//     };
+
+//     heroes.push(hero);
+//   }
+
+//   heroes.sort((a, b) => a.level - b.level);
+
+//   for (const hero of heroes) {
+//     console.log(`Hero: ${hero.name}`);
+//     console.log(`level => ${hero.level}`);
+//     console.log(`items => ${hero.items}`);
+//   }
+// }
+
+// inventory([
+//   "Isacc / 25 / Apple, GravityGun",
+//   "Derek / 12 / BarrelVest, DestructionSword",
+//   "Hes / 1 / Desolator, Sentinel, Antara",
+// ]);
+
+function oddOccurrences(input) {
+  input = input.toLowerCase();
+
+  let arrOfElements = input.split(" ");
+  let map = new Map();
+
+  arrOfElements.forEach((element) => {
+    if (map.has(element)) {
+      let oldValue = map.get(element);
+      let newValue = oldValue + 1;
+
+      map.set(element, newValue);
+    } else {
+      map.set(element, 1);
     }
-    console.log(`  ${key}: ${products[key]}`);
   });
+
+  let result = [];
+
+  map.forEach((value, key) => {
+    if (value % 2 !== 0) {
+      result.push(key);
+    }
+  });
+  console.log(result.join(" "));
 }
 
-solve([
-  "Appricot : 20.4",
-  "Fridge : 1500",
-  "TV : 1499",
-  "Deodorant : 10",
-  "Boiler : 300",
-  "Apple : 1.25",
-  "Anti-Bug Spray : 15",
-  "T-Shirt : 10",
-]);
+oddOccurrences("Java C# Php PHP Java PhP 3 C# 3 1 5 C#");
