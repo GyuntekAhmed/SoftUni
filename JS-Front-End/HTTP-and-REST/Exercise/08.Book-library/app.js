@@ -82,6 +82,9 @@ async function updateBook(e) {
 
   fetch(`http://localhost:3030/jsonstore/collections/books${bookid}`, {
     method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+    },
     body: JSON.stringify({ title, author }),
   });
 }
@@ -96,6 +99,9 @@ async function saveBook() {
 
   fetch("http://localhost:3030/jsonstore/collections/books", {
     method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
     body: JSON.stringify({ title, author }),
   });
 }
