@@ -1,3 +1,5 @@
+const baseUrl = 'http://localhost:3030/jsonstore/collections/books';
+
 function attachEvents() {
   document
     .querySelector("#form button")
@@ -7,7 +9,7 @@ function attachEvents() {
 
 async function loadBooks() {
   const books = await (
-    await fetch("http://localhost:3030/jsonstore/collections/books")
+    await fetch(baseUrl)
   ).json();
 
   Object.entries(books).forEach(createAndAppendElement);
@@ -45,7 +47,7 @@ function createAndAppendElement([id, book]) {
 async function deleteBook(e) {
   const bookId = e.currentTarget.dataset.bookid;
 
-  fetch(`http://localhost:3030/jsonstore/collections/books/${bookId}`, {
+  await fetch(`${baseUrl}/${bookId}`, {
     method: "DELETE",
   });
 }
@@ -80,13 +82,16 @@ async function updateBook(e) {
   const title = document.querySelector('#form input[name="title"]').value;
   const author = document.querySelector('#form input[name="author"]').value;
 
-  fetch(`http://localhost:3030/jsonstore/collections/books${bookid}`, {
+  fetch(`${baseUrl}/${bookid}`, {
     method: "PUT",
     headers: {
       "Content-type": "application/json",
     },
     body: JSON.stringify({ title, author }),
   });
+
+  title = '';
+  author = '';
 }
 
 async function saveBook() {
@@ -97,13 +102,16 @@ async function saveBook() {
     return;
   }
 
-  fetch("http://localhost:3030/jsonstore/collections/books", {
+  await fetch(baseUrl, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
     },
     body: JSON.stringify({ title, author }),
   });
+
+  title = '';
+  author = '';
 }
 
 attachEvents();
