@@ -14,11 +14,12 @@ function solve() {
   function addInputsFromForm(e) {
     e.preventDefault();
 
-    if (
+    let isInValidInput =
       playerNameInput.value === "" ||
-      scoreInput.value === "" ||
-      roundInput.value === ""
-    ) {
+      playerScore.value === "" ||
+      round.value === "";
+
+    if (isInValidInput) {
       return;
     }
 
@@ -73,11 +74,11 @@ function solve() {
     });
   }
 
-  const clearButton = document.getElementsByClassName('btn clear')[0];
+  const clearButton = document.getElementsByClassName("btn clear")[0];
 
-  clearButton.addEventListener('click', () => {
+  clearButton.addEventListener("click", () => {
     location.reload();
-  })
+  });
 
   function createElement(
     type,

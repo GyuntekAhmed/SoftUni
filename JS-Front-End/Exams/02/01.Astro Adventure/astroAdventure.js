@@ -1,78 +1,86 @@
 function solve(input) {
-  const countOfLines = Number(input.shift());
-  const details = Array.from(input.slice(0, countOfLines));
-  const commands = input.slice(countOfLines);
+  const astronauts = [];
 
-  const astronauts = details.reduce((acc, curr) => {
-    const [astronaut, oxygen, energy] = curr.split(" ");
+  const astronautsCount = Number(input.shift());
 
-    acc[astronaut] = {
+  for (let currentAstronaut = 1;currentAstronaut <= astronautsCount; currentAstronaut++) {
+    const [name, oxygen, energy] = input.shift().split(" ");
+    astronauts.push({
+      name,
       oxygen: Number(oxygen),
       energy: Number(energy),
-    };
-    return acc;
-  }, {});
-
-  const commandExecutor = {
-    Explore: explore,
-    Refuel: refuel,
-    Breathe: breathe,
-    End: end,
-  };
-
-  commands.forEach((command) => {
-    const [commandName, ...rest] = command.split(" - ");
-
-    commandExecutor[commandName](...rest);
-  });
-
-  function explore(astronaut, neededEnergy) {
-    if (astronauts[astronaut].energy >= Number(neededEnergy)) {
-      astronauts[astronaut].energy -= Number(neededEnergy);
-
-      console.log(
-        `${astronaut} has successfully explored a new area and now has ${astronauts[astronaut].energy} energy!`
-      );
-    } else {
-      console.log(`${astronaut} does not have enough energy to explore!`);
-    }
-  }
-
-  function refuel(astronaut, amount) {
-    let result = astronauts[astronaut].energy + Number(amount);
-
-    if (result <= 200) {
-      astronauts[astronaut].energy += Number(amount);
-      console.log(`${astronaut} refueled their energy by ${amount}!`);
-    } else {
-      astronauts[astronaut].energy = 200;
-      result = result - 200;
-      console.log(`${astronaut} refueled their energy by ${amount - result}!`);
-    }
-  }
-
-  function breathe(astronaut, amount) {
-    let result = astronauts[astronaut].oxygen + Number(amount);
-
-    if (result <= 100) {
-      astronauts[astronaut].oxygen += Number(amount);
-      console.log(`${astronaut} took a breath and recovered ${amount} oxygen!`);
-    } else {
-      astronauts[astronaut].oxygen = 100;
-      result = result - 100;
-      console.log(
-        `${astronaut} took a breath and recovered ${amount - result} oxygen!`
-      );
-    }
-  }
-
-  function end() {
-    Object.keys(astronauts).forEach((astronaut) => {
-      console.log(
-        `Astronaut: ${astronaut}, Oxygen: ${astronauts[astronaut].oxygen}, Energy: ${astronauts[astronaut].energy}`
-      );
     });
   }
+
+  while (input.length > 0) {
+    const command = input.shift();
+
+    if (command === "End") {
+      break;
+    }
+
+    const [action, name, value] = command.split(" - ");
+
+    switch (action) {
+      case "Explore":
+        const energyNeeded = Number(value);
+        const astronaut = astronauts.find(
+          (astronaut) => astronaut.name === name
+        );
+
+        if (astronaut && astronaut.energy >= energyNeeded) {
+          astronaut.energy -= energyNeeded;
+          console.log(
+            `${name} has successfully explored a new area and now has ${astronaut.energy} energy!`
+          );
+        } else if (astronaut) {
+          console.log(`${name} does not have enough energy to explore!`);
+        }
+        break;
+
+      case "Refuel":
+        const amount = Number(value);
+        const astronautToRefuel = astronauts.find(
+          (astronaut) => astronaut.name === name
+        );
+
+        if (astronautToRefuel) {
+          const energyRecovered = Math.min(
+            amount,
+            200 - astronautToRefuel.energy
+          );
+          astronautToRefuel.energy += energyRecovered;
+
+          console.log(`${name} refueled their energy by ${energyRecovered}!`);
+        }
+        break;
+
+      case "Breathe":
+        const amountOxygen = Number(value);
+        const astronautToBreathe = astronauts.find(
+          (astronaut) => astronaut.name === name
+        );
+
+        if (astronautToBreathe) {
+          const oxygenRecovered = Math.min(
+            amountOxygen,
+            100 - astronautToBreathe.oxygen
+          );
+          astronautToBreathe.oxygen += oxygenRecovered;
+
+          console.log(
+            `${astronautToBreathe.name} took a breath and recovered ${oxygenRecovered} oxygen!`
+          );
+        }
+        break;
+    }
+  }
+
+  astronauts.forEach((a) => {
+    console.log(
+      `Astronaut: ${a.name}, Oxygen: ${a.oxygen}, Energy: ${a.energy}`
+    );
+  });
 }
 
 solve([
