@@ -8,41 +8,96 @@
     {
         private class Node
         {
-            
+            public T Element { get; set; }
+            public Node Next { get; set; }
+
+            public Node(T element, Node next)
+            {
+                this.Element = element;
+                this.Next = next;
+            }
+
+            public Node(T element)
+            {
+                this.Element = element;
+            }
         }
 
         private Node head;
 
-        public int Count => throw new NotImplementedException();
+        public int Count { get; private set; }
 
         public void Enqueue(T item)
         {
-            throw new NotImplementedException();
+            var newNode = new Node(item);
+
+            if (this.head == null)
+            {
+                this.head = newNode;
+            }
+            else
+            {
+                var node = this.head;
+
+                while (node.Next != null)
+                {
+                    node = node.Next;
+                }
+
+                node.Next = newNode;
+            }
+
+            this.Count++;
         }
 
         public T Dequeue()
         {
-            throw new NotImplementedException();
+            if (this.head == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var oldHead = this.head;
+            this.head = oldHead.Next;
+            this.Count--;
+            return oldHead.Element;
         }
 
         public T Peek()
         {
-            throw new NotImplementedException();
+            if (this.head == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            return this.head.Element;
         }
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            foreach (var element in this)
+            {
+                if (item.Equals(element))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            var node = this.head;
+
+            while (node != null)
+            {
+                yield return node.Element;
+                node = node.Next;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+         => GetEnumerator();
     }
 }
