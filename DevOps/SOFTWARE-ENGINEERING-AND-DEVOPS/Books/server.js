@@ -43,7 +43,7 @@ server.delete('/books/:id', (req, res) => {
 });
 
 if (require.main === module) {
-    server.listen(3000, () => console.log('Server is up and running'));
+    server.listen(5000, () => console.log('Server is up and running'));
 }
 
 module.exports = server; // Exporting for testing
