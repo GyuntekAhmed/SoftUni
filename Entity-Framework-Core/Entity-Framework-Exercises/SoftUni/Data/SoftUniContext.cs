@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 using SoftUni.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace SoftUni.Data
 {
@@ -16,11 +16,12 @@ namespace SoftUni.Data
         {
         }
 
-        public virtual DbSet<Address> Addresses { get; set; } = null!;
-        public virtual DbSet<Department> Departments { get; set; } = null!;
-        public virtual DbSet<Employee> Employees { get; set; } = null!;
-        public virtual DbSet<Project> Projects { get; set; } = null!;
-        public virtual DbSet<Town> Towns { get; set; } = null!;
+        public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<EmployeeProject> EmployeesProjects { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<Town> Towns { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,9 +35,12 @@ namespace SoftUni.Data
         {
             modelBuilder.Entity<Address>(entity =>
             {
+                entity.HasKey(e => e.AddressId);
+
                 entity.Property(e => e.AddressId).HasColumnName("AddressID");
 
                 entity.Property(e => e.AddressText)
+                    .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -50,11 +54,14 @@ namespace SoftUni.Data
 
             modelBuilder.Entity<Department>(entity =>
             {
+                entity.HasKey(e => e.DepartmentId);
+
                 entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
 
                 entity.Property(e => e.ManagerId).HasColumnName("ManagerID");
 
                 entity.Property(e => e.Name)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -67,6 +74,8 @@ namespace SoftUni.Data
 
             modelBuilder.Entity<Employee>(entity =>
             {
+                entity.HasKey(e => e.EmployeeId);
+
                 entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
 
                 entity.Property(e => e.AddressId).HasColumnName("AddressID");
@@ -74,16 +83,19 @@ namespace SoftUni.Data
                 entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
 
                 entity.Property(e => e.FirstName)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.HireDate).HasColumnType("smalldatetime");
 
                 entity.Property(e => e.JobTitle)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.LastName)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -93,7 +105,7 @@ namespace SoftUni.Data
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Salary).HasColumnType("decimal(15, 4)");
+                entity.Property(e => e.Salary).HasColumnType("money");
 
                 entity.HasOne(d => d.Address)
                     .WithMany(p => p.Employees)
@@ -110,27 +122,33 @@ namespace SoftUni.Data
                     .WithMany(p => p.InverseManager)
                     .HasForeignKey(d => d.ManagerId)
                     .HasConstraintName("FK_Employees_Employees");
+            });
 
-                entity.HasMany(d => d.Projects)
-                    .WithMany(p => p.Employees)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "EmployeesProject",
-                        l => l.HasOne<Project>().WithMany().HasForeignKey("ProjectId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_EmployeesProjects_Projects"),
-                        r => r.HasOne<Employee>().WithMany().HasForeignKey("EmployeeId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_EmployeesProjects_Employees"),
-                        j =>
-                        {
-                            j.HasKey("EmployeeId", "ProjectId");
+            modelBuilder.Entity<EmployeeProject>(entity =>
+            {
+                entity.HasKey(e => new { e.EmployeeId, e.ProjectId });
 
-                            j.ToTable("EmployeesProjects");
+                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
 
-                            j.IndexerProperty<int>("EmployeeId").HasColumnName("EmployeeID");
+                entity.Property(e => e.ProjectId).HasColumnName("ProjectID");
 
-                            j.IndexerProperty<int>("ProjectId").HasColumnName("ProjectID");
-                        });
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.EmployeesProjects)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_EmployeesProjects_Employees");
+
+                entity.HasOne(d => d.Project)
+                    .WithMany(p => p.EmployeesProjects)
+                    .HasForeignKey(d => d.ProjectId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_EmployeesProjects_Projects");
             });
 
             modelBuilder.Entity<Project>(entity =>
             {
+                entity.HasKey(e => e.ProjectId);
+
                 entity.Property(e => e.ProjectId).HasColumnName("ProjectID");
 
                 entity.Property(e => e.Description).HasColumnType("ntext");
@@ -138,6 +156,7 @@ namespace SoftUni.Data
                 entity.Property(e => e.EndDate).HasColumnType("smalldatetime");
 
                 entity.Property(e => e.Name)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -146,9 +165,12 @@ namespace SoftUni.Data
 
             modelBuilder.Entity<Town>(entity =>
             {
+                entity.HasKey(e => e.TownId);
+
                 entity.Property(e => e.TownId).HasColumnName("TownID");
 
                 entity.Property(e => e.Name)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });

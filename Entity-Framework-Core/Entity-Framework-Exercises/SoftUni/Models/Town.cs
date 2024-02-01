@@ -1,4 +1,7 @@
-﻿namespace SoftUni.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace SoftUni.Models
 {
     public class Town
     {
