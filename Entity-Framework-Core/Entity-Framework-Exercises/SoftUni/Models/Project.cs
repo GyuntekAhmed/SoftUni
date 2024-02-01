@@ -1,7 +1,5 @@
 ﻿namespace SoftUni.Models
 {
-    using System.Collections.Generic;
-
     public class Project
     {
         public Project()
