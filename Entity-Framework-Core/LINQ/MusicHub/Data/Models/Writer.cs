@@ -1,21 +1,22 @@
-﻿namespace MusicHub.Data.Models;
+﻿using System.ComponentModel.DataAnnotations;
 
-using System.ComponentModel.DataAnnotations;
+namespace MusicHub.Data.Models;
 
 public class Writer
 {
     public Writer()
     {
-        Songs= new HashSet<Song>();
+        this.Songs = new HashSet<Song>();
     }
 
     [Key]
     public int Id { get; set; }
 
+    [Required]
     [MaxLength(ValidationConstants.WriterNameMaxLength)]
     public string Name { get; set; } = null!;
 
     public string? Pseudonym { get; set; }
 
-    public virtual ICollection<Song> Songs { get; set; } = null!;
+    public virtual ICollection<Song> Songs { get; set; }
 }

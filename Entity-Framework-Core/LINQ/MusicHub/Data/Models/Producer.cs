@@ -6,12 +6,13 @@ public class Producer
 {
     public Producer()
     {
-        Albums = new HashSet<Album>();
+        this.Albums = new HashSet<Album>();
     }
 
     [Key]
     public int Id { get; set; }
 
+    [Required]
     [MaxLength(ValidationConstants.ProducerNameMaxLength)]
     public string Name { get; set; } = null!;
 

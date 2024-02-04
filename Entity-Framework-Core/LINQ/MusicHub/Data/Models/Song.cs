@@ -1,7 +1,7 @@
 ﻿namespace MusicHub.Data.Models;
 
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 using Enums;
 
@@ -9,12 +9,13 @@ public class Song
 {
     public Song()
     {
-        SongPerformers = new HashSet<SongPerformer>();
+        this.SongPerformers = new HashSet<SongPerformer>();
     }
 
     [Key]
     public int Id { get; set; }
 
+    [Required]
     [MaxLength(ValidationConstants.SongNameMaxLength)]
     public string Name { get; set; } = null!;
 
@@ -36,4 +37,3 @@ public class Song
 
     public virtual ICollection<SongPerformer> SongPerformers { get; set; }
 }
-

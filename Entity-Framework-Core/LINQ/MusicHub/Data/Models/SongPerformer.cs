@@ -1,6 +1,6 @@
-﻿namespace MusicHub.Data.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-using System.ComponentModel.DataAnnotations.Schema;
+namespace MusicHub.Data.Models;
 
 public class SongPerformer
 {

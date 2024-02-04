@@ -15,18 +15,17 @@ public class MusicHubDbContext : DbContext
     {
     }
 
-    public DbSet<Producer> Producers { get; set; }
+    public DbSet<Producer> Producers { get; set; } = null!;
 
-    public DbSet<Album> Albums { get; set; }
+    public DbSet<Album> Albums { get; set; } = null!;
 
-    public DbSet<Song> Songs { get; set; }
+    public DbSet<Song> Songs { get; set; } = null!;
 
-    public DbSet<Writer> Writers { get; set; }
+    public DbSet<Performer> Performers { get; set; } = null!;
 
-    public DbSet<SongPerformer> SongsPerformers { get; set; }
+    public DbSet<Writer> Writers { get; set; } = null!;
 
-    public DbSet<Performer> Performers { get; set; }
-
+    public DbSet<SongPerformer> SongsPerformers { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -42,20 +41,21 @@ public class MusicHubDbContext : DbContext
         builder.Entity<Song>(entity =>
         {
             entity
-            .Property(song => song.CreatedOn)
-            .HasColumnType("date");
+                .Property(s => s.CreatedOn)
+                .HasColumnType("date");
         });
 
         builder.Entity<Album>(entity =>
         {
             entity
-            .Property(a => a.ReleaseDate)
-            .HasColumnType("date");
+                .Property(a => a.ReleaseDate)
+                .HasColumnType("date");
         });
 
         builder.Entity<SongPerformer>(entity =>
         {
-            entity.HasKey(sp => new { sp.SongId, sp.PerformerId });
+            entity
+                .HasKey(sp => new { sp.PerformerId, sp.SongId });
         });
     }
 }
