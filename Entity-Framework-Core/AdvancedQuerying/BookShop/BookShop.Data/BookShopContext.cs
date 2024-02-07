@@ -1,13 +1,9 @@
-﻿using System.Reflection;
-
-namespace BookShop.Data
+﻿namespace BookShop.Data
 {
     using Microsoft.EntityFrameworkCore;
 
     using Models;
     using EntityConfiguration;
-    using System.Collections.Generic;
-    using System.Reflection.Emit;
 
     public class BookShopContext : DbContext
     {

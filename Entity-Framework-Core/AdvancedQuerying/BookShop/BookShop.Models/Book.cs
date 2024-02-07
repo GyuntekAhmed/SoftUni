@@ -5,7 +5,6 @@
 
     using Enums;
 
-
     public class Book
     {
         public Book()
