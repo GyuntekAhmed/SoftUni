@@ -1,12 +1,10 @@
-﻿namespace FastFood.Core.Controllers
+﻿namespace FastFood.Web.Controllers
 {
-    using System;
-    using System.Linq;
     using AutoMapper;
-    using AutoMapper.QueryableExtensions;
-    using Data;
     using Microsoft.AspNetCore.Mvc;
+
     using ViewModels.Items;
+    using FastFood.Data;
 
     public class ItemsController : Controller
     {

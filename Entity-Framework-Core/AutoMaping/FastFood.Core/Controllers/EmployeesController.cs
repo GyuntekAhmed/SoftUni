@@ -1,10 +1,10 @@
-﻿namespace FastFood.Core.Controllers
+﻿namespace FastFood.Web.Controllers
 {
-    using System;
     using AutoMapper;
-    using Data;
     using Microsoft.AspNetCore.Mvc;
+
     using ViewModels.Employees;
+    using FastFood.Data;
 
     public class EmployeesController : Controller
     {
