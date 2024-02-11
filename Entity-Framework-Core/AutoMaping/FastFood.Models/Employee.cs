@@ -17,14 +17,14 @@
         [Key]
         public string Id { get; set; }
 
-        [StringLength(ValidationConstants.EmployeeNameMaxLength, MinimumLength = 3)]
+        [StringLength(EntitiesValidation.EmployeeNameMaxLength, MinimumLength = 3)]
         public string Name { get; set; } = null!;
 
         [Required]
         [Range(15, 80)]
         public int Age { get; set; }
 
-        [StringLength(ValidationConstants.EmployeeAddressMaxLength, MinimumLength = 3)]
+        [StringLength(EntitiesValidation.EmployeeAddressMaxLength, MinimumLength = 3)]
         public string Address { get; set; } = null!;
 
         [ForeignKey(nameof(Position))]
