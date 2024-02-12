@@ -1,7 +1,6 @@
 ﻿namespace ProductShop.Models
 {
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Product
     {
@@ -17,11 +16,11 @@
         public decimal Price { get; set; }
 
         public int SellerId { get; set; }
-        public virtual User Seller { get; set; } = null!;
+        public User Seller { get; set; } = null!;
 
         public int? BuyerId { get; set; }
-        public virtual User? Buyer { get; set; } = null!;
+        public User Buyer { get; set; } = null!;
 
-        public virtual ICollection<CategoryProduct> CategoriesProducts { get; set; }
+        public ICollection<CategoryProduct> CategoriesProducts { get; set; }
     }
 }

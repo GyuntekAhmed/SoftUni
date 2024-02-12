@@ -1,7 +1,6 @@
 ﻿namespace ProductShop.Models
 {
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
 
     public class Category
     {
@@ -14,6 +13,6 @@
 
         public string Name { get; set; } = null!;
 
-        public virtual ICollection<CategoryProduct> CategoriesProducts { get; set; }
+        public ICollection<CategoryProduct> CategoriesProducts { get; set; }
     }
 }
