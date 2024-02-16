@@ -16,10 +16,12 @@ namespace PetStore.Data.Models
             Roles = new HashSet<IdentityUserRole<string>>();
             Claims = new HashSet<IdentityUserClaim<string>>();
             Logins = new HashSet<IdentityUserLogin<string>>();
+
+            this.CreatedOn = DateTime.UtcNow;
         }
 
         // Audit info
-        public DateTime CreatedOn { get; set; }
+        public DateTime? CreatedOn { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
 

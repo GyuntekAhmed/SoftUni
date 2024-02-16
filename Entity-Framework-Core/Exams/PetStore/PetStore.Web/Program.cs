@@ -3,6 +3,8 @@ namespace PetStore.Web
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
+    using Data.Common.Repos;
+    using PetStore.Data.Repositories;
     using PetStore.Data;
 
     public class Program
@@ -53,12 +55,31 @@ namespace PetStore.Web
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services
-                .AddDefaultIdentity<IdentityUser>(options => 
-                    options.SignIn.RequireConfirmedAccount = false)
+                .AddDefaultIdentity<IdentityUser>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequiredLength = 3;
+                })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services
                 .AddControllersWithViews();
+
+            builder
+                .Services.AddAutoMapper(typeof(Program));
+
+            builder
+                .Services
+                .AddScoped(typeof(IRepository<>)
+                    ,typeof( EfRepository<>));
+
+            builder
+                .Services
+                .AddScoped(typeof(IDeletableEntityRepository<>)
+                    , typeof(EfDeletableEntityRepository<>));
 
             var app = builder.Build();
 

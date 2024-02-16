@@ -1,4 +1,5 @@
-﻿namespace PetStore.Data
+﻿
+namespace PetStore.Data
 {
     using System;
     using System.Linq;
@@ -9,13 +10,14 @@
     using PetStore.Data.Common.Models;
     using Models;
 
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using static System.Formats.Asn1.AsnWriter;
     using System.Dynamic;
     using System.Net;
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser, ApplicationRole, string>
     {
         private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
             typeof(ApplicationDbContext).GetMethod(
