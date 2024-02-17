@@ -1,3 +1,9 @@
+using System.Reflection;
+using PetStore.Services.Data;
+using PetStore.Services.Data.Interfaces;
+using PetStore.Services.Mapping;
+using PetStore.Web.ViewModels;
+
 namespace PetStore.Web
 {
     using Microsoft.AspNetCore.Identity;
@@ -68,9 +74,12 @@ namespace PetStore.Web
             builder.Services
                 .AddControllersWithViews();
 
-            builder
-                .Services.AddAutoMapper(typeof(Program));
+            //builder
+            //    .Services
+            //    .AddAutoMapper(typeof(Program));
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
+            // Repositories
             builder
                 .Services
                 .AddScoped(typeof(IRepository<>)
@@ -80,6 +89,11 @@ namespace PetStore.Web
                 .Services
                 .AddScoped(typeof(IDeletableEntityRepository<>)
                     , typeof(EfDeletableEntityRepository<>));
+
+            // Services
+            builder
+                .Services
+                .AddTransient<ICategoryService, CategoryService>();
 
             var app = builder.Build();
 
