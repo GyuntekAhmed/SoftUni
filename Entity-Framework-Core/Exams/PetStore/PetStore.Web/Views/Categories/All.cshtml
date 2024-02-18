@@ -1,5 +1,5 @@
 ﻿@using PetStore.Web.ViewModels.Categories
-@model IEnumerable<AllCategoriesViewModel>
+@model AllCategoriesViewModel
 
 @{
     ViewData["Title"] = "All";
@@ -12,24 +12,41 @@
 </div>
 <table class="table table-striped">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model) {
+    @foreach (var item in Model.AllCategories) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
+
+<ul class="pagination">
+    @for (int i = 1; i < Model.PageCount; i++)
+    {
+        @if (i == Model.ActivePage)
+        {
+            <li class="active">
+                <a asp-action="All" asp-route-page="@i">@i</a>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a asp-action="All" asp-route-page="@i">@i</a>
+            </li>
+        }
+    }
+</ul>

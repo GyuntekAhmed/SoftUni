@@ -35,12 +35,62 @@ namespace PetStore.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int page)
         {
-            IEnumerable<AllCategoriesViewModel> allCategories =
-                await this.categoryService.GetAllAsync();
+            IEnumerable<ListCategoryViewModel> allCategories =
+                await this.categoryService
+                    .GetAllWithPaginationAsync(page);
 
-            return this.View(allCategories);
+
+            var viewModel = new AllCategoriesViewModel()
+            {
+                AllCategories = allCategories,
+                PageCount = (int)Math.Ceiling(allCategories.Count() / 20.0),
+                ActivePage = page
+            };
+
+            return this.View(viewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            bool isValidCategory =
+                await this.categoryService
+                    .ExistsAsync(id);
+
+            if (!isValidCategory)
+            {
+                return this.RedirectToAction("Error", "Home");
+            }
+
+            var categoryToEdit =
+                await this.categoryService
+                    .GetByIdAndPrepareEditAsync(id);
+
+            return this.View(categoryToEdit);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditCategoryViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("Error", "Home");
+            }
+
+            bool isValidCategory =
+                await this.categoryService
+                    .ExistsAsync(model.Id);
+
+            if (!isValidCategory)
+            {
+                return this.RedirectToAction("Error", "Home");
+            }
+
+            await this.categoryService.EditCategoryAsync(model);
+
+            return this.RedirectToAction("All");
         }
     }
 }

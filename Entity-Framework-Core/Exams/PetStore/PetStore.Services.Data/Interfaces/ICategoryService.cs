@@ -6,6 +6,14 @@
     {
         Task CreateAsync(CreateCategoryInputModel inputModel);
         
-        Task<IEnumerable<AllCategoriesViewModel>> GetAllAsync();
+        Task<IEnumerable<ListCategoryViewModel>> GetAllAsync();
+
+        Task<IEnumerable<ListCategoryViewModel>> GetAllWithPaginationAsync(int pageNumber);
+
+        Task<EditCategoryViewModel> GetByIdAndPrepareEditAsync(int id);
+
+        Task EditCategoryAsync(EditCategoryViewModel inputModel);
+
+        Task<bool> ExistsAsync(int id);
     }
 }

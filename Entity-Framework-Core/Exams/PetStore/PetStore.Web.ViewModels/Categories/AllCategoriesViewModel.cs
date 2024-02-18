@@ -1,12 +1,12 @@
 ﻿namespace PetStore.Web.ViewModels.Categories
 {
-    using Data.Models;
-    using Services.Mapping;
 
-    public class AllCategoriesViewModel : IMapFrom<Category>
+    public class AllCategoriesViewModel
     {
-        public string Id { get; set; } = null!;
+        public IEnumerable<ListCategoryViewModel> AllCategories { get; set; }
 
-        public string Name { get; set; } = null!;
+        public int PageCount { get; set; }
+
+        public int ActivePage { get; set; }
     }
 }

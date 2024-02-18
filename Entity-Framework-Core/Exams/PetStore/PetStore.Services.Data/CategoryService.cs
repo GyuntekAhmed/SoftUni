@@ -1,7 +1,6 @@
 ﻿namespace PetStore.Services.Data
 {
     using Microsoft.EntityFrameworkCore;
-    using AutoMapper;
 
     using PetStore.Data.Common.Repos;
     using PetStore.Data.Models;
@@ -28,12 +27,51 @@
             await repository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<AllCategoriesViewModel>> GetAllAsync()
+        public async Task<IEnumerable<ListCategoryViewModel>> GetAllAsync()
         {
             return await this.repository
                 .AllAsNoTracking()
-                .To<AllCategoriesViewModel>()
+                .To<ListCategoryViewModel>()
                 .ToArrayAsync();
         }
+
+        public async Task<IEnumerable<ListCategoryViewModel>> GetAllWithPaginationAsync(int pageNumber)
+        {
+            return await this.repository
+                .AllAsNoTracking()
+                .Skip((pageNumber - 1) * 20)
+                .Take(20)
+                .To<ListCategoryViewModel>()
+                .ToArrayAsync();
+        }
+
+        public async Task<EditCategoryViewModel> GetByIdAndPrepareEditAsync(int id)
+        {
+            Category categoryToEdit = await this.repository
+                .AllAsNoTracking()
+                .FirstAsync(c => c.Id == id);
+
+            return AutoMapperConfig
+                .MapperInstance
+                .Map<EditCategoryViewModel>(categoryToEdit);
+        }
+
+        public async Task EditCategoryAsync(EditCategoryViewModel inputModel)
+        {
+            var categoryToUpdate =
+                await this.repository
+                    .All()
+                    .FirstAsync(c => c.Id == inputModel.Id);
+
+            categoryToUpdate.Name = inputModel.Name;
+
+            this.repository.Update(categoryToUpdate);
+            await this.repository.SaveChangesAsync();
+        }
+
+        public async Task<bool> ExistsAsync(int id)
+            => await this.repository
+                .AllAsNoTracking()
+                .AnyAsync(c => c.Id == id);
     }
 }
